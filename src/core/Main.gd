@@ -6,7 +6,7 @@ const MainMenuUID : String = "uid://beue52odumf1q"
 
 #Game World Root Nodes
 @onready var levelRoot : Node2D = %LevelRoot
-@onready var entityRoot : Node2D = %LevelRoot
+@onready var entityRoot : Node2D = %EntityRoot
 @onready var effectsRoot : Node2D = %effectsRoot
 
 #UI Root Nodes
