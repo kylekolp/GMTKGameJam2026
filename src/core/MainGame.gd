@@ -1,8 +1,8 @@
-class_name Main
+class_name MainGame
 extends Node
 
 const PlayerUID : String = "uid://bw4t4ix88htau"
-const MainMenuUID : String = "uid://beue52odumf1q"
+const MainMenuUID : String = "uid://k68tl4ppllaa"
 
 #Game World Root Nodes
 @onready var levelRoot : Node2D = %LevelRoot
@@ -18,7 +18,9 @@ var currentLevel : Level = null
 var player : Player = null
 
 func _ready() -> void:
-	InitializePlayer()
+	SignalBus.LoadLevel.connect(LoadLevel)
+	SignalBus.LoadMenu.connect(LoadMenu)
+	SignalBus.QuitGame.connect(QuitGame)
 	LoadMenu(MainMenuUID)
 	
 func InitializePlayer() -> void:
@@ -52,7 +54,7 @@ func deferredLoadLevel(levelUID : String) -> void:
 		
 	currentLevel = newLevelPackedScene.instantiate() as Level
 	if currentLevel == null:
-		push_error("Loaded Level Scene does not extend the Level class. " + PlayerUID)
+		push_error("Loaded Level Scene does not extend the Level class. " + levelUID)
 		return
 	
 	levelRoot.add_child(currentLevel)
@@ -69,5 +71,24 @@ func LoadMenu(menuUID : String) -> void:
 	deferredLoadMenu.call_deferred(menuUID)
 	
 func deferredLoadMenu(menuUID : String) -> void:
-	#To do: Create Main Menu and Pause Menu
+	var newMenuPackedScene : PackedScene = ResourceLoader.load(menuUID, "PackedScene") as PackedScene
+	if newMenuPackedScene == null:
+		push_error("Could not menu as packed scene: " + menuUID)
+		return
+		
+	var newMenu = newMenuPackedScene.instantiate() as Control
+	if newMenu == null:
+		push_error("Loaded Menu Scene was not able to instantiate " + menuUID)
+		return
+	
+	hudRoot.add_child(newMenu)
+	
+	#Allow the new level to process before accessing it
+	await get_tree().process_frame
+	
 	return
+	
+func QuitGame() -> void:
+	#Load Are you sure you want to quit menu
+	#LoadMenu(QuitMenuUID)
+	get_tree().quit()

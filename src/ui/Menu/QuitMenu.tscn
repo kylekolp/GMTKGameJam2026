@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://tl3m7s666fu6"]
+
+[ext_resource type="Script" uid="uid://55u2oedi8qwm" path="res://src/ui/Menu/QuiteMenu.gd" id="1_5shqx"]
+[ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="2_0imn4"]
+[ext_resource type="StyleBox" uid="uid://ue6uun70ysn6" path="res://Assets/UI/TempButtonStyles/ButtonStyleNormal.tres" id="3_uujsx"]
+[ext_resource type="StyleBox" uid="uid://cibp7a80tfnok" path="res://Assets/UI/TempButtonStyles/ButtonStylePressed.tres" id="4_avqim"]
+[ext_resource type="StyleBox" uid="uid://vm3ujt4s8d4" path="res://Assets/UI/TempButtonStyles/ButtonStyleHover.tres" id="5_gdxae"]
+
+[node name="QuitMenu" type="Control" unique_id=710551221 node_paths=PackedStringArray("QuitMenuRoot")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5shqx")
+QuitMenuRoot = NodePath(".")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=64290342]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1566059597]
+layout_mode = 2
+theme = ExtResource("2_0imn4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=624516070]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=718677147]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Are You Sure You Want To Quit?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=925886683]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+
+[node name="YesButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=303043462]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("3_uujsx")
+theme_override_styles/pressed = ExtResource("4_avqim")
+theme_override_styles/hover = ExtResource("5_gdxae")
+text = "Yes"
+
+[node name="NoButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1555428961]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("3_uujsx")
+theme_override_styles/pressed = ExtResource("4_avqim")
+theme_override_styles/hover = ExtResource("5_gdxae")
+text = "No"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/NoButton" to="." method="_on_no_button_pressed"]

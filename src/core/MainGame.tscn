@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1s1vhoannn5j"]
 
-[ext_resource type="Script" uid="uid://ce7nkroaijfve" path="res://src/core/Main.gd" id="1_deefb"]
+[ext_resource type="Script" uid="uid://ce7nkroaijfve" path="res://src/core/MainGame.gd" id="1_deefb"]
 
 [node name="MainGame" type="Node2D" unique_id=1336662122]
 process_mode = 3
@@ -26,29 +26,43 @@ layer = 10
 
 [node name="HudRoot" type="Control" parent="HudLayer" unique_id=1076858291]
 unique_name_in_owner = true
+process_mode = 1
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 
 [node name="PauseLayer" type="CanvasLayer" parent="." unique_id=216749940]
 process_mode = 2
 layer = 50
+visible = false
 
 [node name="PauseRoot" type="Control" parent="PauseLayer" unique_id=1928024236]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=67629159]
 process_mode = 3
 layer = 100
+visible = false
 
 [node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=1910267557]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1

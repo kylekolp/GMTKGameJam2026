@@ -1,5 +1,4 @@
 extends Node
-
 # Use this class to emit any custom signal that we wish to access globally. It is auto loaded so it can be treated as a singleton (Accessable from anywhere)
 # Note: Not all signals have to be global. Only use for signals that are required to be received outside the emitting node 
 # 		(For example children can connect to a parents node via the signals tab without being global)
@@ -12,3 +11,8 @@ extends Node
 #
 # To Emit the signal just call
 # SignalBus.testSignal.emit(someArea2D)
+
+#Signals
+signal LoadLevel(levelUID : String)
+signal LoadMenu(menuUID : String)
+signal QuitGame()
