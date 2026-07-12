@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b1s1vhoannn5j"]
 
-[ext_resource type="Script" uid="uid://ce7nkroaijfve" path="res://src/core/Main.gd" id="1_keldc"]
+[ext_resource type="Script" uid="uid://ce7nkroaijfve" path="res://src/core/Main.gd" id="1_deefb"]
 
 [node name="MainGame" type="Node2D" unique_id=1336662122]
 process_mode = 3
-script = ExtResource("1_keldc")
+script = ExtResource("1_deefb")
 
 [node name="Systems" type="Node2D" parent="." unique_id=951629416]
 

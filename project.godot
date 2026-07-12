@@ -19,6 +19,10 @@ run/main_scene="uid://b1s1vhoannn5j"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*uid://cmsme5d5erh4l"
+
 [dotnet]
 
 project/assembly_name="RogueLikeAbilities"
