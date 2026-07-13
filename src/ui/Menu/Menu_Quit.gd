@@ -1,6 +1,4 @@
-extends Control
-
-@export var QuitMenuRoot : Control
+extends BaseMenu_Popup
 
 #Quit the game
 func _on_yes_button_pressed() -> void:
@@ -8,4 +6,4 @@ func _on_yes_button_pressed() -> void:
 
 #Close the menu
 func _on_no_button_pressed() -> void:
-	QuitMenuRoot.queue_free()
+	queue_free()

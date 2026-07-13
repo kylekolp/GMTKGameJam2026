@@ -9,6 +9,9 @@ extends Node
 # Then in any class that wishes to receive the signal just call:
 # SignalBus.testSignal.connect(testSignalMethod) <--- this binds the signal to a function "testSignalMethod" which will be called whever the signal is emitted.
 #
+# Important: If you connect a node to a signal make sure to add the "tree_exited" signal and within it call LoadLevel.disconnect(WhateverFunctionYouConnected)
+# 			 Otherwise you might accidently connect the signal multiple times
+#
 # To Emit the signal just call
 # SignalBus.testSignal.emit(someArea2D)
 

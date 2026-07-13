@@ -1,9 +1,6 @@
 class_name MainGame
 extends Node
 
-const PlayerUID : String = "uid://bw4t4ix88htau"
-const MainMenuUID : String = "uid://k68tl4ppllaa"
-
 #Game World Root Nodes
 @onready var levelRoot : Node2D = %LevelRoot
 @onready var entityRoot : Node2D = %EntityRoot
@@ -21,17 +18,19 @@ func _ready() -> void:
 	SignalBus.LoadLevel.connect(LoadLevel)
 	SignalBus.LoadMenu.connect(LoadMenu)
 	SignalBus.QuitGame.connect(QuitGame)
-	LoadMenu(MainMenuUID)
+	
+	LoadMenu(UIDCatalog.Menu_Main)
 	
 func InitializePlayer() -> void:
-	var playerPackedScene : PackedScene = ResourceLoader.load(PlayerUID) as PackedScene
+	var playerUID : String = UIDCatalog.Entity_Player
+	var playerPackedScene : PackedScene = ResourceLoader.load(playerUID) as PackedScene
 	if playerPackedScene == null:
-		push_error("Could not load player scene: " + PlayerUID)
+		push_error("Could not load player scene: " + playerUID)
 		return
 		
 	player = playerPackedScene.instantiate() as Player
 	if player == null:
-		push_error("Loaded Player Scene does not extend the Player class. " + PlayerUID)
+		push_error("Loaded Player Scene does not extend the Player class. " + playerUID)
 		return
 	
 	entityRoot.add_child(player)
@@ -80,6 +79,28 @@ func deferredLoadMenu(menuUID : String) -> void:
 	if newMenu == null:
 		push_error("Loaded Menu Scene was not able to instantiate " + menuUID)
 		return
+
+	#Retrieve the current menu in the hud root
+	var menuChildren : Array[Node] = hudRoot.get_children()
+	var currentMenu = null
+	if !menuChildren.is_empty():
+		currentMenu = menuChildren.back()
+
+	if newMenu is BaseMenu:
+		if(currentMenu != null):
+			currentMenu.queue_free()
+			currentMenu = null
+	elif newMenu is BaseMenu_Sub:
+		var newSub = newMenu as BaseMenu_Sub
+		if currentMenu != null:
+			newSub.SetParentMenu(currentMenu)
+			#currentMenu.hide()
+	#Else its a popup just display it over top
+	
+	#Allow the old level to finish freeing before adding a new one
+	await get_tree().process_frame
+	
+	currentMenu = newMenu
 	
 	hudRoot.add_child(newMenu)
 	

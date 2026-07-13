@@ -1,0 +1,2 @@
+class_name BaseMenu_Popup
+extends Control

@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://k68tl4ppllaa"]
 
-[ext_resource type="Script" uid="uid://30y54iud8iw8" path="res://src/ui/Menu/MainMenu.gd" id="1_7h282"]
-[ext_resource type="StyleBox" uid="uid://ue6uun70ysn6" path="res://Assets/UI/TempButtonStyles/ButtonStyleNormal.tres" id="2_byany"]
-[ext_resource type="StyleBox" uid="uid://cibp7a80tfnok" path="res://Assets/UI/TempButtonStyles/ButtonStylePressed.tres" id="3_wuk4q"]
-[ext_resource type="StyleBox" uid="uid://vm3ujt4s8d4" path="res://Assets/UI/TempButtonStyles/ButtonStyleHover.tres" id="4_fw1n8"]
+[ext_resource type="Script" uid="uid://30y54iud8iw8" path="res://src/ui/Menu/Menu_Main.gd" id="1_smhq6"]
+[ext_resource type="StyleBox" uid="uid://ue6uun70ysn6" path="res://Assets/UI/TempButtonStyles/ButtonStyleNormal.tres" id="2_i4g1a"]
+[ext_resource type="StyleBox" uid="uid://bvb04dj30mqbn" path="res://Assets/UI/TempPanelBackgroundStyleBoxFlat.tres" id="2_n50ih"]
+[ext_resource type="StyleBox" uid="uid://cibp7a80tfnok" path="res://Assets/UI/TempButtonStyles/ButtonStylePressed.tres" id="3_n50ih"]
+[ext_resource type="StyleBox" uid="uid://vm3ujt4s8d4" path="res://Assets/UI/TempButtonStyles/ButtonStyleHover.tres" id="4_f3lu4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fx5ro"]
 
@@ -14,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7h282")
+script = ExtResource("1_smhq6")
 
 [node name="Panel" type="Panel" parent="." unique_id=445851794]
 layout_mode = 1
@@ -23,6 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_n50ih")
 
 [node name="Buttons" type="VBoxContainer" parent="." unique_id=2141625203]
 layout_mode = 1
@@ -47,9 +49,9 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("2_byany")
-theme_override_styles/pressed = ExtResource("3_wuk4q")
-theme_override_styles/hover = ExtResource("4_fw1n8")
+theme_override_styles/normal = ExtResource("2_i4g1a")
+theme_override_styles/pressed = ExtResource("3_n50ih")
+theme_override_styles/hover = ExtResource("4_f3lu4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fx5ro")
 text = "Start Game"
 
@@ -61,9 +63,9 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("2_byany")
-theme_override_styles/pressed = ExtResource("3_wuk4q")
-theme_override_styles/hover = ExtResource("4_fw1n8")
+theme_override_styles/normal = ExtResource("2_i4g1a")
+theme_override_styles/pressed = ExtResource("3_n50ih")
+theme_override_styles/hover = ExtResource("4_f3lu4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fx5ro")
 text = "Options"
 
@@ -75,9 +77,9 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("2_byany")
-theme_override_styles/pressed = ExtResource("3_wuk4q")
-theme_override_styles/hover = ExtResource("4_fw1n8")
+theme_override_styles/normal = ExtResource("2_i4g1a")
+theme_override_styles/pressed = ExtResource("3_n50ih")
+theme_override_styles/hover = ExtResource("4_f3lu4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fx5ro")
 text = "Quit"
 
