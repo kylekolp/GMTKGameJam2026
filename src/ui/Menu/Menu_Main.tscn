@@ -8,7 +8,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fx5ro"]
 
-[node name="MainMenu" type="Control" unique_id=311291055]
+[node name="Menu_Main" type="Control" unique_id=311291055]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,6 +1,9 @@
 class_name MainGame
 extends Node
 
+#Systems Root Nodes
+@onready var systemsRoot : Node2D = %Systems
+
 #Game World Root Nodes
 @onready var levelRoot : Node2D = %LevelRoot
 @onready var entityRoot : Node2D = %EntityRoot
@@ -17,7 +20,12 @@ var player : Player = null
 func _ready() -> void:
 	SignalBus.LoadLevel.connect(LoadLevel)
 	SignalBus.LoadMenu.connect(LoadMenu)
-	SignalBus.QuitGame.connect(QuitGame)
+	SignalBus.TryQuit.connect(TryQuit)
+	SignalBus.ConfirmQuit.connect(ConfirmQuit)
+	SignalBus.Pause.connect(PauseGame)
+	SignalBus.UnPause.connect(UnPauseGame)
+	
+	# LoadSystem(UIDCatalog.System_PauseAction)
 	
 	LoadMenu(UIDCatalog.Menu_Main)
 	
@@ -67,21 +75,31 @@ func deferredLoadLevel(levelUID : String) -> void:
 	return
 
 func LoadMenu(menuUID : String) -> void:
+	if get_tree().paused == true:
+		LoadPauseLayer(menuUID)
+		return
+		
 	deferredLoadMenu.call_deferred(menuUID)
 	
-func deferredLoadMenu(menuUID : String) -> void:
+func deferredLoadMenu(menuUID : String) -> void:	
 	var newMenuPackedScene : PackedScene = ResourceLoader.load(menuUID, "PackedScene") as PackedScene
 	if newMenuPackedScene == null:
-		push_error("Could not menu as packed scene: " + menuUID)
+		push_error("Could not load menu as packed scene: " + menuUID)
 		return
 		
 	var newMenu = newMenuPackedScene.instantiate() as Control
 	if newMenu == null:
 		push_error("Loaded Menu Scene was not able to instantiate " + menuUID)
 		return
+		
+	#Avoid creating a menu that already exists
+	var menuChildren : Array[Node] = hudRoot.get_children()
+	for menu : Control in menuChildren:
+		if menu.name == newMenu.name:
+			newMenu.queue_free()
+			return
 
 	#Retrieve the current menu in the hud root
-	var menuChildren : Array[Node] = hudRoot.get_children()
 	var currentMenu = null
 	if !menuChildren.is_empty():
 		currentMenu = menuChildren.back()
@@ -100,8 +118,6 @@ func deferredLoadMenu(menuUID : String) -> void:
 	#Allow the old level to finish freeing before adding a new one
 	await get_tree().process_frame
 	
-	currentMenu = newMenu
-	
 	hudRoot.add_child(newMenu)
 	
 	#Allow the new level to process before accessing it
@@ -109,7 +125,98 @@ func deferredLoadMenu(menuUID : String) -> void:
 	
 	return
 	
-func QuitGame() -> void:
-	#Load Are you sure you want to quit menu
-	#LoadMenu(QuitMenuUID)
+func LoadPauseLayer(menuUID : String) -> void:
+	deferredLoadPauseLayer.call_deferred(menuUID)
+	
+func deferredLoadPauseLayer(menuUID : String) -> void:
+	var newMenuPackedScene : PackedScene = ResourceLoader.load(menuUID, "PackedScene") as PackedScene
+	if newMenuPackedScene == null:
+		push_error("Could not load pause menu as packed scene: " + menuUID)
+		return
+		
+	var newMenu = newMenuPackedScene.instantiate() as Control
+	if newMenu == null:
+		push_error("Loaded Pause Menu Scene was not able to instantiate " + menuUID)
+		return
+		
+	#Avoid creating a menu that already exists
+	var menuChildren : Array[Node] = pauseRoot.get_children()
+	for menu : Control in menuChildren:
+		if menu.name == newMenu.name:
+			newMenu.queue_free()
+			return
+
+	#Retrieve the current menu in the hud root
+	var currentMenu = null
+	if !menuChildren.is_empty():
+		currentMenu = menuChildren.back()
+
+	if newMenu is BaseMenu:
+		if(currentMenu != null):
+			currentMenu.queue_free()
+			currentMenu = null
+	elif newMenu is BaseMenu_Sub:
+		var newSub = newMenu as BaseMenu_Sub
+		if currentMenu != null:
+			newSub.SetParentMenu(currentMenu)
+			#currentMenu.hide()
+	#Else its a popup just display it over top
+	
+	#Allow the old level to finish freeing before adding a new one
+	await get_tree().process_frame 
+	
+	pauseRoot.add_child(newMenu)
+	
+	#Allow the new level to process before accessing it
+	await get_tree().process_frame
+	
+	return
+	
+func LoadSystem(systemUID : String) -> void:
+	deferredLoadSystem.call_deferred(systemUID)
+	
+func deferredLoadSystem(systemUID : String) -> void:
+	var systemPackedScene : PackedScene = ResourceLoader.load(systemUID, "PackedScene") as PackedScene
+	if systemPackedScene == null:
+		push_error("Could not load system as packed scene: " + systemUID)
+		return
+		
+	var newSystem = systemPackedScene.instantiate() as Node2D
+	if newSystem == null:
+		push_error("Loaded System Scene was not able to instantiate " + systemUID)
+		return
+		
+	#Avoid creating a system that already exists
+	var systemChildren : Array[Node] = systemsRoot.get_children()
+	for system : Node2D in systemChildren:
+		if system.name == newSystem.name:
+			newSystem.queue_free()
+			return
+	
+	systemsRoot.add_child(newSystem)
+	
+	#Allow the new level to process before accessing it
+	await get_tree().process_frame
+	
+	return
+	
+func TryQuit() -> void:
+	LoadMenu(UIDCatalog.Menu_Quit)
+	
+func ConfirmQuit() -> void:
 	get_tree().quit()
+	
+func PauseGame() -> void:
+	get_tree().paused = true
+	LoadPauseLayer(UIDCatalog.Menu_Pause)
+	await get_tree().process_frame
+	
+func UnPauseGame() -> void:
+	get_tree().paused = false
+	
+	#Queue Free all pause layer menus and resume the game
+	var menuChildren : Array[Node] = pauseRoot.get_children()
+	for menu : Control in menuChildren:
+		menu.queue_free()
+	
+	await get_tree().process_frame

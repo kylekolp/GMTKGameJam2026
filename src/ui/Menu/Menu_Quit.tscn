@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://cibp7a80tfnok" path="res://Assets/UI/TempButtonStyles/ButtonStylePressed.tres" id="4_i8auv"]
 [ext_resource type="StyleBox" uid="uid://vm3ujt4s8d4" path="res://Assets/UI/TempButtonStyles/ButtonStyleHover.tres" id="5_mo06n"]
 
-[node name="QuitMenu" type="Control" unique_id=710551221]
+[node name="Menu_Quit" type="Control" unique_id=710551221]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

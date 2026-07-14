@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://c2b2lxq0i2ysi"]
+
+[ext_resource type="Script" uid="uid://1bvrxkgrf01j" path="res://src/ui/Menu/Menu_Pause.gd" id="1_bsjdg"]
+[ext_resource type="StyleBox" uid="uid://bvb04dj30mqbn" path="res://Assets/UI/TempPanelBackgroundStyleBoxFlat.tres" id="2_2rsw8"]
+[ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="3_uyr75"]
+[ext_resource type="StyleBox" uid="uid://ue6uun70ysn6" path="res://Assets/UI/TempButtonStyles/ButtonStyleNormal.tres" id="5_qtiy1"]
+[ext_resource type="StyleBox" uid="uid://cibp7a80tfnok" path="res://Assets/UI/TempButtonStyles/ButtonStylePressed.tres" id="6_f1rva"]
+[ext_resource type="StyleBox" uid="uid://vm3ujt4s8d4" path="res://Assets/UI/TempButtonStyles/ButtonStyleHover.tres" id="7_s5hbu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wfy2"]
+content_margin_left = 35.0
+content_margin_top = 35.0
+content_margin_right = 35.0
+content_margin_bottom = 35.0
+bg_color = Color(0.14901961, 0.14901961, 0.14901961, 0.9607843)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0, 0, 0, 0.98039216)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Menu_Pause" type="Control" unique_id=278820686]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_bsjdg")
+
+[node name="Panel" type="Panel" parent="." unique_id=416559987]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_2rsw8")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=151939785]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=265460259]
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 2
+theme = ExtResource("3_uyr75")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4wfy2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=260987696]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=416518134]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="EmptyControl" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1108493015]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=110049077]
+layout_mode = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_right = 75
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer3" unique_id=653279543]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("5_qtiy1")
+theme_override_styles/pressed = ExtResource("6_f1rva")
+theme_override_styles/hover = ExtResource("7_s5hbu")
+text = "Resume"
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=2067711935]
+layout_mode = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_right = 75
+
+[node name="OptionsButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer" unique_id=698066919]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("5_qtiy1")
+theme_override_styles/pressed = ExtResource("6_f1rva")
+theme_override_styles/hover = ExtResource("7_s5hbu")
+text = "Options"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1311978717]
+layout_mode = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_right = 75
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer2" unique_id=781366349]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("5_qtiy1")
+theme_override_styles/pressed = ExtResource("6_f1rva")
+theme_override_styles/hover = ExtResource("7_s5hbu")
+text = "Main Menu"
+
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer3/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer2/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

@@ -3,10 +3,14 @@ extends Node
 #This class is used to store UIDs for game objects that might want to be instantiated
 #It is global so simply calling LevelCatalog.[NameOfConstant] will return the value
 
+#Systems
+const System_PauseAction : String = "uid://n3t0af3g7475"
+
 #Menus
 const Menu_Main : String = "uid://k68tl4ppllaa"
 const Menu_Options : String = "uid://cclbjekru4nbm"
 const Menu_Quit : String = "uid://tl3m7s666fu6"
+const Menu_Pause : String = "uid://c2b2lxq0i2ysi"
 
 #Levels
 
@@ -24,6 +28,8 @@ static func GetUIDFromString(itemName : String) -> String:
 			return Menu_Options
 		"Menu_Quit":
 			return Menu_Quit
+		"Menu_Pause":
+			return Menu_Pause
 		"Entity_Player":
 			return Entity_Player
 		_:

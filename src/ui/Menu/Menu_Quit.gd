@@ -2,7 +2,7 @@ extends BaseMenu_Popup
 
 #Quit the game
 func _on_yes_button_pressed() -> void:
-	SignalBus.QuitGame.emit()
+	SignalBus.ConfirmQuit.emit()
 
 #Close the menu
 func _on_no_button_pressed() -> void:

@@ -6,7 +6,7 @@ func _on_start_game_button_pressed() -> void:
 	return
 
 func _on_options_button_pressed() -> void:
-	SignalBus.emit_signal("LoadMenu",UIDCatalog.Menu_Options)
+	SignalBus.LoadMenu.emit(UIDCatalog.Menu_Options)
 
 func _on_quit_game_button_pressed() -> void:
-	SignalBus.emit_signal("LoadMenu",UIDCatalog.Menu_Quit)
+	SignalBus.TryQuit.emit()

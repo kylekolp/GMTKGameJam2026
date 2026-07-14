@@ -16,6 +16,11 @@ extends Node
 # SignalBus.testSignal.emit(someArea2D)
 
 #Signals
+@warning_ignore_start("unused_signal")
 signal LoadLevel(levelUID : String)
 signal LoadMenu(menuUID : String)
-signal QuitGame()
+signal TryQuit()
+signal ConfirmQuit()
+signal Pause()
+signal UnPause()
+@warning_ignore_restore("unused_signal")

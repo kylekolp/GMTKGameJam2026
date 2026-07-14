@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://n3t0af3g7475"]
+
+[ext_resource type="Script" uid="uid://2cwpf4j4aqfa" path="res://src/core/systems/System_PauseAction.gd" id="1_wdnfp"]
+
+[node name="SystemPauseAction" type="Node2D" unique_id=861285055]
+process_mode = 3
+script = ExtResource("1_wdnfp")
