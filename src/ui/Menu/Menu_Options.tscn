@@ -5,6 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://bvb04dj30mqbn" path="res://Assets/UI/TempPanelBackgroundStyleBoxFlat.tres" id="2_yefik"]
 [ext_resource type="StyleBox" uid="uid://ue6uun70ysn6" path="res://Assets/UI/TempButtonStyles/ButtonStyleNormal.tres" id="3_yefik"]
 [ext_resource type="StyleBox" uid="uid://cibp7a80tfnok" path="res://Assets/UI/TempButtonStyles/ButtonStylePressed.tres" id="4_rwodx"]
+[ext_resource type="PackedScene" uid="uid://bxqkaxstsvjf3" path="res://src/ui/Menu/Components/VolumeSlider.tscn" id="4_yefik"]
 [ext_resource type="StyleBox" uid="uid://vm3ujt4s8d4" path="res://Assets/UI/TempButtonStyles/ButtonStyleHover.tres" id="5_ne000"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wfy2"]
@@ -77,22 +78,25 @@ theme_override_constants/separation = 17
 layout_mode = 2
 text = "Master Volume"
 
-[node name="VolumeMaster" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1283602243]
+[node name="VolumeMaster" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=107656459 instance=ExtResource("4_yefik")]
 layout_mode = 2
+busName = "Master"
 
 [node name="Label_Music" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1974053512]
 layout_mode = 2
 text = "Music Volume"
 
-[node name="VolumeMusic" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=2002589685]
+[node name="VolumeMusic" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1606012283 instance=ExtResource("4_yefik")]
 layout_mode = 2
+busName = "Music"
 
 [node name="Label_Sfx" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=63406632]
 layout_mode = 2
 text = "SFX Volume"
 
-[node name="VolumeSfx" type="HSlider" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=522184136]
+[node name="VolumeSfx" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=34451081 instance=ExtResource("4_yefik")]
 layout_mode = 2
+busName = "SFX"
 
 [node name="EmptyControl" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1108493015]
 layout_mode = 2
