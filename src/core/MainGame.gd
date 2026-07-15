@@ -25,9 +25,14 @@ func _ready() -> void:
 	SignalBus.Pause.connect(PauseGame)
 	SignalBus.UnPause.connect(UnPauseGame)
 	
-	# LoadSystem(UIDCatalog.System_PauseAction)
+	#LoadSystem(UIDCatalog.System_PauseAction)
 	
+	RunIntro()
+
+#Runs the intro video and transitions into the main menu
+func RunIntro() -> void:
 	LoadMenu(UIDCatalog.Menu_Main)
+	LoadMenu(UIDCatalog.Menu_Intro)
 	
 func InitializePlayer() -> void:
 	var playerUID : String = UIDCatalog.Entity_Player

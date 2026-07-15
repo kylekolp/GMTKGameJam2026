@@ -34,6 +34,7 @@ project/assembly_name="RogueLikeAbilities"
 [file_customization]
 
 folder_colors={
+"res://Assets/Debug/": "yellow",
 "res://src/debug/": "yellow"
 }
 

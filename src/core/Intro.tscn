@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://kfbhtop1n20d"]
+
+[ext_resource type="VideoStream" uid="uid://nh7qbsr16ram" path="res://Assets/Intro/FarmSoftIntro.ogv" id="1_cuvdu"]
+[ext_resource type="Script" uid="uid://cp8j68fwkbh5v" path="res://src/core/Intro.gd" id="1_lq0bs"]
+[ext_resource type="VideoStream" uid="uid://c44u5vhr3oe3x" path="res://Assets/Intro/GMTKClipped_2.ogv" id="3_lq0bs"]
+
+[node name="FarmSoftIntro" type="Control" unique_id=160518854 node_paths=PackedStringArray("FarmSoftPlayer", "GMTKPlayer", "TransitionPanel", "BackgroundPanel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lq0bs")
+FarmSoftPlayer = NodePath("AspectRatioContainer/FarmSoftVideo")
+GMTKPlayer = NodePath("AspectRatioContainer/GMTKVideo")
+TransitionPanel = NodePath("TransitionRect")
+BackgroundPanel = NodePath("BackgroundPanel")
+
+[node name="BackgroundPanel" type="ColorRect" parent="." unique_id=385948610]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06666667, 0.06666667, 0.06666667, 1)
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=1030356743]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.339722
+offset_bottom = -17.339722
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.8783
+
+[node name="FarmSoftVideo" type="VideoStreamPlayer" parent="AspectRatioContainer" unique_id=1414251219]
+visible = false
+z_index = 1
+layout_mode = 2
+stream = ExtResource("1_cuvdu")
+expand = true
+
+[node name="GMTKVideo" type="VideoStreamPlayer" parent="AspectRatioContainer" unique_id=765627655]
+visible = false
+layout_mode = 2
+stream = ExtResource("3_lq0bs")
+expand = true
+
+[node name="TransitionRect" type="ColorRect" parent="." unique_id=307470493]
+top_level = true
+z_index = 2
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06666667, 0.06666667, 0.06666667, 1)
+
+[connection signal="finished" from="AspectRatioContainer/FarmSoftVideo" to="." method="_on_FarmSoft_video_stream_player_finished"]
+[connection signal="finished" from="AspectRatioContainer/GMTKVideo" to="." method="_on_GMTK_video_stream_player_finished"]

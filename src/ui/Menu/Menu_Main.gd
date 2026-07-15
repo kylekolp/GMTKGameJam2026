@@ -1,5 +1,7 @@
 extends BaseMenu
 
+@export var numberSpawner : Particle_DamageNumber
+
 func _on_start_game_button_pressed() -> void:
 	#To Do: Create Start Level
 	#SignalBus.emit_signal("LoadLevel","Level1UID")
