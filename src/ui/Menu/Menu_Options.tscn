@@ -2,11 +2,10 @@
 
 [ext_resource type="Script" uid="uid://csr37555nmd2n" path="res://src/ui/Menu/Menu_Options.gd" id="1_7a8rc"]
 [ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="2_4wfy2"]
-[ext_resource type="StyleBox" uid="uid://bvb04dj30mqbn" path="res://Assets/UI/TempPanelBackgroundStyleBoxFlat.tres" id="2_yefik"]
-[ext_resource type="StyleBox" uid="uid://ue6uun70ysn6" path="res://Assets/UI/TempButtonStyles/ButtonStyleNormal.tres" id="3_yefik"]
-[ext_resource type="StyleBox" uid="uid://cibp7a80tfnok" path="res://Assets/UI/TempButtonStyles/ButtonStylePressed.tres" id="4_rwodx"]
+[ext_resource type="StyleBox" uid="uid://bvb04dj30mqbn" path="res://Assets/UI/PanelContainer/TempPanelBackgroundStyleBoxFlat.tres" id="2_yefik"]
+[ext_resource type="LabelSettings" uid="uid://b1ki44hmk4u1m" path="res://Assets/UI/LabelSettings/SubtitleSettings.tres" id="4_7a8rc"]
 [ext_resource type="PackedScene" uid="uid://bxqkaxstsvjf3" path="res://src/ui/Menu/Components/VolumeSlider.tscn" id="4_yefik"]
-[ext_resource type="StyleBox" uid="uid://vm3ujt4s8d4" path="res://Assets/UI/TempButtonStyles/ButtonStyleHover.tres" id="5_ne000"]
+[ext_resource type="LabelSettings" uid="uid://bjm71hc0cw01g" path="res://Assets/UI/LabelSettings/DetailSettings.tres" id="5_4wfy2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wfy2"]
 content_margin_left = 35.0
@@ -68,6 +67,7 @@ theme_override_constants/separation = 30
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Settings"
+label_settings = ExtResource("4_7a8rc")
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1197368444]
@@ -77,25 +77,31 @@ theme_override_constants/separation = 17
 [node name="Label_Master" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1109454860]
 layout_mode = 2
 text = "Master Volume"
+label_settings = ExtResource("5_4wfy2")
 
 [node name="VolumeMaster" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=107656459 instance=ExtResource("4_yefik")]
 layout_mode = 2
+theme = ExtResource("2_4wfy2")
 busName = "Master"
 
 [node name="Label_Music" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1974053512]
 layout_mode = 2
 text = "Music Volume"
+label_settings = ExtResource("5_4wfy2")
 
 [node name="VolumeMusic" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1606012283 instance=ExtResource("4_yefik")]
 layout_mode = 2
+theme = ExtResource("2_4wfy2")
 busName = "Music"
 
 [node name="Label_Sfx" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=63406632]
 layout_mode = 2
 text = "SFX Volume"
+label_settings = ExtResource("5_4wfy2")
 
 [node name="VolumeSfx" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=34451081 instance=ExtResource("4_yefik")]
 layout_mode = 2
+theme = ExtResource("2_4wfy2")
 busName = "SFX"
 
 [node name="EmptyControl" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1108493015]
@@ -108,11 +114,8 @@ theme_override_constants/margin_right = 75
 
 [node name="BackButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer" unique_id=698066919]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme = ExtResource("2_4wfy2")
 theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3_yefik")
-theme_override_styles/pressed = ExtResource("4_rwodx")
-theme_override_styles/hover = ExtResource("5_ne000")
 text = "Back"
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]

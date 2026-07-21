@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://55u2oedi8qwm" path="res://src/ui/Menu/Menu_Quit.gd" id="1_eisxb"]
 [ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="2_mlcv6"]
+[ext_resource type="LabelSettings" uid="uid://bjm71hc0cw01g" path="res://Assets/UI/LabelSettings/DetailSettings.tres" id="3_mlcv6"]
 [ext_resource type="StyleBox" uid="uid://ue6uun70ysn6" path="res://Assets/UI/TempButtonStyles/ButtonStyleNormal.tres" id="3_v4e0w"]
 [ext_resource type="StyleBox" uid="uid://cibp7a80tfnok" path="res://Assets/UI/TempButtonStyles/ButtonStylePressed.tres" id="4_i8auv"]
 [ext_resource type="StyleBox" uid="uid://vm3ujt4s8d4" path="res://Assets/UI/TempButtonStyles/ButtonStyleHover.tres" id="5_mo06n"]
@@ -36,6 +37,7 @@ theme_override_constants/separation = 25
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Are You Sure You Want To Quit?"
+label_settings = ExtResource("3_mlcv6")
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=925886683]
@@ -45,6 +47,7 @@ theme_override_constants/separation = 30
 
 [node name="YesButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=303043462]
 layout_mode = 2
+theme = ExtResource("2_mlcv6")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("3_v4e0w")
@@ -54,6 +57,7 @@ text = "Yes"
 
 [node name="NoButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1555428961]
 layout_mode = 2
+theme = ExtResource("2_mlcv6")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("3_v4e0w")

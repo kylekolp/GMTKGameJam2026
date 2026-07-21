@@ -1,6 +1,16 @@
 [gd_resource type="Theme" format=3 uid="uid://j2rfknwaqld0"]
 
-[ext_resource type="StyleBox" uid="uid://1y8mw8aos0s7" path="res://Assets/UI/TempPanelBoxStyle.tres" id="1_jhf3f"]
+[ext_resource type="StyleBox" uid="uid://1y8mw8aos0s7" path="res://Assets/UI/PanelContainer/TempPanelBoxStyle.tres" id="1_jhf3f"]
+[ext_resource type="StyleBox" uid="uid://vm3ujt4s8d4" path="res://Assets/UI/TempButtonStyles/ButtonStyleHover.tres" id="1_rejem"]
+[ext_resource type="StyleBox" uid="uid://ue6uun70ysn6" path="res://Assets/UI/TempButtonStyles/ButtonStyleNormal.tres" id="2_gxghq"]
+[ext_resource type="StyleBox" uid="uid://cibp7a80tfnok" path="res://Assets/UI/TempButtonStyles/ButtonStylePressed.tres" id="3_n5ag8"]
 
 [resource]
+default_font_size = 30
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/styles/hover = ExtResource("1_rejem")
+Button/styles/normal = ExtResource("2_gxghq")
+Button/styles/pressed = ExtResource("3_n5ag8")
 PanelContainer/styles/panel = ExtResource("1_jhf3f")
