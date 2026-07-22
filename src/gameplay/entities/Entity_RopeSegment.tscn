@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cdi24ufha6obs"]
+
+[ext_resource type="Texture2D" uid="uid://culgsb1lbrrqh" path="res://Assets/characters/RopeSegment.png" id="1_ejaof"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
+size = Vector2(132, 52)
+
+[node name="RopeSegment" type="RigidBody2D" unique_id=1538065058]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2146331024]
+position = Vector2(0, -0.99999994)
+scale = Vector2(0.20625001, 0.20625004)
+texture = ExtResource("1_ejaof")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1589707294]
+shape = SubResource("RectangleShape2D_bai2n")

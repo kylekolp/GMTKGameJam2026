@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kd3toeif43gk"
-path="res://.godot/imported/Rocket.png-0f5aea4aa6856f710cb2338fe93f8a09.ctex"
+uid="uid://culgsb1lbrrqh"
+path="res://.godot/imported/RopeSegment.png-66626c41986d71681c9687923e2b898a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Rocket.png"
-dest_files=["res://.godot/imported/Rocket.png-0f5aea4aa6856f710cb2338fe93f8a09.ctex"]
+source_file="res://Assets/characters/RopeSegment.png"
+dest_files=["res://.godot/imported/RopeSegment.png-66626c41986d71681c9687923e2b898a.ctex"]
 
 [params]
 

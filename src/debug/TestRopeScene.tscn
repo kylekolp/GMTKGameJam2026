@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://357xihy2vco4"]
+
+[ext_resource type="PackedScene" uid="uid://c86xeg2esb2uo" path="res://src/gameplay/entities/Rocket/Entity_Rocket.tscn" id="1_pm8fr"]
+[ext_resource type="PackedScene" uid="uid://cdi24ufha6obs" path="res://src/gameplay/entities/Entity_RopeSegment.tscn" id="2_kbp7u"]
+[ext_resource type="PackedScene" uid="uid://bw4t4ix88htau" path="res://src/gameplay/entities/player/Entity_Player.tscn" id="3_ft7x8"]
+[ext_resource type="Script" uid="uid://c2r60jvkr82w" path="res://src/gameplay/entities/Entity_RopeSegment.gd" id="3_m5bqw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kbp7u"]
+
+[node name="TestRopeScene" type="Node2D" unique_id=1262716561]
+
+[node name="Rocket" parent="." unique_id=1733741076 instance=ExtResource("1_pm8fr")]
+position = Vector2(499, 168)
+
+[node name="RocketBody" type="StaticBody2D" parent="Rocket" unique_id=1844944640]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket/RocketBody" unique_id=1202412432]
+position = Vector2(0, 28)
+shape = SubResource("RectangleShape2D_kbp7u")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=547409942]
+position = Vector2(499, 198)
+node_a = NodePath("../Rocket/RocketBody")
+node_b = NodePath("../RopeSegment")
+
+[node name="RopeSegment" parent="." unique_id=1538065058 instance=ExtResource("2_kbp7u")]
+position = Vector2(504, 264)
+rotation = 1.5707964
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="." unique_id=1636406783]
+position = Vector2(503, 331)
+node_a = NodePath("../RopeSegment")
+node_b = NodePath("../RopeSegment2")
+
+[node name="RopeSegment2" parent="." unique_id=422358488 instance=ExtResource("2_kbp7u")]
+position = Vector2(504, 396)
+rotation = 1.5707964
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="." unique_id=2075099816]
+position = Vector2(503, 463)
+node_a = NodePath("../RopeSegment2")
+node_b = NodePath("../RopeSegment3")
+
+[node name="RopeSegment3" parent="." unique_id=1607864135 instance=ExtResource("2_kbp7u")]
+position = Vector2(504, 529)
+rotation = 1.5707964
+script = ExtResource("3_m5bqw")
+
+[node name="Player" parent="." unique_id=526542025 instance=ExtResource("3_ft7x8")]
+position = Vector2(215, 284)
