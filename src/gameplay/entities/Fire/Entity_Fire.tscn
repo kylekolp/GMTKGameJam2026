@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://tequb32i5gkj"]
+
+[ext_resource type="Script" uid="uid://cdsjwt04xf57t" path="res://src/gameplay/entities/Fire/Entity_Fire.gd" id="1_fej27"]
+[ext_resource type="Texture2D" uid="uid://c8vale8plupbr" path="res://icon.svg" id="2_dxq6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1v16"]
+size = Vector2(77, 78)
+
+[node name="EntityFire" type="Node2D" unique_id=1191729301]
+script = ExtResource("1_fej27")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=564261856]
+texture = ExtResource("2_dxq6c")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2113893076]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=255735316]
+shape = SubResource("RectangleShape2D_m1v16")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
