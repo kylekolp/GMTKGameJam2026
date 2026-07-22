@@ -19,6 +19,7 @@ const Level_1 : String = "uid://b6p18mlsjkqut"
 
 #Entities
 const Entity_Player : String = "uid://bw4t4ix88htau"
+const Entity_Rocket : String = "uid://c86xeg2esb2uo"
 
 #Other
 

@@ -4,10 +4,16 @@
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wb2dy"]
 
-[node name="Player" type="CharacterBody2D" unique_id=526542025]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
+size = Vector2(76, 78)
+
+[node name="Player" type="CharacterBody2D" unique_id=526542025 groups=["Player"]]
 script = ExtResource("1_khxic")
 movement_speed = 350.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=602313639]
 scale = Vector2(76, 75.999954)
 texture = SubResource("PlaceholderTexture2D_wb2dy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1902461312]
+shape = SubResource("RectangleShape2D_bai2n")

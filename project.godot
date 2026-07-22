@@ -38,6 +38,12 @@ folder_colors={
 "res://src/debug/": "yellow"
 }
 
+[global_group]
+
+Player="The player character"
+Rocket="The fireworks"
+Fire="Fire"
+
 [input]
 
 PauseGame={

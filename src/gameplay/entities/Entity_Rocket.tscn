@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c86xeg2esb2uo"]
+
+[ext_resource type="Script" uid="uid://davrbmi2pn8l8" path="res://src/gameplay/entities/Entity_Rocket.gd" id="1_b4x1x"]
+[ext_resource type="Texture2D" uid="uid://kd3toeif43gk" path="res://Assets/Rocket.png" id="1_d7am1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
+size = Vector2(36, 76)
+
+[node name="Rocket" type="Node2D" unique_id=1733741076]
+script = ExtResource("1_b4x1x")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1540493977]
+scale = Vector2(0.13333333, 0.13333334)
+texture = ExtResource("1_d7am1")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1027875018 groups=["Rocket"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=982255867]
+shape = SubResource("RectangleShape2D_bai2n")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
