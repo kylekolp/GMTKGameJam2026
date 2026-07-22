@@ -17,10 +17,18 @@ extends Node
 
 #Signals
 @warning_ignore_start("unused_signal")
+
+#Main
 signal LoadLevel(levelUID : String)
 signal LoadMenu(menuUID : String)
+signal LoadSystem(systemUID : String)
 signal TryQuit()
 signal ConfirmQuit()
 signal Pause()
 signal UnPause()
+
+#Level
+signal LoadEntity(entityUID : String)
+signal LoadEffect(effectUID : String)
+
 @warning_ignore_restore("unused_signal")

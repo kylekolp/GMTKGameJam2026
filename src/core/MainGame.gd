@@ -25,6 +25,10 @@ func _ready() -> void:
 	SignalBus.Pause.connect(PauseGame)
 	SignalBus.UnPause.connect(UnPauseGame)
 	
+	SignalBus.LoadEntity.connect(LoadEntity)
+	SignalBus.LoadEffect.connect(LoadEffect)
+	SignalBus.LoadSystem.connect(LoadSystem)
+	
 	#LoadSystem(UIDCatalog.System_PauseAction)
 	
 	RunIntro()
@@ -48,7 +52,7 @@ func InitializePlayer() -> void:
 	
 	entityRoot.add_child(player)
 	
-func LoadLevel(levelUID : Level) -> void:
+func LoadLevel(levelUID : String) -> void:
 	deferredLoadLevel.call_deferred(levelUID)
 	
 func deferredLoadLevel(levelUID : String) -> void:
@@ -199,6 +203,48 @@ func deferredLoadSystem(systemUID : String) -> void:
 			return
 	
 	systemsRoot.add_child(newSystem)
+	
+	#Allow the new level to process before accessing it
+	await get_tree().process_frame
+	
+	return
+	
+func LoadEntity(entityUID : String) -> void:
+	deferredLoadEntity.call_deferred(entityUID)
+	
+func deferredLoadEntity(entityUID : String) -> void:
+	var entityPackedScene : PackedScene = ResourceLoader.load(entityUID, "PackedScene") as PackedScene
+	if entityPackedScene == null:
+		push_error("Could not load entity as packed scene: " + entityUID)
+		return
+		
+	var newEntity = entityPackedScene.instantiate() as Node2D
+	if newEntity == null:
+		push_error("Loaded Entity Scene was not able to instantiate " + entityUID)
+		return
+	
+	entityRoot.add_child(newEntity)
+	
+	#Allow the new level to process before accessing it
+	await get_tree().process_frame
+	
+	return
+	
+func LoadEffect(effectUID : Level) -> void:
+	deferredLoadEffect.call_deferred(effectUID)
+	
+func deferredLoadEffect(effectUID : String) -> void:
+	var effectPackedScene : PackedScene = ResourceLoader.load(effectUID, "PackedScene") as PackedScene
+	if effectPackedScene == null:
+		push_error("Could not load effect as packed scene: " + effectUID)
+		return
+		
+	var newEffect = effectPackedScene.instantiate() as Node2D
+	if newEffect == null:
+		push_error("Loaded Effect Scene was not able to instantiate " + effectUID)
+		return
+	
+	effectsRoot.add_child(newEffect)
 	
 	#Allow the new level to process before accessing it
 	await get_tree().process_frame
