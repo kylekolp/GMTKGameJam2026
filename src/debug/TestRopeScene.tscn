@@ -26,27 +26,30 @@ node_a = NodePath("../Rocket/RocketBody")
 node_b = NodePath("../RopeSegment")
 
 [node name="RopeSegment" parent="." unique_id=1538065058 instance=ExtResource("2_kbp7u")]
-position = Vector2(504, 264)
-rotation = 1.5707964
+position = Vector2(521, 259)
+rotation = 1.3177236
 
 [node name="PinJoint2D2" type="PinJoint2D" parent="." unique_id=1636406783]
-position = Vector2(503, 331)
+position = Vector2(535, 324)
+rotation = 1.3177236
 node_a = NodePath("../RopeSegment")
 node_b = NodePath("../RopeSegment2")
 
 [node name="RopeSegment2" parent="." unique_id=422358488 instance=ExtResource("2_kbp7u")]
-position = Vector2(504, 396)
-rotation = 1.5707964
+position = Vector2(556, 386)
+rotation = 1.3177236
 
 [node name="PinJoint2D3" type="PinJoint2D" parent="." unique_id=2075099816]
-position = Vector2(503, 463)
+position = Vector2(571, 451.99997)
+rotation = 1.3177236
 node_a = NodePath("../RopeSegment2")
 node_b = NodePath("../RopeSegment3")
 
-[node name="RopeSegment3" parent="." unique_id=1607864135 instance=ExtResource("2_kbp7u")]
-position = Vector2(504, 529)
-rotation = 1.5707964
+[node name="RopeSegment3" parent="." unique_id=1607864135 node_paths=PackedStringArray("player") instance=ExtResource("2_kbp7u")]
+position = Vector2(592, 512.99994)
+rotation = 1.3177236
 script = ExtResource("3_m5bqw")
+player = NodePath("../Player")
 
 [node name="Player" parent="." unique_id=526542025 instance=ExtResource("3_ft7x8")]
 position = Vector2(215, 284)
