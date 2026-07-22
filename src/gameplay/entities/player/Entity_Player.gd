@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 @export var movement_speed : float
 
+@onready var rope: Line2D = $Line2D
+
 func _ready() -> void:
 	return
 	
@@ -12,3 +14,6 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * movement_speed
 	
 	move_and_slide()
+
+func start_drawing() -> void:
+	rope.start_drawing()
