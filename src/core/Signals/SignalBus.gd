@@ -28,7 +28,7 @@ signal Pause()
 signal UnPause()
 
 #Level
-signal LoadEntity(entityUID : String)
+signal LoadEntity(entityUID : String, position: Vector2)
 signal LoadEffect(effectUID : String)
 
 @warning_ignore_restore("unused_signal")

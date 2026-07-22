@@ -1,17 +1,13 @@
 [gd_scene format=3 uid="uid://bw4t4ix88htau"]
 
 [ext_resource type="Script" uid="uid://tl6khwr4g44e" path="res://src/gameplay/entities/player/Entity_Player.gd" id="1_khxic"]
-[ext_resource type="Texture2D" uid="uid://c8vale8plupbr" path="res://icon.svg" id="2_fok4k"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wb2dy"]
 
-[node name="Player" type="Node2D" unique_id=365570103]
+[node name="Player" type="CharacterBody2D" unique_id=526542025]
 script = ExtResource("1_khxic")
+movement_speed = 350.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=602313639]
-scale = Vector2(1000, 1000)
+scale = Vector2(76, 75.999954)
 texture = SubResource("PlaceholderTexture2D_wb2dy")
-
-[node name="Icon" type="Sprite2D" parent="." unique_id=1537789538]
-position = Vector2(666, 261)
-texture = ExtResource("2_fok4k")

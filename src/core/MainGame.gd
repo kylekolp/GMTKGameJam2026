@@ -210,21 +210,23 @@ func deferredLoadSystem(systemUID : String) -> void:
 	
 	return
 	
-func LoadEntity(entityUID : String) -> void:
-	deferredLoadEntity.call_deferred(entityUID)
+func LoadEntity(entityUID : String, position: Vector2) -> void:
+	deferredLoadEntity.call_deferred(entityUID,position)
 	
-func deferredLoadEntity(entityUID : String) -> void:
+func deferredLoadEntity(entityUID : String, position: Vector2) -> void:
 	var entityPackedScene : PackedScene = ResourceLoader.load(entityUID, "PackedScene") as PackedScene
 	if entityPackedScene == null:
 		push_error("Could not load entity as packed scene: " + entityUID)
 		return
 		
-	var newEntity = entityPackedScene.instantiate() as Entity
+	var newEntity = entityPackedScene.instantiate() as Node2D
 	if newEntity == null:
 		push_error("Loaded Entity Scene was not able to instantiate " + entityUID)
 		return
 	
 	entityRoot.add_child(newEntity)
+	
+	newEntity.position = position
 	
 	#Allow the new level to process before accessing it
 	await get_tree().process_frame
