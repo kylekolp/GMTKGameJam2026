@@ -190,7 +190,7 @@ func deferredLoadSystem(systemUID : String) -> void:
 		push_error("Could not load system as packed scene: " + systemUID)
 		return
 		
-	var newSystem = systemPackedScene.instantiate() as Node2D
+	var newSystem = systemPackedScene.instantiate() as System
 	if newSystem == null:
 		push_error("Loaded System Scene was not able to instantiate " + systemUID)
 		return
@@ -218,7 +218,7 @@ func deferredLoadEntity(entityUID : String) -> void:
 		push_error("Could not load entity as packed scene: " + entityUID)
 		return
 		
-	var newEntity = entityPackedScene.instantiate() as Node2D
+	var newEntity = entityPackedScene.instantiate() as Entity
 	if newEntity == null:
 		push_error("Loaded Entity Scene was not able to instantiate " + entityUID)
 		return

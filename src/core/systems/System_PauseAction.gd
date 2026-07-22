@@ -1,4 +1,4 @@
-extends Node
+extends System
 #Handles the user Pausing and UnPausing the game
 
 func _process(delta: float) -> void:
