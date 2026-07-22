@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ctv4a8qir44ns"]
+
+[ext_resource type="Script" uid="uid://4n37gc6fiq3g" path="res://Assets/AnimationNodes/ContainerTween.gd" id="1_b00jr"]
+
+[node name="ContainerTween" type="Control" unique_id=1097775066]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_b00jr")
+Animation_Type = 2
+Duration = 0.25
