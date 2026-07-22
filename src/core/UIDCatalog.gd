@@ -15,6 +15,7 @@ const Menu_Pause : String = "uid://c2b2lxq0i2ysi"
 const Menu_Intro : String = "uid://kfbhtop1n20d"
 
 #Levels
+const Level_1 : String = "uid://b6p18mlsjkqut"
 
 #Entities
 const Entity_Player : String = "uid://bw4t4ix88htau"

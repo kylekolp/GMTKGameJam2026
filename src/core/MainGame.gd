@@ -31,7 +31,8 @@ func _ready() -> void:
 	
 	#LoadSystem(UIDCatalog.System_PauseAction)
 	
-	RunIntro()
+	#RunIntro()
+	LoadMenu(UIDCatalog.Menu_Main)
 
 #Runs the intro video and transitions into the main menu
 func RunIntro() -> void:

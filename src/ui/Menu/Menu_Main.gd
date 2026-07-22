@@ -1,9 +1,8 @@
 extends BaseMenu
 
 func _on_start_game_button_pressed() -> void:
-	#To Do: Create Start Level
-	#SignalBus.emit_signal("LoadLevel","Level1UID")
-	return
+	SignalBus.LoadLevel.emit(UIDCatalog.Level_1)
+	queue_free()
 
 func _on_options_button_pressed() -> void:
 	SignalBus.LoadMenu.emit(UIDCatalog.Menu_Options)
