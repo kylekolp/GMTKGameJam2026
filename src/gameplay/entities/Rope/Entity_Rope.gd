@@ -5,6 +5,7 @@ extends Line2D
 const HITS_TO_LAUNCH := 10
 
 var attachments: Array[Dictionary] = []
+var ignitedRopes : Array[Entity_Rope] = []
 
 @export var drawingDelayTimer: Timer
 
@@ -34,6 +35,7 @@ func stop_drawing() -> void:
 	is_drawing = false
 	fireSpawnTimer.start() #Start spawning fire
 
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	if is_drawing and drawingDelayTimer.is_stopped():
 		
@@ -69,15 +71,11 @@ func _on_fire_spawn_timer_timeout() -> void:
 	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining():
 		return
 	
-	var ropeEndPosition : Vector2 = Vector2(points[points.size()-1].x,points[points.size()-1].y)
-	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(ropeEndPosition)
+	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(points.size() - 1)
 	activeFires += 1
 	fireBurn.FireTravelComplete.connect(_on_fire_travel_complete)
-	
-	#var newFire : Entity_FireBurnRope = get_child("")
-	
-	pass # Replace with function body.
 
+@warning_ignore("unused_parameter")
 func _on_fire_travel_complete(fireEntity : Node2D) -> void:
 	activeFires -= 1
 
@@ -93,10 +91,11 @@ func get_child_of_type(type: GDScript) -> Node:
 			return child
 	return null
 	
-func SpawnFireBurn(position: Vector2) -> Entity_FireBurnRope: 
-	return await SpawnFireBurnAtPosition(UIDCatalog.Entity_FireBurnRope,position,self)
+func SpawnFireBurn(index: int) -> Entity_FireBurnRope: 
+	return await SpawnFireBurnAtIndex(UIDCatalog.Entity_FireBurnRope, index, self)
 	
-func SpawnFireBurnAtPosition(entityUID : String, position: Vector2, parent : Node2D = null) -> Entity_FireBurnRope:
+@warning_ignore("unused_parameter")
+func SpawnFireBurnAtIndex(entityUID : String, index: int, parent : Node2D = null) -> Entity_FireBurnRope:
 	var entityPackedScene : PackedScene = ResourceLoader.load(entityUID, "PackedScene") as PackedScene
 	if entityPackedScene == null:
 		push_error("Rope Spawn Fire: Could not load entity as packed scene: " + entityUID)
@@ -107,14 +106,29 @@ func SpawnFireBurnAtPosition(entityUID : String, position: Vector2, parent : Nod
 		push_error("Rope Spawn Fire: Loaded Entity Scene was not able to instantiate " + entityUID)
 		return
 	
+	newEntity.startIndex = index
 	self.add_child(newEntity)
-	
-	newEntity.position = position
+	newEntity.position = points[index]
 	
 	#Allow the new level to process before accessing it
 	await get_tree().process_frame
 	
 	return newEntity
+
+func ignite_from_point(from_rope: Entity_Rope, index: int) -> void:
+	if from_rope in ignitedRopes:
+		return
+	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining():
+		return
+	ignitedRopes.append(from_rope)
+	from_rope.ignitedRopes.append(self)
+	
+	for attachment in attachments:
+		attachment["rocket"].stop_countdown()
+	
+	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(index)
+	activeFires += 1
+	fireBurn.FireTravelComplete.connect(_on_fire_travel_complete)
 	
 func BurnRope() -> void:
 	queue_free()

@@ -7,6 +7,7 @@ extends Node2D
 
 var countdown_tween : Tween
 var hasRope : bool = false
+var timer_stopped : bool = false
 
 var rope : Entity_Rope
 
@@ -18,6 +19,13 @@ func _ready() -> void:
 
 func _on_countdown_finished() -> void:
 	SignalBus.GameOver.emit()
+
+func stop_countdown() -> void:
+	if timer_stopped:
+		return
+	timer_stopped = true
+	countdown_tween.kill()
+	circle_timer.queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var bodyGroups : Array[StringName] = body.get_groups()
@@ -38,8 +46,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func _on_rope_complete(rope : Node2D) -> void:
 	rope.RopeComplete.disconnect(_on_rope_complete)
-	countdown_tween.kill()
-	circle_timer.queue_free()
+	stop_countdown()
 
 func launch() -> void:
 	#Play firework launch animation
