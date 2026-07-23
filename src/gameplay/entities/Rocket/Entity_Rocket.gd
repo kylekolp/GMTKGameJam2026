@@ -43,4 +43,5 @@ func _on_rope_complete(rope : Node2D) -> void:
 
 func launch() -> void:
 	#Play firework launch animation
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK)
 	queue_free()

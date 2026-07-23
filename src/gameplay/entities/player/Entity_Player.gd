@@ -93,6 +93,7 @@ func CreateRope(position: Vector2) -> Entity_Rope:
 #push the player back a bit and burn the rope they are holding
 func FireDamagePlayer(enemy : Entity_FireBurnRope) -> void:
 	animator.play("TakeDamage")
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PLAYER_HIT)
 	if currentRope != null:
 		currentRope.reset_attached_rockets()
 		currentRope.BurnRope()
