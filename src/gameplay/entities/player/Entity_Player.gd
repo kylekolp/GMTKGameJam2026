@@ -18,16 +18,42 @@ func _physics_process(delta: float) -> void:
 	
 	var direction:= Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down")
 	
+	AnimatePlayer(direction)
+	
 	velocity = direction * movement_speed
 	
 	move_and_slide()
 	
-	var screen_size = get_viewport_rect().size
-	var half_sprite_size = $Sprite2D.texture.get_size() * $Sprite2D.scale / 2
+	#var screen_size = get_viewport_rect().size
+	#var half_sprite_size = $Sprite2D.texture.get_size() * $Sprite2D.scale / 2
+	#
+	#position.x = clamp(position.x, half_sprite_size.x, screen_size.x - half_sprite_size.x)
+	#position.y = clamp(position.y, half_sprite_size.y, screen_size.y - half_sprite_size.y)
 	
-	position.x = clamp(position.x, half_sprite_size.x, screen_size.x - half_sprite_size.x)
-	position.y = clamp(position.y, half_sprite_size.y, screen_size.y - half_sprite_size.y)
+func AnimatePlayer(direction : Vector2):
 	
+	if direction.x < 0 and direction.y == 0:
+		animator.play("Walk_Left")
+	elif direction.x > 0 and direction.y == 0: #Right
+		animator.play("Walk_Right")
+	elif direction.x == 0 and direction.y > 0:
+		animator.play("Walk_Down")
+	elif direction.x == 0 and direction.y < 0:
+		animator.play("Walk_Up")
+	elif direction.x < 0 and direction.y < 0:
+		animator.play("Walk_Diagonal_Back_Left")
+	elif direction.x > 0 and direction.y < 0:
+		animator.play("Walk_Diagonal_Back_Right")
+	elif direction.x < 0 and direction.y > 0:
+		animator.play("Walk_Diagonal_Front_LeftDown")
+	elif direction.x > 0 and direction.y > 0:
+		animator.play("Walk_Diagonal_Front_RightDown")
+	else:
+		animator.play("Idle")
+		
+	print("current animation: " + animator.current_animation.get_basename())
+	
+	return
 
 func start_drawing(rocket : Entity_Rocket) -> Entity_Rope:
 	currentRope = CreateRope(Vector2(0,0))
