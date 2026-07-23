@@ -4,3 +4,14 @@
 
 [node name="Level1" type="Node2D" unique_id=1647347138]
 script = ExtResource("1_qsbfr")
+
+[node name="RocketSpawnTimer" type="Timer" parent="." unique_id=454984310]
+wait_time = 2.0
+
+[node name="SpawnAreaTopLeft" type="Marker2D" parent="." unique_id=913642284]
+position = Vector2(10, 10)
+
+[node name="SpawnAreaBottomRight" type="Marker2D" parent="." unique_id=704561352]
+position = Vector2(1142, 638)
+
+[connection signal="timeout" from="RocketSpawnTimer" to="." method="_on_rocket_spawn_timer_timeout"]
