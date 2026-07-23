@@ -1,17 +1,20 @@
 class_name Entity_Rope
 extends Line2D
 
+# this is like ropeHealth var and BurnComplete signal
+const HITS_TO_LAUNCH := 10
+
+var attachments: Array[Dictionary] = []
+
 @export var drawingDelayTimer: Timer
 
 @export var fireSpawnTimer : Timer
 
 signal RopeComplete(rope : Entity_Rope)
-signal BurnComplete()
 
 var is_drawing := false
 var target: Node2D
 
-var ropeHealth : int = 10
 var activeFires : int = 0
 
 var previousPoint : Vector2 = Vector2.ZERO
@@ -31,6 +34,7 @@ func stop_drawing() -> void:
 	is_drawing = false
 	fireSpawnTimer.start() #Start spawning fire
 
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	if is_drawing and drawingDelayTimer.is_stopped():
 		
@@ -40,18 +44,47 @@ func _process(delta: float) -> void:
 			previousPoint = points[points.size()-1]
 			drawingDelayTimer.start(.1)
 
+func attach_rocket(rocket: Entity_Rocket) -> void:
+	add_point(rocket.global_position)
+	attachments.append({
+		"rocket": rocket,
+		"index": points.size() - 1,
+		"hits_remaining": HITS_TO_LAUNCH
+	})
+
+func notify_ember_passed_point(index: int) -> void:
+	for attachment in attachments:
+		if attachment["index"] == index and attachment["hits_remaining"] > 0:
+			attachment["hits_remaining"] -= 1
+			if attachment["hits_remaining"] == 0:
+				attachment["rocket"].launch()
+	
+	attachments = attachments.filter(func(a): return a["hits_remaining"] > 0)
+	
+	if total_hits_remaining() == 0:
+		queue_free()
+
+func reset_attached_rockets() -> void:
+	for attachment in attachments:
+		attachment["rocket"].hasRope = false
+
 func _on_fire_spawn_timer_timeout() -> void:
-	if ropeHealth == activeFires: #Dont spawn more fire if
+	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining():
 		return
 	
-	var ropeEndPosition : Vector2 = Vector2(points[points.size()-1].x,points[points.size()-1].y)
-	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(ropeEndPosition)
+	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(points.size() - 1)
 	activeFires += 1
-	fireBurn.FireTravelComplete.connect(fireMadeItToRocket)
-	
-	#var newFire : Entity_FireBurnRope = get_child("")
-	
-	pass # Replace with function body.
+	fireBurn.FireTravelComplete.connect(_on_fire_travel_complete)
+
+@warning_ignore("unused_parameter")
+func _on_fire_travel_complete(fireEntity : Node2D) -> void:
+	activeFires -= 1
+
+func total_hits_remaining() -> int:
+	var total := 0
+	for attachment in attachments:
+		total += attachment["hits_remaining"]
+	return total
 
 func get_child_of_type(type: GDScript) -> Node:
 	for child in get_children():
@@ -59,10 +92,10 @@ func get_child_of_type(type: GDScript) -> Node:
 			return child
 	return null
 	
-func SpawnFireBurn(position: Vector2) -> Entity_FireBurnRope: 
-	return await SpawnFireBurnAtPosition(UIDCatalog.Entity_FireBurnRope,position,self)
+func SpawnFireBurn(index: int, source_rope: Entity_Rope = null) -> Entity_FireBurnRope: 
+	return await SpawnFireBurnAtIndex(UIDCatalog.Entity_FireBurnRope, index, source_rope)
 	
-func SpawnFireBurnAtPosition(entityUID : String, position: Vector2, parent : Node2D = null) -> Entity_FireBurnRope:
+func SpawnFireBurnAtIndex(entityUID : String, index: int, source_rope: Entity_Rope = null) -> Entity_FireBurnRope:
 	var entityPackedScene : PackedScene = ResourceLoader.load(entityUID, "PackedScene") as PackedScene
 	if entityPackedScene == null:
 		push_error("Rope Spawn Fire: Could not load entity as packed scene: " + entityUID)
@@ -73,23 +106,26 @@ func SpawnFireBurnAtPosition(entityUID : String, position: Vector2, parent : Nod
 		push_error("Rope Spawn Fire: Loaded Entity Scene was not able to instantiate " + entityUID)
 		return
 	
+	newEntity.startIndex = index
+	newEntity.sourceRope = source_rope
 	self.add_child(newEntity)
-	
-	newEntity.position = position
+	newEntity.position = points[index]
 	
 	#Allow the new level to process before accessing it
 	await get_tree().process_frame
 	
 	return newEntity
+
+func ignite_from_point(from_rope: Entity_Rope, index: int) -> void:
+	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining():
+		return
 	
-func fireMadeItToRocket(fireEntity : Node2D) -> void:
-	activeFires -= 1
-	ropeHealth -= 1
-	print("RopeHealth: " + str(ropeHealth))
+	for attachment in attachments:
+		attachment["rocket"].stop_countdown()
 	
-	if ropeHealth == 0:
-		BurnComplete.emit()
-		queue_free()
-		
+	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(index, from_rope)
+	activeFires += 1
+	fireBurn.FireTravelComplete.connect(_on_fire_travel_complete)
+	
 func BurnRope() -> void:
 	queue_free()
