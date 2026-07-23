@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1v16"]
 size = Vector2(77, 78)
 
-[node name="EntityFire" type="Node2D" unique_id=1191729301]
+[node name="EntityFire" type="Node2D" unique_id=1191729301 groups=["Fire"]]
 z_index = 1
 script = ExtResource("1_fej27")
 
