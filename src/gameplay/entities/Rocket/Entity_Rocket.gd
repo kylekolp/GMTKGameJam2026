@@ -3,6 +3,7 @@ extends Node2D
 @onready var circle_timer: TextureProgressBar = $CircleTimer
 
 var countdown_tween : Tween
+var hasRope : bool = false
 
 func _ready() -> void:
 	SignalBus.RopeComplete.connect(_on_rope_complete)
@@ -18,7 +19,8 @@ func _on_countdown_finished() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var bodyGroups : Array[StringName] = body.get_groups()
 	
-	if "Player" in bodyGroups:
+	if "Player" in bodyGroups and !hasRope:
+		hasRope = true
 		body.start_drawing()
 
 # TODO: once we add more than one rope, this will need to check
