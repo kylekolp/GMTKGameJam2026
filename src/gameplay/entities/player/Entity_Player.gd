@@ -3,6 +3,9 @@ extends CharacterBody2D
 
 @export var movement_speed : float
 
+@onready var dash : Dash = $Dash
+@export var dash_speed : float
+
 var currentRope: Entity_Rope
 var currentRocket : Entity_Rocket
 
@@ -20,15 +23,14 @@ func _physics_process(delta: float) -> void:
 	
 	AnimatePlayer(direction)
 	
-	velocity = direction * movement_speed
+	if Input.is_action_just_pressed("dash"):
+		dash.start_dash(dash_speed)
+	
+	var speed = dash_speed if dash.is_dashing() else movement_speed
+	
+	velocity = direction.normalized() * movement_speed * delta
 	
 	move_and_slide()
-	
-	#var screen_size = get_viewport_rect().size
-	#var half_sprite_size = $Sprite2D.texture.get_size() * $Sprite2D.scale / 2
-	#
-	#position.x = clamp(position.x, half_sprite_size.x, screen_size.x - half_sprite_size.x)
-	#position.y = clamp(position.y, half_sprite_size.y, screen_size.y - half_sprite_size.y)
 	
 func AnimatePlayer(direction : Vector2):
 	

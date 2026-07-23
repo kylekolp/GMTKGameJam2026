@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://wras6segf5s5"]
+
+[node name="Dash" type="Node2D" unique_id=1348304677]
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=1210742155]
