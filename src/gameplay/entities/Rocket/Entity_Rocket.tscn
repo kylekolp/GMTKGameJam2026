@@ -6,6 +6,27 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
 size = Vector2(36, 76)
 
+[sub_resource type="Gradient" id="Gradient_5jh8n"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.706, 0.982)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5iuxx"]
+gradient = SubResource("Gradient_5jh8n")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_5iuxx"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.706, 1)
+colors = PackedColorArray(3.080368e-06, 0, 0.79890245, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_joy22"]
+gradient = SubResource("Gradient_5iuxx")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
 [node name="Rocket" type="Node2D" unique_id=1733741076]
 script = ExtResource("1_o8uc8")
 
@@ -17,5 +38,23 @@ texture = ExtResource("2_mln42")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=982255867]
 shape = SubResource("RectangleShape2D_bai2n")
+
+[node name="CircleTimer" type="TextureProgressBar" parent="." unique_id=2042413223]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -80.0
+offset_right = 16.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_5iuxx")
+texture_progress = SubResource("GradientTexture2D_joy22")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
