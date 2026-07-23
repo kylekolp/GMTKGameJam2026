@@ -29,10 +29,11 @@ fill_to = Vector2(0, 0)
 
 [node name="Rocket" type="Node2D" unique_id=1733741076]
 z_index = 1
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_o8uc8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1540493977]
-scale = Vector2(0.13333333, 0.13333334)
+scale = Vector2(0.133, 0.133)
 texture = ExtResource("2_mln42")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1027875018 groups=["Rocket"]]

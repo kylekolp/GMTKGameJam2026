@@ -21,6 +21,13 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * movement_speed
 	
 	move_and_slide()
+	
+	var screen_size = get_viewport_rect().size
+	var half_sprite_size = $Sprite2D.texture.get_size() * $Sprite2D.scale / 2
+	
+	position.x = clamp(position.x, half_sprite_size.x, screen_size.x - half_sprite_size.x)
+	position.y = clamp(position.y, half_sprite_size.y, screen_size.y - half_sprite_size.y)
+	
 
 func start_drawing(rocket : Entity_Rocket) -> Entity_Rope:
 	if currentRope == null:

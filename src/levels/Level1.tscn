@@ -10,9 +10,9 @@ wait_time = 2.0
 one_shot = true
 
 [node name="SpawnAreaTopLeft" type="Marker2D" parent="." unique_id=913642284]
-position = Vector2(10, 10)
+position = Vector2(128, 128)
 
 [node name="SpawnAreaBottomRight" type="Marker2D" parent="." unique_id=704561352]
-position = Vector2(1142, 638)
+position = Vector2(1024, 512)
 
 [connection signal="timeout" from="RocketSpawnTimer" to="." method="_on_rocket_spawn_timer_timeout"]
