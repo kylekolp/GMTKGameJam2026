@@ -13,15 +13,15 @@ func _ready() -> void:
 	parentRope = get_parent()
 	
 func _process(delta: float) -> void:
-
 	if movingTween != null and movingTween.is_running():
 		return
 			
 	movingTween  = create_tween()
 	movingTween.tween_property(self, 'position', parentRope.points[parentRope.points.size()-1], timeToReachSegment).set_trans(Tween.TRANS_LINEAR)
 	
-	for i in range(parentRope.points.size() - 1,0,-1):
+	for i in range(parentRope.points.size() - 1, 0, -1):
 		movingTween.chain().tween_property(self, 'position', parentRope.points[i], timeToReachSegment).set_trans(Tween.TRANS_LINEAR)
+		movingTween.chain().tween_callback(parentRope.notify_ember_passed_point.bind(i))
 		
 	movingTween.finished.connect(FireBurnComplete)
 	

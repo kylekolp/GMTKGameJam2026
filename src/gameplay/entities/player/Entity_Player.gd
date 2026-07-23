@@ -30,15 +30,16 @@ func _physics_process(delta: float) -> void:
 	
 
 func start_drawing(rocket : Entity_Rocket) -> Entity_Rope:
-	if currentRope == null:
-		currentRocket = rocket
-		currentRope = CreateRope(Vector2(0,0))
-		currentRope.RopeComplete.connect(DropRopeOnComplete)
-		
+	currentRope = CreateRope(Vector2(0,0))
+	currentRope.RopeComplete.connect(DropRopeOnComplete)
 	currentRope.start_drawing()
-	
+	currentRope.attach_rocket(rocket)
 	return currentRope
-	
+
+func attach_rocket_to_current_rope(rocket : Entity_Rocket) -> Entity_Rope:
+	currentRope.attach_rocket(rocket)
+	return currentRope
+
 func hasRope() -> bool:
 	return currentRope != null
 	
@@ -69,9 +70,7 @@ func CreateRope(position: Vector2) -> Entity_Rope:
 func FireDamagePlayer(enemy : Entity_FireBurnRope) -> void:
 	animator.play("TakeDamage")
 	if currentRope != null:
-		if currentRocket != null:
-			currentRocket.hasRope = false
-			currentRocket = null
+		currentRope.reset_attached_rockets()
 		currentRope.BurnRope()
 		currentRope = null
 	

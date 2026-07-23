@@ -1,17 +1,20 @@
 class_name Entity_Rope
 extends Line2D
 
+# this is like ropeHealth var and BurnComplete signal
+const HITS_TO_LAUNCH := 10
+
+var attachments: Array[Dictionary] = []
+
 @export var drawingDelayTimer: Timer
 
 @export var fireSpawnTimer : Timer
 
 signal RopeComplete(rope : Entity_Rope)
-signal BurnComplete()
 
 var is_drawing := false
 var target: Node2D
 
-var ropeHealth : int = 10
 var activeFires : int = 0
 
 var previousPoint : Vector2 = Vector2.ZERO
@@ -40,18 +43,49 @@ func _process(delta: float) -> void:
 			previousPoint = points[points.size()-1]
 			drawingDelayTimer.start(.1)
 
+func attach_rocket(rocket: Entity_Rocket) -> void:
+	add_point(rocket.global_position)
+	attachments.append({
+		"rocket": rocket,
+		"index": points.size() - 1,
+		"hits_remaining": HITS_TO_LAUNCH
+	})
+
+func notify_ember_passed_point(index: int) -> void:
+	for attachment in attachments:
+		if attachment["index"] == index and attachment["hits_remaining"] > 0:
+			attachment["hits_remaining"] -= 1
+			if attachment["hits_remaining"] == 0:
+				attachment["rocket"].launch()
+	
+	if total_hits_remaining() == 0:
+		queue_free()
+
+func reset_attached_rockets() -> void:
+	for attachment in attachments:
+		attachment["rocket"].hasRope = false
+
 func _on_fire_spawn_timer_timeout() -> void:
-	if ropeHealth == activeFires: #Dont spawn more fire if
+	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining():
 		return
 	
 	var ropeEndPosition : Vector2 = Vector2(points[points.size()-1].x,points[points.size()-1].y)
 	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(ropeEndPosition)
 	activeFires += 1
-	fireBurn.FireTravelComplete.connect(fireMadeItToRocket)
+	fireBurn.FireTravelComplete.connect(_on_fire_travel_complete)
 	
 	#var newFire : Entity_FireBurnRope = get_child("")
 	
 	pass # Replace with function body.
+
+func _on_fire_travel_complete(fireEntity : Node2D) -> void:
+	activeFires -= 1
+
+func total_hits_remaining() -> int:
+	var total := 0
+	for attachment in attachments:
+		total += attachment["hits_remaining"]
+	return total
 
 func get_child_of_type(type: GDScript) -> Node:
 	for child in get_children():
@@ -82,14 +116,5 @@ func SpawnFireBurnAtPosition(entityUID : String, position: Vector2, parent : Nod
 	
 	return newEntity
 	
-func fireMadeItToRocket(fireEntity : Node2D) -> void:
-	activeFires -= 1
-	ropeHealth -= 1
-	print("RopeHealth: " + str(ropeHealth))
-	
-	if ropeHealth == 0:
-		BurnComplete.emit()
-		queue_free()
-		
 func BurnRope() -> void:
 	queue_free()
