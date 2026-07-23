@@ -3,9 +3,6 @@
 [ext_resource type="Script" uid="uid://davrbmi2pn8l8" path="res://src/gameplay/entities/Rocket/Entity_Rocket.gd" id="1_o8uc8"]
 [ext_resource type="Texture2D" uid="uid://kd3toeif43gk" path="res://Assets/Rocket.png" id="2_mln42"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
-size = Vector2(36, 76)
-
 [sub_resource type="Gradient" id="Gradient_5jh8n"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.706, 0.982)
@@ -37,8 +34,8 @@ texture = ExtResource("2_mln42")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1027875018 groups=["Rocket"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=982255867]
-shape = SubResource("RectangleShape2D_bai2n")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=75526236]
+polygon = PackedVector2Array(-19, -39, 18, -39, 20, 39, -19, 39)
 
 [node name="CircleTimer" type="TextureProgressBar" parent="." unique_id=2042413223]
 anchors_preset = 8

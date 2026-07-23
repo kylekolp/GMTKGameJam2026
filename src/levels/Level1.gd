@@ -21,8 +21,22 @@ func _ready() -> void:
 	rocket_spawn_timer.start()
 
 func _on_rocket_spawn_timer_timeout() -> void:
+	var rocket_spawns_in_fire = false
+	
 	var rocket_spawn_position := Vector2(
 		randf_range(rocket_spawn_area.position.x, rocket_spawn_area.end.x),
 		randf_range(rocket_spawn_area.position.y, rocket_spawn_area.end.y)
 	)
+	
+	for item in get_children():
+		var bodyGroups : Array[StringName] = item.get_groups()
+		
+		if "Fire" in bodyGroups:
+			var fire = item as Entity_Fire
+			rocket_spawns_in_fire = Geometry2D.is_point_in_polygon(rocket_spawn_position, fire.fire_area)
+	
+	if rocket_spawns_in_fire == true:
+		_on_rocket_spawn_timer_timeout()
+		return
+	
 	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Rocket, rocket_spawn_position, self)
