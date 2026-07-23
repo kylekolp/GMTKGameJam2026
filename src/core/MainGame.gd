@@ -24,6 +24,7 @@ func _ready() -> void:
 	SignalBus.ConfirmQuit.connect(ConfirmQuit)
 	SignalBus.Pause.connect(PauseGame)
 	SignalBus.UnPause.connect(UnPauseGame)
+	SignalBus.GameOver.connect(OnGameOver)
 	
 	SignalBus.LoadEntity.connect(LoadEntity)
 	SignalBus.LoadEffect.connect(LoadEffect)
@@ -262,6 +263,13 @@ func TryQuit() -> void:
 	
 func ConfirmQuit() -> void:
 	get_tree().quit()
+	
+func OnGameOver() -> void:
+	if currentLevel != null:
+		currentLevel.queue_free()
+		currentLevel = null
+	
+	LoadMenu(UIDCatalog.Menu_GameOver)
 	
 func PauseGame() -> void:
 	get_tree().paused = true

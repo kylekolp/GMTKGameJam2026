@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://6kstv1i2rqao"]
+
+[ext_resource type="Script" uid="uid://dgf8jtkcjrchy" path="res://src/ui/Menu/Menu_GameOver.gd" id="1_37t8g"]
+[ext_resource type="StyleBox" uid="uid://1y8mw8aos0s7" path="res://Assets/UI/PanelContainer/TempPanelBoxStyle.tres" id="2_wsie1"]
+[ext_resource type="LabelSettings" uid="uid://db21agx7m6v2w" path="res://Assets/UI/LabelSettings/TitleSettings.tres" id="3_pvixc"]
+[ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="4_pvixc"]
+
+[node name="MenuGameOver" type="Control" unique_id=1651065814]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_37t8g")
+
+[node name="Panel" type="Panel" parent="." unique_id=232295608]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_wsie1")
+
+[node name="Label" type="Label" parent="." unique_id=143164430]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -11.5
+offset_right = 43.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = ExtResource("3_pvixc")
+
+[node name="RestartButton" type="Button" parent="." unique_id=568739488]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = 126.0
+offset_right = 87.5
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_pvixc")
+text = "Restart"
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]

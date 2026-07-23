@@ -9,7 +9,7 @@ func _ready() -> void:
 	tween.finished.connect(_on_countdown_finished)
 
 func _on_countdown_finished() -> void:
-	pass
+	SignalBus.GameOver.emit()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	
