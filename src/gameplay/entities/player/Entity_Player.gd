@@ -50,8 +50,6 @@ func AnimatePlayer(direction : Vector2):
 		animator.play("Walk_Diagonal_Front_RightDown")
 	else:
 		animator.play("Idle")
-		
-	print("current animation: " + animator.current_animation.get_basename())
 	
 	return
 
