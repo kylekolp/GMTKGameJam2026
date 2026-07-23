@@ -13,6 +13,7 @@ func _ready() -> void:
 	parentRope = get_parent()
 	
 func _process(delta: float) -> void:
+
 	if movingTween != null and movingTween.is_running():
 		return
 			
@@ -27,3 +28,11 @@ func _process(delta: float) -> void:
 func FireBurnComplete() -> void:
 	FireTravelComplete.emit(self)
 	queue_free()
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	var bodyGroups : Array[StringName] = body.get_groups()
+	
+	if "Player" in bodyGroups:
+		var playerObj : Player = body as Player
+		playerObj.FireDamagePlayer(self)

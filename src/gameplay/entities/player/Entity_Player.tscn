@@ -7,7 +7,47 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
 size = Vector2(76, 78)
 
+[sub_resource type="Animation" id="Animation_2tk31"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fok4k"]
+resource_name = "TakeDamage"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.26666668, 0.35205948, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.87, 0, 0, 1), Color(1, 1, 1, 1), Color(0.71, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_77yeb"]
+_data = {
+&"RESET": SubResource("Animation_2tk31"),
+&"TakeDamage": SubResource("Animation_fok4k")
+}
+
 [node name="Player" type="CharacterBody2D" unique_id=526542025 groups=["Player"]]
+z_index = 2
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_khxic")
 movement_speed = 350.0
 
@@ -17,3 +57,6 @@ texture = SubResource("PlaceholderTexture2D_wb2dy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1902461312]
 shape = SubResource("RectangleShape2D_bai2n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=610364512]
+libraries/ = SubResource("AnimationLibrary_77yeb")

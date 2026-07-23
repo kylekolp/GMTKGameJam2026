@@ -7,11 +7,14 @@ var currentRope: Entity_Rope
 
 var entityRoot : Node2D
 
+@onready var animator : AnimationPlayer = $AnimationPlayer
+
 func _ready() -> void:
 	entityRoot = get_parent()
 	return
 	
 func _physics_process(delta: float) -> void:
+	
 	var direction:= Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down")
 	
 	velocity = direction * movement_speed
@@ -22,8 +25,6 @@ func start_drawing() -> Entity_Rope:
 	if currentRope == null:
 		currentRope = CreateRope(Vector2(0,0))
 		currentRope.RopeComplete.connect(DropRopeOnComplete)
-		
-	#await get_tree().process_frame
 		
 	currentRope.start_drawing()
 	
@@ -54,3 +55,11 @@ func CreateRope(position: Vector2) -> Entity_Rope:
 	newRope.position = position
 
 	return newRope
+	
+#push the player back a bit and burn the rope they are holding
+func FireDamagePlayer(enemy : Entity_FireBurnRope) -> void:
+	animator.play("TakeDamage")
+	if currentRope != null:
+		currentRope.BurnRope()
+		currentRope = null
+	

@@ -80,3 +80,6 @@ func fireMadeItToRocket(fireEntity : Node2D) -> void:
 	
 	if ropeHealth == 0:
 		queue_free()
+		
+func BurnRope() -> void:
+	queue_free()
