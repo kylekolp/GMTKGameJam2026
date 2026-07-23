@@ -11,6 +11,7 @@ var rocket_spawn_area: Rect2
 @export var min_distance_from_fire: float = 150.0
 @export var min_distance_from_rocket: float = 80.0
 @export var min_distance_from_rope: float = 40.0
+@export var min_distance_from_player: float = 100.0
 
 func _ready() -> void:
 	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Player, Vector2(100,100), self)
@@ -30,12 +31,14 @@ func _on_rocket_spawn_timer_timeout() -> void:
 		randf_range(rocket_spawn_area.position.y, rocket_spawn_area.end.y)
 	)
 	
-	for group in ["Fire", "Rocket"]:
+	for group in ["Fire", "Rocket", "Player"]:
 		var min_distance: float
 		if group == "Fire":
 			min_distance = min_distance_from_fire
 		if group == "Rocket":
 			min_distance = min_distance_from_rocket
+		if group == "Player":
+			min_distance = min_distance_from_player
 		if not _is_far_enough_from_group(candidate_position, group, min_distance):
 			rocket_spawn_timer.start(failed_rocket_spawn_interval)
 			return
