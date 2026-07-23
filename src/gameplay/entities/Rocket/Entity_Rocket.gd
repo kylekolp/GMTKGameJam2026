@@ -1,3 +1,4 @@
+class_name Entity_Rocket
 extends Node2D
 
 @onready var circle_timer: TextureProgressBar = $CircleTimer
@@ -23,7 +24,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	
 	if "Player" in bodyGroups and !hasRope and !body.hasRope():
 		hasRope = true
-		rope = body.start_drawing()
+		rope = body.start_drawing(self)
 		rope.RopeComplete.connect(_on_rope_complete)
 
 # TODO: once we add more than one rope, this will need to check

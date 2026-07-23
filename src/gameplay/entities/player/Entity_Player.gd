@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var movement_speed : float
 
 var currentRope: Entity_Rope
+var currentRocket : Entity_Rocket
 
 var entityRoot : Node2D
 
@@ -21,8 +22,9 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func start_drawing() -> Entity_Rope:
+func start_drawing(rocket : Entity_Rocket) -> Entity_Rope:
 	if currentRope == null:
+		currentRocket = rocket
 		currentRope = CreateRope(Vector2(0,0))
 		currentRope.RopeComplete.connect(DropRopeOnComplete)
 		
@@ -60,6 +62,9 @@ func CreateRope(position: Vector2) -> Entity_Rope:
 func FireDamagePlayer(enemy : Entity_FireBurnRope) -> void:
 	animator.play("TakeDamage")
 	if currentRope != null:
+		if currentRocket != null:
+			currentRocket.hasRope = false
+			currentRocket = null
 		currentRope.BurnRope()
 		currentRope = null
 	
