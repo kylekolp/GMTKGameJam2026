@@ -13,6 +13,9 @@ var target: Node2D
 var ropeHealth : int = 50
 var activeFires : int = 0
 
+var previousPoint : Vector2 = Vector2.ZERO
+var minPointDistance : float = 20
+
 func _ready() -> void:
 	top_level = true
 	target = get_parent()
@@ -28,8 +31,12 @@ func stop_drawing() -> void:
 
 func _process(delta: float) -> void:
 	if is_drawing and drawingDelayTimer.is_stopped():
-		add_point(target.global_position)
-		drawingDelayTimer.start(.1)
+		
+		if previousPoint == Vector2.ZERO or (previousPoint != Vector2.ZERO and previousPoint.distance_to(target.global_position) > minPointDistance):
+		
+			add_point(target.global_position)
+			previousPoint = points[points.size()-1]
+			drawingDelayTimer.start(.1)
 
 func _on_fire_spawn_timer_timeout() -> void:
 	if ropeHealth == activeFires: #Dont spawn more fire if
