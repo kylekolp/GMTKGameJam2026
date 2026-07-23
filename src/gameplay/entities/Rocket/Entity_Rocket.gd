@@ -2,18 +2,27 @@ extends Node2D
 
 @onready var circle_timer: TextureProgressBar = $CircleTimer
 
+var countdown_tween : Tween
+
 func _ready() -> void:
+	SignalBus.RopeComplete.connect(_on_rope_complete)
+	
 	circle_timer.value = circle_timer.max_value
-	var tween := create_tween()
-	tween.tween_property(circle_timer, "value", 0.0, 10.0)
-	tween.finished.connect(_on_countdown_finished)
+	countdown_tween = create_tween()
+	countdown_tween.tween_property(circle_timer, "value", 0.0, 10.0)
+	countdown_tween.finished.connect(_on_countdown_finished)
 
 func _on_countdown_finished() -> void:
-	pass
+	SignalBus.GameOver.emit()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	
 	var bodyGroups : Array[StringName] = body.get_groups()
 	
 	if "Player" in bodyGroups:
 		body.start_drawing()
+
+# TODO: once we add more than one rope, this will need to check
+# that a rope belongs to a rocket before killing its timer
+func _on_rope_complete(rope : Node2D) -> void:
+	countdown_tween.kill()
+	circle_timer.queue_free()

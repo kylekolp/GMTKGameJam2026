@@ -26,6 +26,7 @@ signal TryQuit()
 signal ConfirmQuit()
 signal Pause()
 signal UnPause()
+signal GameOver()
 
 #Level
 signal LoadEntity(entityUID : String, position: Vector2, parent : Node2D)

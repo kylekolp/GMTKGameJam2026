@@ -11,6 +11,7 @@ const Menu_Main : String = "uid://k68tl4ppllaa"
 const Menu_Options : String = "uid://cclbjekru4nbm"
 const Menu_Quit : String = "uid://tl3m7s666fu6"
 const Menu_Pause : String = "uid://c2b2lxq0i2ysi"
+const Menu_GameOver : String = "uid://6kstv1i2rqao"
 
 const Menu_Intro : String = "uid://kfbhtop1n20d"
 
