@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var circle_timer: TextureProgressBar = $CircleTimer
 
-var countdownTime : float = 60.0
+@export var countdownTime : float = 60.0 # debug
 
 var countdown_tween : Tween
 var hasRope : bool = false
@@ -28,8 +28,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		rope.RopeComplete.connect(_on_rope_complete)
 		rope.BurnComplete.connect(_on_rope_burn_complete)
 
-# TODO: once we add more than one rope, this will need to check
-# that a rope belongs to a rocket before killing its timer
 func _on_rope_complete(rope : Node2D) -> void:
 	rope.RopeComplete.disconnect(_on_rope_complete)
 	countdown_tween.kill()
