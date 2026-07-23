@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://bw4t4ix88htau"]
 
 [ext_resource type="Script" uid="uid://tl6khwr4g44e" path="res://src/gameplay/entities/player/Entity_Player.gd" id="1_khxic"]
-[ext_resource type="Script" uid="uid://ba4h3cl5uqas0" path="res://src/gameplay/entities/Rope/Entity_Rope.gd" id="2_fok4k"]
-[ext_resource type="Texture2D" uid="uid://6qbyy33yok0g" path="res://Assets/RopeSegment.png" id="3_77yeb"]
+[ext_resource type="PackedScene" uid="uid://dxkiorh8g5kvt" path="res://src/gameplay/entities/Rope/RopeDraw.tscn" id="2_fok4k"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wb2dy"]
 
@@ -20,13 +19,4 @@ texture = SubResource("PlaceholderTexture2D_wb2dy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1902461312]
 shape = SubResource("RectangleShape2D_bai2n")
 
-[node name="Line2D" type="Line2D" parent="." unique_id=662206131 node_paths=PackedStringArray("timer")]
-width = 100.0
-texture = ExtResource("3_77yeb")
-texture_mode = 1
-script = ExtResource("2_fok4k")
-timer = NodePath("../Timer")
-
-[node name="Timer" type="Timer" parent="." unique_id=1984692034]
-wait_time = 0.5
-one_shot = true
+[node name="Rope" parent="." unique_id=1437477763 instance=ExtResource("2_fok4k")]

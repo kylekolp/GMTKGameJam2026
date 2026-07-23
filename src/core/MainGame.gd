@@ -213,7 +213,7 @@ func deferredLoadSystem(systemUID : String) -> void:
 func LoadEntity(entityUID : String, position: Vector2) -> void:
 	deferredLoadEntity.call_deferred(entityUID,position)
 	
-func deferredLoadEntity(entityUID : String, position: Vector2) -> void:
+func deferredLoadEntity(entityUID : String, position: Vector2, parent : Node2D = null) -> void:
 	var entityPackedScene : PackedScene = ResourceLoader.load(entityUID, "PackedScene") as PackedScene
 	if entityPackedScene == null:
 		push_error("Could not load entity as packed scene: " + entityUID)
@@ -224,7 +224,10 @@ func deferredLoadEntity(entityUID : String, position: Vector2) -> void:
 		push_error("Loaded Entity Scene was not able to instantiate " + entityUID)
 		return
 	
-	entityRoot.add_child(newEntity)
+	if parent == null:
+		entityRoot.add_child(newEntity)
+	else:
+		parent.add_child(newEntity)
 	
 	newEntity.position = position
 	

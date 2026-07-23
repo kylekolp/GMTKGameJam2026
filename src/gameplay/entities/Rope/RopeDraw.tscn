@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dxkiorh8g5kvt"]
+
+[ext_resource type="Texture2D" uid="uid://6qbyy33yok0g" path="res://Assets/RopeSegment.png" id="1_px0da"]
+[ext_resource type="Script" uid="uid://ba4h3cl5uqas0" path="res://src/gameplay/entities/Rope/Entity_Rope.gd" id="2_4owud"]
+
+[node name="Rope" type="Line2D" unique_id=1437477763 node_paths=PackedStringArray("drawingDelayTimer", "fireSpawnTimer")]
+width = 100.0
+texture = ExtResource("1_px0da")
+texture_mode = 1
+script = ExtResource("2_4owud")
+drawingDelayTimer = NodePath("DrawingDelayTimer")
+fireSpawnTimer = NodePath("FireSpawnTimer")
+
+[node name="FireSpawnTimer" type="Timer" parent="." unique_id=615892898]
+wait_time = 3.0
+one_shot = true
+
+[node name="DrawingDelayTimer" type="Timer" parent="." unique_id=1308408186]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="FireSpawnTimer" to="." method="_on_fire_spawn_timer_timeout"]
