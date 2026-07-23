@@ -17,6 +17,8 @@ extends Node
 var currentLevel : Level = null
 var player : Player = null
 
+var isGameOver : bool = false
+
 func _ready() -> void:
 	SignalBus.LoadLevel.connect(LoadLevel)
 	SignalBus.LoadMenu.connect(LoadMenu)
@@ -24,6 +26,8 @@ func _ready() -> void:
 	SignalBus.ConfirmQuit.connect(ConfirmQuit)
 	SignalBus.Pause.connect(PauseGame)
 	SignalBus.UnPause.connect(UnPauseGame)
+	
+	SignalBus.StartGame.connect(OnStartGame)
 	SignalBus.GameOver.connect(OnGameOver)
 	
 	SignalBus.LoadEntity.connect(LoadEntity)
@@ -265,16 +269,30 @@ func ConfirmQuit() -> void:
 	get_tree().quit()
 	
 func OnGameOver() -> void:
+	if isGameOver:
+		return
+		
+	isGameOver = true
+	
+	get_tree().paused = true
+	
 	if currentLevel != null:
 		currentLevel.queue_free()
 		currentLevel = null
 	
-	LoadMenu(UIDCatalog.Menu_GameOver)
+	LoadPauseLayer(UIDCatalog.Menu_GameOver)
+	
+func OnStartGame() -> void:
+	isGameOver = false
+	
+	LoadLevel(UIDCatalog.Level_1)
+	
+	if get_tree().paused:
+		get_tree().paused = false;
 	
 func PauseGame() -> void:
 	get_tree().paused = true
 	LoadPauseLayer(UIDCatalog.Menu_Pause)
-	await get_tree().process_frame
 	
 func UnPauseGame() -> void:
 	get_tree().paused = false

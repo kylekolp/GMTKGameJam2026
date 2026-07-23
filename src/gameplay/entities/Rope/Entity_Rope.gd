@@ -5,6 +5,8 @@ extends Line2D
 
 @export var fireSpawnTimer : Timer
 
+signal RopeComplete(rope : Entity_Rope)
+
 var is_drawing := false
 var target: Node2D
 
@@ -20,7 +22,7 @@ func start_drawing() -> void:
 	is_drawing = true
 
 func stop_drawing() -> void:
-	SignalBus.RopeComplete.emit(self)
+	RopeComplete.emit(self)
 	is_drawing = false
 	fireSpawnTimer.start() #Start spawning fire
 

@@ -3,12 +3,11 @@ extends CharacterBody2D
 
 @export var movement_speed : float
 
-var currentRope: Line2D
+var currentRope: Entity_Rope
 
 var entityRoot : Node2D
 
 func _ready() -> void:
-	SignalBus.RopeComplete.connect(DropRopeOnComplete)
 	entityRoot = get_parent()
 	return
 	
@@ -19,16 +18,20 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func start_drawing() -> void:
+func start_drawing() -> Entity_Rope:
 	if currentRope == null:
 		currentRope = CreateRope(Vector2(0,0))
+		currentRope.RopeComplete.connect(DropRopeOnComplete)
 		
 	#await get_tree().process_frame
 		
 	currentRope.start_drawing()
 	
+	return currentRope
+	
 # Used to drop rope into level
 func DropRopeOnComplete(rope : Entity_Rope) -> void:
+	currentRope.RopeComplete.disconnect(DropRopeOnComplete)
 	rope.reparent(entityRoot)
 	currentRope = null
 	
