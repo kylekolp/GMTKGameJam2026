@@ -18,21 +18,21 @@ func _physics_process(delta: float) -> void:
 	
 	var direction:= Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down")
 	
-	#AnimatePlayer(direction)
+	AnimatePlayer(direction)
 	
 	velocity = direction * movement_speed
 	
 	move_and_slide()
 	
-	var screen_size = get_viewport_rect().size
-	var half_sprite_size = $Sprite2D.texture.get_size() * $Sprite2D.scale / 2
-	
-	position.x = clamp(position.x, half_sprite_size.x, screen_size.x - half_sprite_size.x)
-	position.y = clamp(position.y, half_sprite_size.y, screen_size.y - half_sprite_size.y)
+	#var screen_size = get_viewport_rect().size
+	#var half_sprite_size = $Sprite2D.texture.get_size() * $Sprite2D.scale / 2
+	#
+	#position.x = clamp(position.x, half_sprite_size.x, screen_size.x - half_sprite_size.x)
+	#position.y = clamp(position.y, half_sprite_size.y, screen_size.y - half_sprite_size.y)
 	
 func AnimatePlayer(direction : Vector2):
 	
-	if direction.x > 0 and direction.y == 0:
+	if direction.x < 0 and direction.y == 0:
 		animator.play("Walk_Left")
 	elif direction.x > 0 and direction.y == 0: #Right
 		animator.play("Walk_Right")

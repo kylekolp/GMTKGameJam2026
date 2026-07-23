@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ddcgb77euc8f5" path="res://Assets/characters/PlayerAnimationExport2.png" id="2_fok4k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
-size = Vector2(76, 78)
+size = Vector2(56, 74)
 
 [sub_resource type="Animation" id="Animation_77yeb"]
 resource_name = "Idle"
@@ -341,7 +341,7 @@ script = ExtResource("1_khxic")
 movement_speed = 350.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=602313639]
-scale = Vector2(76, 75.999954)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_fok4k")
 flip_h = true
 hframes = 6
