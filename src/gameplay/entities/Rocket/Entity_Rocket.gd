@@ -22,17 +22,25 @@ func _on_countdown_finished() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var bodyGroups : Array[StringName] = body.get_groups()
 	
-	if "Player" in bodyGroups and !hasRope and !body.hasRope():
+	if "Player" not in bodyGroups or hasRope:
+		return
+	
+	if not body.hasRope():
 		hasRope = true
 		rope = body.start_drawing(self)
-		rope.RopeComplete.connect(_on_rope_complete)
-		rope.BurnComplete.connect(_on_rope_burn_complete)
+	elif body.currentRope.is_drawing:
+		hasRope = true
+		rope = body.attach_rocket_to_current_rope(self)
+	else:
+		return
+	
+	rope.RopeComplete.connect(_on_rope_complete)
 
 func _on_rope_complete(rope : Node2D) -> void:
 	rope.RopeComplete.disconnect(_on_rope_complete)
 	countdown_tween.kill()
 	circle_timer.queue_free()
 
-func _on_rope_burn_complete() -> void:
+func launch() -> void:
 	#Play firework launch animation
 	queue_free()
