@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var circle_timer: TextureProgressBar = $CircleTimer
 
+var countdownTime : float = 60.0
+
 var countdown_tween : Tween
 var hasRope : bool = false
 
@@ -10,7 +12,7 @@ var rope : Entity_Rope
 func _ready() -> void:
 	circle_timer.value = circle_timer.max_value
 	countdown_tween = create_tween()
-	countdown_tween.tween_property(circle_timer, "value", 0.0, 10.0)
+	countdown_tween.tween_property(circle_timer, "value", 0.0, countdownTime)
 	countdown_tween.finished.connect(_on_countdown_finished)
 
 func _on_countdown_finished() -> void:
@@ -19,7 +21,7 @@ func _on_countdown_finished() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var bodyGroups : Array[StringName] = body.get_groups()
 	
-	if "Player" in bodyGroups and !hasRope:
+	if "Player" in bodyGroups and !hasRope and !body.hasRope():
 		hasRope = true
 		rope = body.start_drawing()
 		rope.RopeComplete.connect(_on_rope_complete)

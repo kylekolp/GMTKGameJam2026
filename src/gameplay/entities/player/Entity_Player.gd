@@ -29,6 +29,9 @@ func start_drawing() -> Entity_Rope:
 	
 	return currentRope
 	
+func hasRope() -> bool:
+	return currentRope != null
+	
 # Used to drop rope into level
 func DropRopeOnComplete(rope : Entity_Rope) -> void:
 	currentRope.RopeComplete.disconnect(DropRopeOnComplete)
