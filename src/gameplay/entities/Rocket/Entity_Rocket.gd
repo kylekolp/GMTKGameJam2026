@@ -26,6 +26,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		hasRope = true
 		rope = body.start_drawing(self)
 		rope.RopeComplete.connect(_on_rope_complete)
+		rope.BurnComplete.connect(_on_rope_burn_complete)
 
 # TODO: once we add more than one rope, this will need to check
 # that a rope belongs to a rocket before killing its timer
@@ -33,3 +34,7 @@ func _on_rope_complete(rope : Node2D) -> void:
 	rope.RopeComplete.disconnect(_on_rope_complete)
 	countdown_tween.kill()
 	circle_timer.queue_free()
+
+func _on_rope_burn_complete() -> void:
+	#Play firework launch animation
+	queue_free()

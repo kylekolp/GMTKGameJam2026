@@ -6,11 +6,12 @@ extends Line2D
 @export var fireSpawnTimer : Timer
 
 signal RopeComplete(rope : Entity_Rope)
+signal BurnComplete()
 
 var is_drawing := false
 var target: Node2D
 
-var ropeHealth : int = 50
+var ropeHealth : int = 10
 var activeFires : int = 0
 
 var previousPoint : Vector2 = Vector2.ZERO
@@ -86,6 +87,7 @@ func fireMadeItToRocket(fireEntity : Node2D) -> void:
 	print("RopeHealth: " + str(ropeHealth))
 	
 	if ropeHealth == 0:
+		BurnComplete.emit()
 		queue_free()
 		
 func BurnRope() -> void:
