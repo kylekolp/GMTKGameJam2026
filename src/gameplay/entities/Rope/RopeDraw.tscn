@@ -13,7 +13,6 @@ fireSpawnTimer = NodePath("FireSpawnTimer")
 
 [node name="FireSpawnTimer" type="Timer" parent="." unique_id=615892898]
 wait_time = 3.0
-one_shot = true
 
 [node name="DrawingDelayTimer" type="Timer" parent="." unique_id=1308408186]
 wait_time = 0.5

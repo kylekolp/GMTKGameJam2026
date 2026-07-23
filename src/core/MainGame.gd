@@ -210,8 +210,8 @@ func deferredLoadSystem(systemUID : String) -> void:
 	
 	return
 	
-func LoadEntity(entityUID : String, position: Vector2) -> void:
-	deferredLoadEntity.call_deferred(entityUID,position)
+func LoadEntity(entityUID : String, position: Vector2, parent : Node2D = null) -> void:
+	deferredLoadEntity.call_deferred(entityUID,position,parent)
 	
 func deferredLoadEntity(entityUID : String, position: Vector2, parent : Node2D = null) -> void:
 	var entityPackedScene : PackedScene = ResourceLoader.load(entityUID, "PackedScene") as PackedScene
