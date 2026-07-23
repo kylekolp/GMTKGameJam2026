@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://hd8w4ou6nb7m" path="res://src/levels/Level1.gd" id="1_qsbfr"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_stybw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0n4a7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ymmmm"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b6imk"]
+
 [node name="Level1" type="Node2D" unique_id=1647347138]
 script = ExtResource("1_qsbfr")
 
@@ -14,5 +22,35 @@ position = Vector2(128, 128)
 
 [node name="SpawnAreaBottomRight" type="Marker2D" parent="." unique_id=704561352]
 position = Vector2(1024, 512)
+
+[node name="WallTop" type="StaticBody2D" parent="." unique_id=1890332113]
+position = Vector2(0, 117.22)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop" unique_id=1968751749]
+position = Vector2(0, -111.46)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_stybw")
+
+[node name="WallBottom" type="StaticBody2D" parent="." unique_id=1100648790]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom" unique_id=1374738287]
+position = Vector2(0, 645.58)
+shape = SubResource("WorldBoundaryShape2D_0n4a7")
+
+[node name="WallLeft" type="StaticBody2D" parent="." unique_id=708854840]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft" unique_id=558717954]
+position = Vector2(4.18, 325)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_ymmmm")
+
+[node name="WallRight" type="StaticBody2D" parent="." unique_id=842325857]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight" unique_id=1969593408]
+position = Vector2(1146.615, 325)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_b6imk")
 
 [connection signal="timeout" from="RocketSpawnTimer" to="." method="_on_rocket_spawn_timer_timeout"]
