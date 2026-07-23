@@ -22,6 +22,7 @@ const Entity_Player : String = "uid://bw4t4ix88htau"
 const Entity_Rocket : String = "uid://c86xeg2esb2uo"
 const Entity_Fire : String = "uid://tequb32i5gkj"
 const Entity_FireBurnRope : String = "uid://wf071cv4c6v6"
+const Entity_Rope : String = "uid://dxkiorh8g5kvt"
 
 #Other
 

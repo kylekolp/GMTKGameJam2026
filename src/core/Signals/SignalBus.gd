@@ -31,6 +31,6 @@ signal UnPause()
 signal LoadEntity(entityUID : String, position: Vector2, parent : Node2D)
 signal LoadEffect(effectUID : String)
 
-signal RopeComplete(rope : Node2D)
+signal RopeComplete(rope : Entity_Rope)
 
 @warning_ignore_restore("unused_signal")

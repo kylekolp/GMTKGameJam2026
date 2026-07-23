@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bw4t4ix88htau"]
 
 [ext_resource type="Script" uid="uid://tl6khwr4g44e" path="res://src/gameplay/entities/player/Entity_Player.gd" id="1_khxic"]
-[ext_resource type="PackedScene" uid="uid://dxkiorh8g5kvt" path="res://src/gameplay/entities/Rope/RopeDraw.tscn" id="2_fok4k"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wb2dy"]
 
@@ -18,5 +17,3 @@ texture = SubResource("PlaceholderTexture2D_wb2dy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1902461312]
 shape = SubResource("RectangleShape2D_bai2n")
-
-[node name="Rope" parent="." unique_id=1437477763 instance=ExtResource("2_fok4k")]

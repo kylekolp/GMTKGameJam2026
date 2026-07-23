@@ -1,3 +1,4 @@
+class_name Entity_Rope
 extends Line2D
 
 @export var drawingDelayTimer: Timer
@@ -7,7 +8,7 @@ extends Line2D
 var is_drawing := false
 var target: Node2D
 
-var ropeHealth : int = 5
+var ropeHealth : int = 50
 var activeFires : int = 0
 
 func _ready() -> void:
@@ -27,7 +28,6 @@ func _process(delta: float) -> void:
 	if is_drawing and drawingDelayTimer.is_stopped():
 		add_point(target.global_position)
 		drawingDelayTimer.start(.1)
-
 
 func _on_fire_spawn_timer_timeout() -> void:
 	if ropeHealth == activeFires: #Dont spawn more fire if
