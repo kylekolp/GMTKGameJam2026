@@ -20,6 +20,7 @@ var minPointDistance : float = 20
 func _ready() -> void:
 	top_level = true
 	target = get_parent()
+	add_to_group("Rope")
 
 func start_drawing() -> void:
 	clear_points()
