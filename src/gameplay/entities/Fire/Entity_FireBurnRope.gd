@@ -9,6 +9,7 @@ var currentIndex : int = -1
 
 @export var velocity : float
 
+
 signal FireTravelComplete(fireEntity : Node2D)
 
 func _ready() -> void:
