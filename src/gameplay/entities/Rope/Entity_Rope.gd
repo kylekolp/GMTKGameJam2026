@@ -5,7 +5,6 @@ extends Line2D
 const HITS_TO_LAUNCH := 10
 
 var attachments: Array[Dictionary] = []
-var ignitedRopes : Array[Entity_Rope] = []
 
 @export var drawingDelayTimer: Timer
 
@@ -60,6 +59,8 @@ func notify_ember_passed_point(index: int) -> void:
 			if attachment["hits_remaining"] == 0:
 				attachment["rocket"].launch()
 	
+	attachments = attachments.filter(func(a): return a["hits_remaining"] > 0)
+	
 	if total_hits_remaining() == 0:
 		queue_free()
 
@@ -91,11 +92,10 @@ func get_child_of_type(type: GDScript) -> Node:
 			return child
 	return null
 	
-func SpawnFireBurn(index: int) -> Entity_FireBurnRope: 
-	return await SpawnFireBurnAtIndex(UIDCatalog.Entity_FireBurnRope, index, self)
+func SpawnFireBurn(index: int, source_rope: Entity_Rope = null) -> Entity_FireBurnRope: 
+	return await SpawnFireBurnAtIndex(UIDCatalog.Entity_FireBurnRope, index, source_rope)
 	
-@warning_ignore("unused_parameter")
-func SpawnFireBurnAtIndex(entityUID : String, index: int, parent : Node2D = null) -> Entity_FireBurnRope:
+func SpawnFireBurnAtIndex(entityUID : String, index: int, source_rope: Entity_Rope = null) -> Entity_FireBurnRope:
 	var entityPackedScene : PackedScene = ResourceLoader.load(entityUID, "PackedScene") as PackedScene
 	if entityPackedScene == null:
 		push_error("Rope Spawn Fire: Could not load entity as packed scene: " + entityUID)
@@ -107,6 +107,7 @@ func SpawnFireBurnAtIndex(entityUID : String, index: int, parent : Node2D = null
 		return
 	
 	newEntity.startIndex = index
+	newEntity.sourceRope = source_rope
 	self.add_child(newEntity)
 	newEntity.position = points[index]
 	
@@ -116,17 +117,13 @@ func SpawnFireBurnAtIndex(entityUID : String, index: int, parent : Node2D = null
 	return newEntity
 
 func ignite_from_point(from_rope: Entity_Rope, index: int) -> void:
-	if from_rope in ignitedRopes:
-		return
 	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining():
 		return
-	ignitedRopes.append(from_rope)
-	from_rope.ignitedRopes.append(self)
 	
 	for attachment in attachments:
 		attachment["rocket"].stop_countdown()
 	
-	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(index)
+	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(index, from_rope)
 	activeFires += 1
 	fireBurn.FireTravelComplete.connect(_on_fire_travel_complete)
 	
