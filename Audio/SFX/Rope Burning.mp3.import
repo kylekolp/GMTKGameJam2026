@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dgbmorc6a7pga"
+path="res://.godot/imported/Rope Burning.mp3-c24df39e64152fcfc1884c382fa1e4b4.mp3str"
+
+[deps]
+
+source_file="res://Audio/SFX/Rope Burning.mp3"
+dest_files=["res://.godot/imported/Rope Burning.mp3-c24df39e64152fcfc1884c382fa1e4b4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
