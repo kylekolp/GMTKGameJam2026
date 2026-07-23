@@ -45,6 +45,7 @@ Player="The player character"
 Rocket="The fireworks"
 Fire="Fire"
 RopeFire="The fire that burns along the fuses"
+Rope=""
 
 [input]
 
