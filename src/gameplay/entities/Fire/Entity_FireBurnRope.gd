@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	movingTween  = create_tween()
 	movingTween.tween_property(self, 'position', parentRope.points[parentRope.points.size()-1], timeToReachSegment).set_trans(Tween.TRANS_LINEAR)
 	
-	for i in range(parentRope.points.size() - 1, 0, -1):
+	for i in range(parentRope.points.size() - 1, -1, -1):
 		movingTween.chain().tween_property(self, 'position', parentRope.points[i], timeToReachSegment).set_trans(Tween.TRANS_LINEAR)
 		movingTween.chain().tween_callback(parentRope.notify_ember_passed_point.bind(i))
 		
