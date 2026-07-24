@@ -42,5 +42,8 @@ signal ResetScore()
 signal SpawnScoreNumber(number : int, label : String, position : Vector2)
 signal RocketMissed
 
+#UI
+signal DashOnCooldown(cooldown : float)
+
 
 @warning_ignore_restore("unused_signal")
