@@ -67,7 +67,8 @@ func deferredLoadLevel(levelUID : String) -> void:
 	if(currentLevel != null):
 		currentLevel.queue_free()
 		currentLevel = null
-	
+	for item in AudioManager.get_children():
+		item.queue_free()
 	#Allow the old level to finish freeing before adding a new one
 	await get_tree().process_frame
 	
