@@ -54,4 +54,13 @@ func update_position(sfx: AudioStreamPlayer2D, location: Vector2):
 func fade_out(sfx:AudioStreamPlayer2D, duration: float = 1.0):
 	var tween = create_tween()
 	tween.tween_property(sfx, "volume_db", -80, duration)
+	tween.finished.connect(sfx.queue_free)
 	
+
+func increase_pitch(sfx: AudioStreamPlayer2D, amt: int):
+	if sfx:
+		sfx.pitch_scale += 0.1 * amt
+
+func clear_all_sfx():
+	for sfx in self.get_children():
+		sfx.queue_free()

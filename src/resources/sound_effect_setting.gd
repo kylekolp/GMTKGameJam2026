@@ -8,6 +8,9 @@ enum SOUND_EFFECT_TYPE{
 	ROCKET_SPAWN,
 	PLAYER_HIT,
 	FIREWORK,
+	ROPE_CONNECT_TEXTURE,
+	ROPE_CONNECT_TONE,
+	FIREWORK_LAUNCH,
 }
 
 @export_range(0, 100) var limit: int = 5 ## Max number of SoundEffect allowed to be played
