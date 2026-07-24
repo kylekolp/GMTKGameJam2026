@@ -36,7 +36,10 @@ func start_drawing() -> void:
 	clear_points()
 	is_drawing = true
 
-func stop_drawing() -> void:
+func stop_drawing(final_point: Vector2 = Vector2.INF) -> void:
+	if final_point != Vector2.INF:
+		add_point(to_local(final_point))
+		previousPoint = points[points.size() - 1]
 	RopeComplete.emit(self)
 	AddRocketScore()
 	is_drawing = false
