@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b6p18mlsjkqut"]
 
 [ext_resource type="Script" uid="uid://hd8w4ou6nb7m" path="res://src/levels/Level1.gd" id="1_qsbfr"]
+[ext_resource type="Texture2D" uid="uid://bgpd74dhk04v3" path="res://Assets/World/background_night.png" id="2_dklsv"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_stybw"]
 
@@ -52,5 +53,10 @@ shape = SubResource("WorldBoundaryShape2D_ymmmm")
 position = Vector2(1146.615, 325)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_b6imk")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=552936561]
+position = Vector2(575, 323)
+scale = Vector2(1.006, 1.009)
+texture = ExtResource("2_dklsv")
 
 [connection signal="timeout" from="RocketSpawnTimer" to="." method="_on_rocket_spawn_timer_timeout"]

@@ -2,7 +2,9 @@ class_name Entity_Rope
 extends Line2D
 
 # this is like ropeHealth var and BurnComplete signal
-const HITS_TO_LAUNCH := 10
+@export var HITS_TO_LAUNCH := 10
+@export var Fire_Spawn_Time : float
+@export var Drawing_Delay_Time : float
 
 var attachments: Array[Dictionary] = []
 
@@ -24,6 +26,9 @@ func _ready() -> void:
 	top_level = true
 	target = get_parent()
 	add_to_group("Rope")
+	
+	fireSpawnTimer.wait_time = Fire_Spawn_Time
+	drawingDelayTimer.wait_time = Drawing_Delay_Time
 
 func start_drawing() -> void:
 	clear_points()
