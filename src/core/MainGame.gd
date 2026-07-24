@@ -21,6 +21,8 @@ var player : Player = null
 
 var isGameOver : bool = false
 
+var hasSeenTutorial : bool = false
+
 func _ready() -> void:
 	SignalBus.LoadLevel.connect(LoadLevel)
 	SignalBus.LoadMenu.connect(LoadMenu)
@@ -132,6 +134,9 @@ func deferredLoadMenu(menuUID : String) -> void:
 			newSub.SetParentMenu(currentMenu)
 			#currentMenu.hide()
 	#Else its a popup just display it over top
+	
+	if menuUID == UIDCatalog.Menu_Tutorial:
+		hasSeenTutorial = true
 	
 	#Allow the old level to finish freeing before adding a new one
 	await get_tree().process_frame
@@ -296,6 +301,10 @@ func OnGameOver() -> void:
 	
 func OnStartGame() -> void:
 	isGameOver = false
+	
+	if not hasSeenTutorial:
+		LoadMenu(UIDCatalog.Menu_Tutorial)
+		return
 	
 	LoadLevel(UIDCatalog.Level_1)
 	
