@@ -30,7 +30,11 @@ func animate() -> void:
 		currentColor = valueColor
 		
 		if valueColor == Color.from_hsv(0.021, 1.0, 0.983, 1.0):
-			animator.play("FlashRed")
+			if not animator.is_playing():
+				animator.play("FlashRed")
+		else:
+			if animator.is_playing():
+				animator.stop()
 		
 		var newScaleValue : float = GetScaleBasedOnValue(value)
 		
