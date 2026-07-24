@@ -36,15 +36,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		return
 	
 	if not body.hasRope():
-		hasRope = true
 		rope = body.start_drawing(self)
-		
 		if rope == null:
 			return
-		
-	elif body.currentRope.is_drawing:
 		hasRope = true
+	elif body.currentRope.is_drawing:
 		rope = body.attach_rocket_to_current_rope(self)
+		hasRope = true
 	else:
 		return
 	
