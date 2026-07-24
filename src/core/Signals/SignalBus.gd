@@ -35,4 +35,9 @@ signal GameOver()
 signal LoadEntity(entityUID : String, position: Vector2, parent : Node2D)
 signal LoadEffect(effectUID : String)
 
+#Score
+signal AddScore(value : int, source : Node2D)
+signal SubtractScore(value : int, source : Node2D)
+signal ResetScore()
+
 @warning_ignore_restore("unused_signal")

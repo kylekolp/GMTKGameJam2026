@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cutlm6om3imjp"]
+
+[ext_resource type="Script" uid="uid://vla5hoh8jsg0" path="res://src/core/systems/ScoreSystem/UI_Score.gd" id="1_55w1t"]
+[ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="1_crudx"]
+[ext_resource type="FontFile" uid="uid://c6pom3pd1kke2" path="res://Assets/Fonts/Daydream.otf" id="2_etgha"]
+[ext_resource type="Script" uid="uid://d0w4pvdnrcvri" path="res://src/ui/AnimatedLabel.gd" id="4_1ahnr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ahnr"]
+
+[node name="UiScore" type="Control" unique_id=530059810 node_paths=PackedStringArray("scoreValue")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_55w1t")
+scoreValue = NodePath("Panel/MarginContainer/HBoxContainer/ScoreValue")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1395793602]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -210.0
+offset_top = -70.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("1_crudx")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1059748217]
+layout_mode = 2
+theme_override_constants/margin_left = -15
+theme_override_constants/margin_top = -15
+theme_override_constants/margin_right = -15
+theme_override_constants/margin_bottom = -15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer" unique_id=162650370]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ScoreTitle" type="Label" parent="Panel/MarginContainer/HBoxContainer" unique_id=1425592500]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_etgha")
+theme_override_font_sizes/font_size = 15
+text = "Score:"
+
+[node name="ScoreValue" type="Label" parent="Panel/MarginContainer/HBoxContainer" unique_id=223898575]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_etgha")
+theme_override_font_sizes/font_size = 15
+text = "0"
+label_settings = SubResource("LabelSettings_1ahnr")
+script = ExtResource("4_1ahnr")
+target_property = "text"

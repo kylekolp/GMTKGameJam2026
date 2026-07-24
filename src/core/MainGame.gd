@@ -211,6 +211,7 @@ func deferredLoadSystem(systemUID : String) -> void:
 			return
 	
 	newSystem.world = worldRoot
+	newSystem.hudRoot = hudRoot
 	
 	systemsRoot.add_child(newSystem)
 	

@@ -13,6 +13,12 @@
 
 [node name="Level1" type="Node2D" unique_id=1647347138]
 script = ExtResource("1_qsbfr")
+rocket_spawn_interval = null
+failed_rocket_spawn_interval = null
+min_distance_from_fire = null
+min_distance_from_rocket = null
+min_distance_from_rope = null
+min_distance_from_player = null
 
 [node name="RocketSpawnTimer" type="Timer" parent="." unique_id=454984310]
 wait_time = 2.0

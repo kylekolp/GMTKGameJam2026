@@ -15,6 +15,7 @@ var rocket_spawn_area: Rect2
 
 func _ready() -> void:
 	SignalBus.LoadSystem.emit(UIDCatalog.System_PauseAction)
+	SignalBus.LoadSystem.emit(UIDCatalog.System_Score)
 	
 	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Player, Vector2(100,100), self)
 	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Fire, Vector2(100,600), self)
@@ -52,6 +53,8 @@ func _on_rocket_spawn_timer_timeout() -> void:
 	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Rocket, candidate_position, self)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ROCKET_SPAWN)
 	rocket_spawn_timer.start(rocket_spawn_interval)
+	
+	SignalBus.AddScore.emit(10,self)
 
 func _is_far_enough_from_group(position: Vector2, group: StringName, min_distance: float) -> bool:
 	for node in get_tree().get_nodes_in_group(group):

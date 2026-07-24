@@ -5,6 +5,7 @@ extends Node
 
 #Systems
 const System_PauseAction : String = "uid://n3t0af3g7475"
+const System_Score : String = "uid://ug60f2r81iy6"
 
 #Menus
 const Menu_Main : String = "uid://k68tl4ppllaa"
@@ -24,6 +25,9 @@ const Entity_Rocket : String = "uid://c86xeg2esb2uo"
 const Entity_Fire : String = "uid://tequb32i5gkj"
 const Entity_FireBurnRope : String = "uid://wf071cv4c6v6"
 const Entity_Rope : String = "uid://dxkiorh8g5kvt"
+
+#UI
+const UI_Score : String = "uid://cutlm6om3imjp"
 
 #Other
 
