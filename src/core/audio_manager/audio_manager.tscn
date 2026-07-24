@@ -10,6 +10,12 @@
 [ext_resource type="AudioStream" uid="uid://0nw0ugvgk27b" path="res://Audio/SFX/WAVs/Rope Connect Texture v1.wav" id="8_4b0jq"]
 [ext_resource type="AudioStream" uid="uid://btyq18rtdkucc" path="res://Audio/SFX/Rope Connect Tone v1.mp3" id="9_foedu"]
 [ext_resource type="AudioStream" uid="uid://b4g5cmix7861" path="res://Audio/SFX/WAVs/Firework Launch Pop.wav" id="10_foedu"]
+[ext_resource type="AudioStream" uid="uid://cxwfw8i0a576c" path="res://Audio/SFX/WAVs/Tick.wav" id="11_4b0jq"]
+[ext_resource type="AudioStream" uid="uid://lf8kc057s1n2" path="res://Audio/SFX/WAVs/Tock.wav" id="12_h23lm"]
+[ext_resource type="AudioStream" uid="uid://fkitamxase48" path="res://Audio/SFX/WAVs/Tick Final.wav" id="13_d73h1"]
+[ext_resource type="AudioStream" uid="uid://dlvorr1w6hnh1" path="res://Audio/SFX/WAVs/Timer Low.wav" id="14_h23lm"]
+[ext_resource type="AudioStream" uid="uid://doj24t7128iy1" path="res://Audio/SFX/WAVs/Pop.wav" id="15_d73h1"]
+[ext_resource type="AudioStream" uid="uid://b00b7cg2fvob6" path="res://Audio/SFX/WAVs/Rope Score.wav" id="16_w0rdc"]
 
 [sub_resource type="Resource" id="Resource_s7fu5"]
 script = ExtResource("2_w37oj")
@@ -22,7 +28,7 @@ script = ExtResource("2_w37oj")
 limit = 100
 type = 1
 sound_effect = ExtResource("4_p165e")
-volume = -10.0
+volume = -16.0
 pitch_randomness = 0.1
 metadata/_custom_type_script = "uid://edosslbptmeu"
 
@@ -71,6 +77,54 @@ type = 7
 sound_effect = ExtResource("10_foedu")
 metadata/_custom_type_script = "uid://edosslbptmeu"
 
+[sub_resource type="Resource" id="Resource_88741"]
+script = ExtResource("2_w37oj")
+limit = 1
+type = 8
+sound_effect = ExtResource("11_4b0jq")
+volume = -12.0
+metadata/_custom_type_script = "uid://edosslbptmeu"
+
+[sub_resource type="Resource" id="Resource_igw0h"]
+script = ExtResource("2_w37oj")
+limit = 1
+type = 9
+sound_effect = ExtResource("12_h23lm")
+volume = -12.0
+metadata/_custom_type_script = "uid://edosslbptmeu"
+
+[sub_resource type="Resource" id="Resource_3d0px"]
+script = ExtResource("2_w37oj")
+limit = 1
+type = 10
+sound_effect = ExtResource("13_d73h1")
+volume = -12.0
+metadata/_custom_type_script = "uid://edosslbptmeu"
+
+[sub_resource type="Resource" id="Resource_mln42"]
+script = ExtResource("2_w37oj")
+limit = 1
+type = 11
+sound_effect = ExtResource("14_h23lm")
+volume = -8.0
+metadata/_custom_type_script = "uid://edosslbptmeu"
+
+[sub_resource type="Resource" id="Resource_h23lm"]
+script = ExtResource("2_w37oj")
+type = 12
+sound_effect = ExtResource("15_d73h1")
+volume = -16.0
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://edosslbptmeu"
+
+[sub_resource type="Resource" id="Resource_d73h1"]
+script = ExtResource("2_w37oj")
+limit = 1
+type = 13
+sound_effect = ExtResource("16_w0rdc")
+volume = -16.0
+metadata/_custom_type_script = "uid://edosslbptmeu"
+
 [node name="AudioManager" type="Node2D" unique_id=1002705866]
 script = ExtResource("1_s7fu5")
-sound_effect_settings = Array[ExtResource("2_w37oj")]([SubResource("Resource_s7fu5"), SubResource("Resource_w37oj"), SubResource("Resource_qsbfr"), SubResource("Resource_qw8bb"), SubResource("Resource_f7c22"), SubResource("Resource_3nv2i"), SubResource("Resource_whfmy"), SubResource("Resource_2on5u")])
+sound_effect_settings = Array[ExtResource("2_w37oj")]([SubResource("Resource_s7fu5"), SubResource("Resource_w37oj"), SubResource("Resource_qsbfr"), SubResource("Resource_qw8bb"), SubResource("Resource_f7c22"), SubResource("Resource_3nv2i"), SubResource("Resource_whfmy"), SubResource("Resource_2on5u"), SubResource("Resource_88741"), SubResource("Resource_igw0h"), SubResource("Resource_3d0px"), SubResource("Resource_mln42"), SubResource("Resource_h23lm"), SubResource("Resource_d73h1")])

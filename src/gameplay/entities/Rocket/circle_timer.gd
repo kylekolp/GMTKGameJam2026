@@ -13,6 +13,16 @@ var initialScale : Vector2
 func _ready() -> void:
 	initialScale = scale
 	pivot_offset = Vector2(0,size.y)
+	#value_changed.connect(rocket_countdown)
+
+#func rocket_countdown(value): ## UNCOMMENT FOR THE TICKING NOISE (ALSO UNCOMMENT THE value_changed.connect(rocket_counddown) LINE
+	#if value < 5:
+		#return
+	#if animator.current_animation == "FlashRed":
+		#if fmod(value, 10) == 0:
+			#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TICK)
+		#elif fmod(value, 10) == 5:
+			#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TOCK)
 
 func _set(property : StringName, value : Variant) -> bool:
 	if property == target_property:
@@ -28,10 +38,13 @@ func animate() -> void:
 	if valueColor != currentColor:
 		tint_progress = valueColor
 		currentColor = valueColor
+		if currentColor == Color.from_hsv(0.133, 1.0, 0.98, 1.0) or currentColor == Color.from_hsv(0.099, 1.0, 0.932, 1.0):
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.POP)
 		
 		if valueColor == Color.from_hsv(0.021, 1.0, 0.983, 1.0):
 			if not animator.is_playing():
 				animator.play("FlashRed")
+				AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TIMER_LOW)
 		else:
 			if animator.is_playing():
 				animator.stop()

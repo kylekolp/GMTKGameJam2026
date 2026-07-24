@@ -11,6 +11,12 @@ enum SOUND_EFFECT_TYPE{
 	ROPE_CONNECT_TEXTURE,
 	ROPE_CONNECT_TONE,
 	FIREWORK_LAUNCH,
+	TICK,
+	TOCK,
+	TICK_LAST,
+	TIMER_LOW,
+	POP,
+	ROPE_SCORE,
 }
 
 @export_range(0, 100) var limit: int = 5 ## Max number of SoundEffect allowed to be played
