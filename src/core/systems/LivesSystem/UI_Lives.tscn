@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dyjipvvvlgxpl"]
+
+[ext_resource type="Script" uid="uid://dbwppo88emgdh" path="res://src/core/systems/LivesSystem/UI_Lives.gd" id="1_ui2mi"]
+[ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="2_c40qd"]
+[ext_resource type="FontFile" uid="uid://c6pom3pd1kke2" path="res://Assets/Fonts/Daydream.otf" id="3_7707u"]
+
+[node name="UiLives" type="Control" unique_id=1870645117 node_paths=PackedStringArray("livesValue")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ui2mi")
+livesValue = NodePath("PanelContainer/MarginContainer/HBoxContainer/LivesValue")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1114424167]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+offset_right = 191.0
+grow_vertical = 0
+theme = ExtResource("2_c40qd")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=846573625]
+layout_mode = 2
+theme_override_constants/margin_left = -15
+theme_override_constants/margin_top = -15
+theme_override_constants/margin_right = -15
+theme_override_constants/margin_bottom = -15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1867735424]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="LivesTitle" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=586973126]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_7707u")
+theme_override_font_sizes/font_size = 15
+text = "Misses:"
+
+[node name="LivesValue" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1312840910]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_7707u")
+theme_override_font_sizes/font_size = 15
+text = "3"
