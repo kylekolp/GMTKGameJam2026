@@ -1,4 +1,7 @@
 [gd_resource type="LabelSettings" format=3 uid="uid://db21agx7m6v2w"]
 
+[ext_resource type="FontFile" uid="uid://c6pom3pd1kke2" path="res://Assets/Fonts/Daydream.otf" id="1_vbv7x"]
+
 [resource]
-font_size = 72
+font = ExtResource("1_vbv7x")
+font_size = 64
