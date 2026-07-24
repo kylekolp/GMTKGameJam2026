@@ -27,6 +27,7 @@ shape = SubResource("RectangleShape2D_bai2n")
 offset_left = 4.0000005
 offset_top = -65.33334
 offset_right = 36.0
-offset_bottom = -33.333344
+offset_bottom = -33.333355
+pivot_offset = Vector2(0, 31.999989)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
