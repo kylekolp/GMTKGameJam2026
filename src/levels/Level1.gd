@@ -20,8 +20,8 @@ func _ready() -> void:
 	SignalBus.LoadSystem.emit(UIDCatalog.System_Lives)
 	
 	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Player, Vector2(100,100), self)
-	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Fire, Vector2(100,600), self)
-	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Fire, Vector2(1000,600), self)
+	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Fire, Vector2(100,400), self)
+	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Fire, Vector2(1000,400), self)
 	
 	rocket_spawn_area = Rect2(
 		rocket_spawn_area_top_left.position,
