@@ -24,6 +24,9 @@ var entityRoot : Node2D
 var knockback : Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
 
+var knockback_wearoff_time : float = 0.1
+var knockback_wearing_off : float = 0.0
+
 var currentScale : Vector2
 
 func _ready() -> void:
@@ -39,7 +42,15 @@ func _physics_process(delta: float) -> void:
 		knockback_timer -= delta
 		if knockback_timer <= 0.0:
 			knockback = Vector2.ZERO
+			knockback_wearing_off = knockback_wearoff_time
 		return
+		
+	if knockback_wearing_off > 0.0:
+		knockback_wearing_off -= delta
+		if knockback_wearing_off <= 0.0:
+			knockback_wearing_off = 0
+		return
+		
 	
 	var movementDirection = Vector2.ZERO
 	
@@ -90,6 +101,9 @@ func AnimatePlayer(direction : Vector2):
 	return
 
 func start_drawing(rocket : Entity_Rocket) -> Entity_Rope:
+	if knockback_wearing_off > 0:
+		return null
+	
 	currentRope = CreateRope(Vector2(0,0))
 	currentRope.RopeComplete.connect(DropRopeOnComplete)
 	currentRope.start_drawing()
