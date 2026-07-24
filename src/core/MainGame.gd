@@ -135,6 +135,9 @@ func deferredLoadMenu(menuUID : String) -> void:
 			#currentMenu.hide()
 	#Else its a popup just display it over top
 	
+	if menuUID == UIDCatalog.Menu_Tutorial:
+		hasSeenTutorial = true
+	
 	#Allow the old level to finish freeing before adding a new one
 	await get_tree().process_frame
 	
@@ -300,7 +303,6 @@ func OnStartGame() -> void:
 	isGameOver = false
 	
 	if not hasSeenTutorial:
-		hasSeenTutorial = true
 		LoadMenu(UIDCatalog.Menu_Tutorial)
 		return
 	

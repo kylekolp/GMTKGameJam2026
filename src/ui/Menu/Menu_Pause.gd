@@ -13,3 +13,7 @@ func _on_main_menu_button_pressed() -> void:
 	SignalBus.LoadMenu.emit(UIDCatalog.Menu_Main)
 	SignalBus.UnPause.emit()
 	queue_free()
+
+
+func _on_controls_button_pressed() -> void:
+	SignalBus.LoadMenu.emit(UIDCatalog.Menu_Tutorial)

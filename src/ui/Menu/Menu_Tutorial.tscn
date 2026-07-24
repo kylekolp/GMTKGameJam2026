@@ -88,4 +88,5 @@ theme_override_constants/margin_right = 75
 layout_mode = 2
 text = "Continue"
 
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
