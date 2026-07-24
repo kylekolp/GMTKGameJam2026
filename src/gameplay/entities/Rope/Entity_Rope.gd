@@ -70,9 +70,27 @@ func attach_rocket(rocket: Entity_Rocket) -> void:
 
 func _on_attached_rocket_exited(attachment: Dictionary) -> void:
 	attachments.erase(attachment)
-	if is_drawing and attachments.is_empty():
-		RopeEmpty.emit(self)
-		queue_free()
+	
+	if attachments.is_empty():
+		if is_drawing:
+			RopeEmpty.emit(self)
+			queue_free()
+		return
+	
+	if is_drawing:
+		_trim_dangling_rope()
+
+func _trim_dangling_rope() -> void:
+	var min_index := points.size()
+	for a in attachments:
+		min_index = min(min_index, a["index"])
+	
+	if min_index <= 0:
+		return
+	
+	points = points.slice(min_index)
+	for a in attachments:
+		a["index"] -= min_index
 
 func getScoreMult() -> int:
 	if attachments.size() < 5:
