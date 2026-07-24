@@ -5,6 +5,8 @@ extends Node
 @onready var systemsRoot : Node2D = %Systems
 
 #Game World Root Nodes
+@onready var worldRoot : Node2D = %World
+
 @onready var levelRoot : Node2D = %LevelRoot
 @onready var entityRoot : Node2D = %EntityRoot
 @onready var effectsRoot : Node2D = %EffectsRoot
@@ -34,7 +36,7 @@ func _ready() -> void:
 	SignalBus.LoadEffect.connect(LoadEffect)
 	SignalBus.LoadSystem.connect(LoadSystem)
 	
-	#LoadSystem(UIDCatalog.System_PauseAction)
+	SignalBus.UnloadLevel.connect(UnloadLevel)
 	
 	#RunIntro()
 	LoadMenu(UIDCatalog.Menu_Main)
@@ -208,6 +210,8 @@ func deferredLoadSystem(systemUID : String) -> void:
 			newSystem.queue_free()
 			return
 	
+	newSystem.world = worldRoot
+	
 	systemsRoot.add_child(newSystem)
 	
 	#Allow the new level to process before accessing it
@@ -303,3 +307,26 @@ func UnPauseGame() -> void:
 		menu.queue_free()
 	
 	await get_tree().process_frame
+	
+func UnloadLevel() -> void:
+	#Unload LevelRoot
+	for item in levelRoot.get_children():
+		item.queue_free()
+		
+	#Unload Entity Root
+	for item in entityRoot.get_children():
+		item.queue_free()
+		
+	#Unload Effects Root
+	for item in effectsRoot.get_children():
+		item.queue_free()
+		
+	#Unload Effects Root
+	for item in hudRoot.get_children():
+		item.queue_free()
+		
+	#Unload Systems Root
+	for item in systemsRoot.get_children():
+		item.queue_free()
+		
+	#Unload Audio Stuff?

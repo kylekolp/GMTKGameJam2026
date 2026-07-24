@@ -3,53 +3,75 @@ extends CharacterBody2D
 
 @export var movement_speed : float
 
+@onready var dash : Dash = $Dash
+@export var dash_cooldown : float
+@export var dash_speed : float
+@export var dashDuration : float
+var dashDirection : Vector2 = Vector2.ZERO
+
+@export var movement_acceleration : float = 10
+
 var currentRope: Entity_Rope
 var currentRocket : Entity_Rocket
 
 var entityRoot : Node2D
 
-@onready var animator : AnimationPlayer = $AnimationPlayer
+@onready var sprite : Sprite2D = $Sprite2D
+
+@onready var animator_Movement : AnimationPlayer = $AnimationPlayerMovement
+@onready var animator_Damage : AnimationPlayer = $AnimationPlayerDamage
 
 func _ready() -> void:
 	entityRoot = get_parent()
+	dash.dash_cooldown = dash_cooldown
 	return
 	
 func _physics_process(delta: float) -> void:
+	var movementDirection = Vector2.ZERO
 	
-	var direction:= Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down")
+	if dash.is_dashing():
+		movementDirection = dashDirection
+	else:
+		movementDirection = get_move_direction()
+		
+	AnimatePlayer(movementDirection)
 	
-	AnimatePlayer(direction)
+	if Input.is_action_just_pressed("Dash") and not dash.is_dash_on_cooldown():
+			dash.start_dash(dashDuration)
+			dashDirection = movementDirection
 	
-	velocity = direction * movement_speed
+	var speed = dash_speed if dash.is_dashing() else movement_speed
+	
+	velocity = velocity.lerp(movementDirection.normalized() * speed, movement_acceleration * delta)
 	
 	move_and_slide()
-	
-	#var screen_size = get_viewport_rect().size
-	#var half_sprite_size = $Sprite2D.texture.get_size() * $Sprite2D.scale / 2
-	#
-	#position.x = clamp(position.x, half_sprite_size.x, screen_size.x - half_sprite_size.x)
-	#position.y = clamp(position.y, half_sprite_size.y, screen_size.y - half_sprite_size.y)
+
+func get_move_direction() -> Vector2:
+	return Vector2(
+		int(Input.is_action_pressed('Move_Right')) - int(Input.is_action_pressed("Move_Left")),
+		int(Input.is_action_pressed('Move_Down')) - int(Input.is_action_pressed('Move_Up'))
+	)
 	
 func AnimatePlayer(direction : Vector2):
 	
 	if direction.x < 0 and direction.y == 0:
-		animator.play("Walk_Left")
+		animator_Movement.play("Walk_Left")
 	elif direction.x > 0 and direction.y == 0: #Right
-		animator.play("Walk_Right")
+		animator_Movement.play("Walk_Right")
 	elif direction.x == 0 and direction.y > 0:
-		animator.play("Walk_Down")
+		animator_Movement.play("Walk_Down")
 	elif direction.x == 0 and direction.y < 0:
-		animator.play("Walk_Up")
+		animator_Movement.play("Walk_Up")
 	elif direction.x < 0 and direction.y < 0:
-		animator.play("Walk_Diagonal_Back_Left")
+		animator_Movement.play("Walk_Diagonal_Back_Left")
 	elif direction.x > 0 and direction.y < 0:
-		animator.play("Walk_Diagonal_Back_Right")
+		animator_Movement.play("Walk_Diagonal_Back_Right")
 	elif direction.x < 0 and direction.y > 0:
-		animator.play("Walk_Diagonal_Front_LeftDown")
+		animator_Movement.play("Walk_Diagonal_Front_LeftDown")
 	elif direction.x > 0 and direction.y > 0:
-		animator.play("Walk_Diagonal_Front_RightDown")
+		animator_Movement.play("Walk_Diagonal_Front_RightDown")
 	else:
-		animator.play("Idle")
+		animator_Movement.play("Idle")
 	
 	return
 
@@ -92,7 +114,7 @@ func CreateRope(position: Vector2) -> Entity_Rope:
 	
 #push the player back a bit and burn the rope they are holding
 func FireDamagePlayer(enemy : Entity_FireBurnRope) -> void:
-	animator.play("TakeDamage")
+	animator_Damage.play("TakeDamage")
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PLAYER_HIT)
 	if currentRope != null:
 		currentRope.reset_attached_rockets()

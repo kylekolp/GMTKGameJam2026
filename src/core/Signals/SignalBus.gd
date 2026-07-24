@@ -26,6 +26,7 @@ signal TryQuit()
 signal ConfirmQuit()
 signal Pause()
 signal UnPause()
+signal UnloadLevel()
 
 signal StartGame()
 signal GameOver()
