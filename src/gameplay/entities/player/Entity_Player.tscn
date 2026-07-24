@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://tl6khwr4g44e" path="res://src/gameplay/entities/player/Entity_Player.gd" id="1_khxic"]
 [ext_resource type="PackedScene" uid="uid://wras6segf5s5" path="res://src/gameplay/entities/player/Dash.tscn" id="2_77yeb"]
 [ext_resource type="Texture2D" uid="uid://ddcgb77euc8f5" path="res://Assets/characters/PlayerAnimationExport2.png" id="2_fok4k"]
+[ext_resource type="Script" uid="uid://c5l1qco47j8jg" path="res://src/gameplay/entities/player/Dash.gd" id="3_4ahne"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
 size = Vector2(56, 74)
@@ -339,10 +340,11 @@ z_index = 2
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_khxic")
-movement_speed = 350.0
-dash_speed = 10000.0
+movement_speed = 8000.0
+dash_speed = 40000.0
 
 [node name="Dash" parent="." unique_id=1348304677 instance=ExtResource("2_77yeb")]
+script = ExtResource("3_4ahne")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=602313639]
 scale = Vector2(0.5, 0.5)

@@ -3,3 +3,4 @@
 [node name="Dash" type="Node2D" unique_id=1348304677]
 
 [node name="CooldownTimer" type="Timer" parent="." unique_id=1210742155]
+one_shot = true

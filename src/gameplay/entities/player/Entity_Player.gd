@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 @onready var dash : Dash = $Dash
 @export var dash_speed : float
+@export var dashDuration : float = 0.2
 
 var currentRope: Entity_Rope
 var currentRocket : Entity_Rocket
@@ -18,19 +19,25 @@ func _ready() -> void:
 	return
 	
 func _physics_process(delta: float) -> void:
+	var movementDirection = get_move_direction()
+	#var direction:= Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down")
 	
-	var direction:= Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down")
+	AnimatePlayer(movementDirection)
 	
-	AnimatePlayer(direction)
-	
-	if Input.is_action_just_pressed("dash"):
-		dash.start_dash(dash_speed)
+	if Input.is_action_just_pressed("Dash"):
+		dash.start_dash(dashDuration)
 	
 	var speed = dash_speed if dash.is_dashing() else movement_speed
 	
-	velocity = direction.normalized() * movement_speed * delta
+	velocity = movementDirection.normalized() * movement_speed * delta
 	
 	move_and_slide()
+
+func get_move_direction() -> Vector2:
+	return Vector2(
+		int(Input.is_action_pressed('Move_Right')) - int(Input.is_action_pressed("Move_Left")),
+		int(Input.is_action_pressed('Move_Down')) - int(Input.is_action_pressed('Move_Up'))
+	)
 	
 func AnimatePlayer(direction : Vector2):
 	
