@@ -26,7 +26,8 @@ func _ready() -> void:
 	countdown_tween.finished.connect(_on_countdown_finished)
 
 func _on_countdown_finished() -> void:
-	SignalBus.GameOver.emit()
+	queue_free()
+	SignalBus.RocketMissed.emit()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var bodyGroups : Array[StringName] = body.get_groups()

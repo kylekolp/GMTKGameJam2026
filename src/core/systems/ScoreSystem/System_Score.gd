@@ -10,6 +10,8 @@ func _ready() -> void:
 	SignalBus.AddScore.connect(AddScore)
 	SignalBus.SubtractScore.connect(SubtractScore)
 	SignalBus.ResetScore.connect(ResetScore)
+	SignalBus.StartGame.connect(ResetScore)
+
 	
 	UIScore = SpawnScoreUI()
 	scoreLabel = UIScore.scoreValue

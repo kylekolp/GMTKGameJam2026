@@ -28,7 +28,9 @@ const Entity_Rope : String = "uid://dxkiorh8g5kvt"
 
 #UI
 const UI_Score : String = "uid://cutlm6om3imjp"
+const UI_Lives : String = "uid://dyjipvvvlgxpl"
 const ScoreNumberSpawner : String = "uid://c822q8pcdetsc"
+const System_Lives : String = "uid://c3cosdww72dkg"
 
 #Other
 

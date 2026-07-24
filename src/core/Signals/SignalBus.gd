@@ -40,5 +40,7 @@ signal AddScore(value : int, source : Node2D)
 signal SubtractScore(value : int, source : Node2D)
 signal ResetScore()
 signal SpawnScoreNumber(number : int, label : String, position : Vector2)
+signal RocketMissed
+
 
 @warning_ignore_restore("unused_signal")
