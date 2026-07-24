@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dbwppo88emgdh" path="res://src/core/systems/LivesSystem/UI_Lives.gd" id="1_ui2mi"]
 [ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="2_c40qd"]
-[ext_resource type="FontFile" uid="uid://c6pom3pd1kke2" path="res://Assets/Fonts/Daydream.otf" id="3_7707u"]
+[ext_resource type="Texture2D" uid="uid://bjtuq677ti3lw" path="res://Assets/Fireworks/firework_green.png" id="4_pmm3y"]
+[ext_resource type="Texture2D" uid="uid://bambnh6rnpmtm" path="res://Assets/Fireworks/firework_orange.png" id="5_dqb2n"]
+[ext_resource type="Texture2D" uid="uid://b2ke08klwxlqn" path="res://Assets/Fireworks/firework_violet.png" id="6_rbo0e"]
 
-[node name="UiLives" type="Control" unique_id=1870645117 node_paths=PackedStringArray("livesValue")]
+[node name="UiLives" type="Control" unique_id=1870645117]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +14,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ui2mi")
-livesValue = NodePath("PanelContainer/MarginContainer/HBoxContainer/LivesValue")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1114424167]
 layout_mode = 1
@@ -35,14 +36,23 @@ theme_override_constants/margin_bottom = -15
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="LivesTitle" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=586973126]
+[node name="Icon0" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1922600147]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7707u")
-theme_override_font_sizes/font_size = 15
-text = "Misses:"
+texture = ExtResource("4_pmm3y")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="LivesValue" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1312840910]
+[node name="Icon1" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1533135011]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7707u")
-theme_override_font_sizes/font_size = 15
-text = "3"
+texture = ExtResource("5_dqb2n")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Icon2" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer" unique_id=1982524705]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("6_rbo0e")
+expand_mode = 1
+stretch_mode = 5

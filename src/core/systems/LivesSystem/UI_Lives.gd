@@ -1,4 +1,8 @@
 class_name UI_Lives
 extends Control
 
-@export var livesValue : Label
+@onready var livesIcons : Array[TextureRect] = [
+	  $PanelContainer/MarginContainer/HBoxContainer/Icon0,
+	  $PanelContainer/MarginContainer/HBoxContainer/Icon1,
+	  $PanelContainer/MarginContainer/HBoxContainer/Icon2,
+]

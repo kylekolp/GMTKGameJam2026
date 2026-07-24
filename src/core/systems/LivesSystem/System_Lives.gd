@@ -5,21 +5,23 @@ const MAX_MISSES := 3
 
 var missesRemaining : int
 var UILives: UI_Lives
-var livesLabel : Label
 
 func _ready() -> void:
 	SignalBus.RocketMissed.connect(OnRocketMissed)
+	SignalBus.StartGame.connect(ResetLives)
 	UILives = SpawnLivesUI()
-	livesLabel = UILives.livesValue
 	ResetLives()
 
 func ResetLives() -> void:
 	missesRemaining = MAX_MISSES
-	livesLabel.text = str(missesRemaining)
+	for icon in UILives.livesIcons:
+		icon.visible = true
 
 func OnRocketMissed() -> void:
 	missesRemaining -= 1
-	livesLabel.text = str(missesRemaining)
+	var usedIndex := MAX_MISSES - missesRemaining - 1
+	if usedIndex >= 0 and usedIndex < UILives.livesIcons.size():
+		UILives.livesIcons[usedIndex].visible = false
 	if missesRemaining <= 0:
 		SignalBus.GameOver.emit()
 
