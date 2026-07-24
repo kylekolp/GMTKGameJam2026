@@ -31,7 +31,6 @@ fill_to = Vector2(0, 0)
 z_index = 1
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_o8uc8")
-countdownTime = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1540493977]
 scale = Vector2(0.2, 0.2)

@@ -10,7 +10,7 @@
 font = ExtResource("3_0kf1q")
 font_size = 25
 
-[node name="MenuGameOver" type="Control" unique_id=1651065814]
+[node name="MenuGameOver" type="Control" unique_id=1651065814 node_paths=PackedStringArray("scoreLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,34 +18,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_37t8g")
+scoreLabel = NodePath("MarginContainer/Panel/ScoreLabel")
 
-[node name="Panel" type="Panel" parent="." unique_id=232295608]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1970856427]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("2_wsie1")
+color = Color(0, 0, 0, 0.6862745)
 
-[node name="TitleLabel" type="Label" parent="." unique_id=143164430]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=739178830]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -297.75
-offset_top = -133.0
-offset_right = 297.75
-offset_bottom = -16.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 100
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=232295608]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_wsie1")
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/Panel" unique_id=143164430]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -262.375
+offset_top = 77.0
+offset_right = 262.375
+offset_bottom = 168.0
+grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_0kf1q")
 text = "Game Over"
 label_settings = ExtResource("3_pvixc")
 
-[node name="ScoreLabel" type="Label" parent="." unique_id=1940570978]
+[node name="ScoreLabel" type="Label" parent="MarginContainer/Panel" unique_id=1940570978]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,9 +67,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -231.5
-offset_top = 4.0
+offset_top = -27.0
 offset_right = 231.5
-offset_bottom = 69.0
+offset_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Final Score: 0"
@@ -63,24 +77,31 @@ label_settings = SubResource("LabelSettings_bai2n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1887530288]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 465.0
-offset_right = 1150.0
-offset_bottom = 528.0
-theme_override_constants/separation = 150
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel" unique_id=1887530288]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -369.0
+offset_top = -112.0
+offset_right = 369.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 100
 alignment = 1
 
-[node name="MainMenuButton" type="Button" parent="HBoxContainer" unique_id=233342838]
+[node name="MainMenuButton" type="Button" parent="MarginContainer/Panel/HBoxContainer" unique_id=233342838]
 layout_mode = 2
 theme = ExtResource("4_pvixc")
 text = "Main Menu"
 
-[node name="RestartButton" type="Button" parent="HBoxContainer" unique_id=568739488]
+[node name="RestartButton" type="Button" parent="MarginContainer/Panel/HBoxContainer" unique_id=568739488]
 layout_mode = 2
 theme = ExtResource("4_pvixc")
 text = "Play Again"
 
-[connection signal="pressed" from="HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

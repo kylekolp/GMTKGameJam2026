@@ -21,12 +21,26 @@ var entityRoot : Node2D
 @onready var animator_Movement : AnimationPlayer = $AnimationPlayerMovement
 @onready var animator_Damage : AnimationPlayer = $AnimationPlayerDamage
 
+var knockback : Vector2 = Vector2.ZERO
+var knockback_timer: float = 0.0
+
+var currentScale : Vector2
+
 func _ready() -> void:
 	entityRoot = get_parent()
 	dash.dash_cooldown = dash_cooldown
+	currentScale = scale
 	return
 	
 func _physics_process(delta: float) -> void:
+	
+	if knockback_timer > 0.0:
+		velocity = knockback
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			knockback = Vector2.ZERO
+		return
+	
 	var movementDirection = Vector2.ZERO
 	
 	if dash.is_dashing():
@@ -116,8 +130,28 @@ func CreateRope(position: Vector2) -> Entity_Rope:
 func FireDamagePlayer(enemy : Entity_FireBurnRope) -> void:
 	animator_Damage.play("TakeDamage")
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.PLAYER_HIT)
+	
+	#knockback player
+	var direction : Vector2 = enemy.global_position.direction_to(self.global_position).normalized()
+	
+	apply_knockback(direction, 2000.0, 0.04)
+	
 	if currentRope != null:
 		currentRope.reset_attached_rockets()
 		currentRope.BurnRope()
 		currentRope = null
+		
+func apply_knockback(direction : Vector2, force: float, knockback_duration: float) -> void:
+	knockback = direction * force
+	knockback_timer = knockback_duration
+	
+	#Scale the player a bit to sell the knockback
+	var knockbackTween : Tween = create_tween().set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	
+	knockbackTween.tween_property(self, "scale:x", scale.x * .5, .15) #Tween the scale as well
+	knockbackTween.chain().tween_property(self, "scale:y", scale.y * .8, .2).set_delay(.08) #Tween the scale as well
+	knockbackTween.parallel().tween_property(self, "scale:x", currentScale.x, .2)
+	knockbackTween.chain().tween_property(self, "scale:y", currentScale.y, .2)
+
+	
 	

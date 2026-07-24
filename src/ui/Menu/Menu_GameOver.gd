@@ -1,10 +1,11 @@
 class_name Menu_GameOver
 extends Control
 
+@export var scoreLabel : Label
+
 var score : String
 
 func SetScore() -> void:
-	var scoreLabel : Label = $ScoreLabel
 	scoreLabel.text = "Final Score: " + score
 
 func _on_restart_button_pressed() -> void:
