@@ -18,12 +18,12 @@ func _set(property : StringName, value : Variant) -> bool:
 	if property == target_property:
 		if get(property) == value: 
 			return false
-		animate()
+		animate(value)
 		return false
 	return false
 	
-func animate() -> void:
-	var valueColor : Color = GetColorBasedOnValue(value)
+func animate(newValue : float) -> void:
+	var valueColor : Color = GetColorBasedOnValue(newValue)
 	
 	if valueColor != currentColor:
 		tint_progress = valueColor
@@ -48,7 +48,7 @@ func animate() -> void:
 		tween.tween_property(self, "scale:x", newScaleX, .25)
 		tween.parallel().tween_property(self, "scale:y", newScaleY, .25).set_delay(.05)
 		
-		var rotation : float = GetRotationBasedOnScale(value)
+		var rotation : float = GetRotationBasedOnScale(newValue)
 		
 		var tween2 = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		tween2.tween_property(self, "rotation_degrees", -rotation, .1)
