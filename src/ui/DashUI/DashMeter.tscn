@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://d2h11drxvk1ad"]
+
+[ext_resource type="Script" uid="uid://2bursnfa8gu5" path="res://src/ui/DashUI/DashMeter.gd" id="1_kn5gn"]
+[ext_resource type="Texture2D" uid="uid://b1vg1jan54pmj" path="res://Assets/UI/DashBar/DashIcon.png" id="2_u07dk"]
+[ext_resource type="Texture2D" uid="uid://cjkvb4a88nhcb" path="res://Assets/UI/DashBar/DashBarBack.png" id="3_42lp1"]
+[ext_resource type="Texture2D" uid="uid://btlid5ig7i00t" path="res://Assets/UI/DashBar/DashBar.png" id="4_yd8j7"]
+[ext_resource type="Script" uid="uid://nwrpo4r121qo" path="res://src/ui/DashUI/DashBar.gd" id="5_5astw"]
+
+[node name="DashMeter" type="Control" unique_id=1796403487]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -63.0
+offset_right = -115.0
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_kn5gn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052704859]
+position = Vector2(24, 14.965027)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_u07dk")
+
+[node name="DashBar" type="TextureProgressBar" parent="." unique_id=1992001478]
+layout_mode = 0
+offset_left = 72.0
+offset_top = -12.034973
+offset_right = 397.0
+offset_bottom = 57.965027
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(0, 35)
+offset_transform_enabled = true
+value = 100.0
+texture_under = ExtResource("3_42lp1")
+texture_progress = ExtResource("4_yd8j7")
+script = ExtResource("5_5astw")
+target_property = "value"

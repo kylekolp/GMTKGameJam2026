@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d1ls3mfsrmj7u"]
+
+[ext_resource type="Script" uid="uid://dvukgvaprntis" path="res://src/ui/DashUI/System_DashAction.gd" id="1_ivd04"]
+
+[node name="System_DashAction" type="Node2D" unique_id=49696360]
+script = ExtResource("1_ivd04")

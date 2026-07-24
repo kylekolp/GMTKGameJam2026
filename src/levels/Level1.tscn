@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://hd8w4ou6nb7m" path="res://src/levels/Level1.gd" id="1_qsbfr"]
 [ext_resource type="Texture2D" uid="uid://bgpd74dhk04v3" path="res://Assets/World/background_night.png" id="2_dklsv"]
+[ext_resource type="PackedScene" uid="uid://cg0ypork01p7y" path="res://src/levels/FireSpawner/FireSpawner.tscn" id="2_iearj"]
+[ext_resource type="PackedScene" uid="uid://byvocdjeyqvo5" path="res://src/levels/RocketSpawner/RocketSpawner.tscn" id="2_r7s8a"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_stybw"]
 
@@ -14,15 +16,9 @@
 [node name="Level1" type="Node2D" unique_id=1647347138]
 script = ExtResource("1_qsbfr")
 
-[node name="RocketSpawnTimer" type="Timer" parent="." unique_id=454984310]
-wait_time = 2.0
-one_shot = true
+[node name="FireSpawner" parent="." unique_id=1929410905 instance=ExtResource("2_iearj")]
 
-[node name="SpawnAreaTopLeft" type="Marker2D" parent="." unique_id=913642284]
-position = Vector2(128, 128)
-
-[node name="SpawnAreaBottomRight" type="Marker2D" parent="." unique_id=704561352]
-position = Vector2(1024, 512)
+[node name="RocketSpawner" parent="." unique_id=1900071013 instance=ExtResource("2_r7s8a")]
 
 [node name="WallTop" type="StaticBody2D" parent="." unique_id=1890332113]
 position = Vector2(0, 117.22)
@@ -58,5 +54,3 @@ shape = SubResource("WorldBoundaryShape2D_b6imk")
 position = Vector2(575, 323)
 scale = Vector2(1.006, 1.009)
 texture = ExtResource("2_dklsv")
-
-[connection signal="timeout" from="RocketSpawnTimer" to="." method="_on_rocket_spawn_timer_timeout"]
