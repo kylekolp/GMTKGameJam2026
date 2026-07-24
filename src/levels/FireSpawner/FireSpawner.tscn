@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cg0ypork01p7y"]
+
+[ext_resource type="Script" uid="uid://cwphtbbg8w3nh" path="res://src/levels/FireSpawner/FireSpawner.gd" id="1_4e76m"]
+
+[node name="FireSpawner" type="Node2D" unique_id=1929410905]
+script = ExtResource("1_4e76m")
+
+[node name="FireAreaTopLeft" type="Marker2D" parent="." unique_id=1798021766]
+position = Vector2(128, 250)
+
+[node name="FireAreaBottomRight" type="Marker2D" parent="." unique_id=519523090]
+position = Vector2(1024, 512)
