@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var circle_timer: TextureProgressBar = $CircleTimer
 
-@export var countdownTime : float = 60.0 # debug
+@export var countdownTime : float = 5.0 # debug
 
 var countdown_tween : Tween
 var hasRope : bool = false

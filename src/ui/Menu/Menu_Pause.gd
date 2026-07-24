@@ -10,6 +10,10 @@ func _on_options_button_pressed() -> void:
 
 func _on_main_menu_button_pressed() -> void:
 	SignalBus.UnloadLevel.emit()
-	SignalBus.LoadMenu.emit(UIDCatalog.Menu_Main)
 	SignalBus.UnPause.emit()
+	SignalBus.LoadMenu.emit(UIDCatalog.Menu_Main)
 	queue_free()
+
+
+func _on_controls_button_pressed() -> void:
+	SignalBus.LoadMenu.emit(UIDCatalog.Menu_Tutorial)

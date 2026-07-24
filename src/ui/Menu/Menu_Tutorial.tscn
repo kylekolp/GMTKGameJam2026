@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://dq0jsvfgoit02"]
+
+[ext_resource type="StyleBox" uid="uid://1y8mw8aos0s7" path="res://Assets/UI/PanelContainer/TempPanelBoxStyle.tres" id="1_a18k3"]
+[ext_resource type="Script" uid="uid://di65jts0lc7li" path="res://src/ui/Menu/Menu_Tutorial.gd" id="1_x3tj7"]
+[ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="3_angim"]
+[ext_resource type="LabelSettings" uid="uid://db21agx7m6v2w" path="res://Assets/UI/LabelSettings/TitleSettings.tres" id="4_p61v1"]
+
+[node name="MenuTutorial" type="Control" unique_id=985753097]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x3tj7")
+
+[node name="Panel" type="Panel" parent="." unique_id=852437355]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_a18k3")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1323973740]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -225.0
+offset_right = 300.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=602067297]
+custom_minimum_size = Vector2(600, 450)
+layout_mode = 2
+theme = ExtResource("3_angim")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=918032006]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1837388824]
+layout_mode = 2
+text = "How To Play"
+label_settings = ExtResource("4_p61v1")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=341060907]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1866437708]
+layout_mode = 2
+text = "WASD - move"
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=819463041]
+layout_mode = 2
+text = "Space - dash"
+
+[node name="Label5" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=2059027098]
+layout_mode = 2
+text = "Esc / P - pause"
+
+[node name="Label3" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=2108073840]
+layout_mode = 2
+text = "Walk into a rocket to grab its rope, drag it to the fire"
+
+[node name="Label4" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=88764793]
+layout_mode = 2
+text = "Dodge fires travelling up rope, don't get burned!"
+
+[node name="EmptyControl" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1782804453]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=751487221]
+layout_mode = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_right = 75
+
+[node name="ContinueButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer" unique_id=1699026174]
+layout_mode = 2
+text = "Continue"
+
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
