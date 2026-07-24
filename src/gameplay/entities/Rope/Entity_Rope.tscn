@@ -8,7 +8,7 @@ texture = ExtResource("1_fbdd8")
 texture_mode = 1
 script = ExtResource("2_4owud")
 Fire_Spawn_Time = 2.2
-Drawing_Delay_Time = 0.5
+Drawing_Delay_Time = 0.05
 drawingDelayTimer = NodePath("DrawingDelayTimer")
 fireSpawnTimer = NodePath("FireSpawnTimer")
 
