@@ -36,7 +36,10 @@ func start_drawing() -> void:
 	clear_points()
 	is_drawing = true
 
-func stop_drawing() -> void:
+func stop_drawing(final_point: Vector2 = Vector2.INF) -> void:
+	if final_point != Vector2.INF:
+		add_point(to_local(final_point))
+		previousPoint = points[points.size() - 1]
 	RopeComplete.emit(self)
 	AddRocketScore()
 	is_drawing = false
@@ -53,11 +56,13 @@ func _process(delta: float) -> void:
 
 func attach_rocket(rocket: Entity_Rocket) -> void:
 	add_point(rocket.global_position)
-	attachments.append({
+	var attachment = {
 		"rocket": rocket,
 		"index": points.size() - 1,
 		"hits_remaining": HITS_TO_LAUNCH
-	})
+	}
+	attachments.append(attachment)
+	rocket.tree_exiting.connect(attachments.erase.bind(attachment))
 	var scoreMult = getScoreMult()
 	#Attach Multiplier Number here!
 	SignalBus.SpawnScoreNumber.emit(scoreMult,"x" + str(scoreMult),rocket.global_position)

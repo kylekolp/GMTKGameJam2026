@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c3cosdww72dkg"]
+
+[ext_resource type="Script" uid="uid://cv30xjcbhl0yk" path="res://src/core/systems/LivesSystem/System_Lives.gd" id="1_2xs7d"]
+
+[node name="SystemLives" type="Node2D" unique_id=1215374227]
+script = ExtResource("1_2xs7d")

@@ -42,7 +42,8 @@ func _physics_process(delta: float) -> void:
 		knockback_timer -= delta
 		if knockback_timer <= 0.0:
 			knockback = Vector2.ZERO
-			knockback_wearing_off = knockback_wearoff_time
+			if knockback_wearing_off <= 0.0:
+				knockback_wearing_off = knockback_wearoff_time
 		return
 		
 	if knockback_wearing_off > 0.0:

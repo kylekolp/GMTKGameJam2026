@@ -26,7 +26,10 @@ func _ready() -> void:
 	countdown_tween.finished.connect(_on_countdown_finished)
 
 func _on_countdown_finished() -> void:
-	SignalBus.GameOver.emit()
+	if hasRope and rope != null and not rope.is_drawing:
+		return
+	queue_free()
+	SignalBus.RocketMissed.emit()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var bodyGroups : Array[StringName] = body.get_groups()
@@ -35,15 +38,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		return
 	
 	if not body.hasRope():
-		hasRope = true
 		rope = body.start_drawing(self)
-		
 		if rope == null:
 			return
-		
-	elif body.currentRope.is_drawing:
 		hasRope = true
+	elif body.currentRope.is_drawing:
 		rope = body.attach_rocket_to_current_rope(self)
+		hasRope = true
 	else:
 		return
 	
