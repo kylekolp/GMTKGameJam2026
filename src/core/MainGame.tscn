@@ -10,6 +10,7 @@ script = ExtResource("1_deefb")
 unique_name_in_owner = true
 
 [node name="World" type="Node2D" parent="." unique_id=748805315]
+unique_name_in_owner = true
 process_mode = 1
 
 [node name="LevelRoot" type="Node2D" parent="World" unique_id=1806143608]

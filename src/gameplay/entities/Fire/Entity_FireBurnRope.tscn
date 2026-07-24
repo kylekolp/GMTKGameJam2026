@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://wf071cv4c6v6"]
 
-[ext_resource type="Texture2D" uid="uid://cjayplixmr5h6" path="res://Assets/Fire.png" id="1_ftjwe"]
+[ext_resource type="Texture2D" uid="uid://cjayplixmr5h6" path="res://Assets/Debug/Fire.png" id="1_ftjwe"]
 [ext_resource type="Script" uid="uid://c1wtcx3qj52vm" path="res://src/gameplay/entities/Fire/Entity_FireBurnRope.gd" id="1_ydwmt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bai2n"]

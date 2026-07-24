@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://wras6segf5s5"]
+
+[ext_resource type="Script" uid="uid://c5l1qco47j8jg" path="res://src/gameplay/entities/player/Dash.gd" id="1_hjsaq"]
+
+[node name="Dash" type="Node2D" unique_id=1348304677]
+script = ExtResource("1_hjsaq")
+
+[node name="DurationTimer" type="Timer" parent="." unique_id=1210742155]
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=1700673086]
+one_shot = true
+
+[connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]

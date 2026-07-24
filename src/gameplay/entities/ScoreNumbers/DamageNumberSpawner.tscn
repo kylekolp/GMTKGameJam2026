@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c822q8pcdetsc"]
+
+[ext_resource type="Script" uid="uid://grfdy04wl6is" path="res://src/debug/DamageNumber/Particle_DamageNumber.gd" id="1_robpm"]
+[ext_resource type="FontFile" uid="uid://c4yu2a6xej1w7" path="res://Assets/Debug/Pixellari.ttf" id="2_ks8lj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cmx3y"]
+font = ExtResource("2_ks8lj")
+font_size = 30
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="DamageNumberSpawner" type="Node2D" unique_id=1466404794]
+script = ExtResource("1_robpm")
+labelSettings = SubResource("LabelSettings_cmx3y")
