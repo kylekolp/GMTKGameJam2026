@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var circle_timer: TextureProgressBar = $CircleTimer
 
-@export var countdownTime : float = 60.0 # debug
+@export var countdownTime : float = 15.0 # debug
 
 var countdown_tween : Tween
 var hasRope : bool = false
@@ -26,6 +26,8 @@ func _ready() -> void:
 	countdown_tween.finished.connect(_on_countdown_finished)
 
 func _on_countdown_finished() -> void:
+	if hasRope and rope != null and not rope.is_drawing:
+		return
 	queue_free()
 	SignalBus.RocketMissed.emit()
 

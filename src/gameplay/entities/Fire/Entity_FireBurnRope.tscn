@@ -56,7 +56,7 @@ velocity = 400.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=793148936]
 sprite_frames = SubResource("SpriteFrames_qskyy")
 autoplay = "default"
-frame_progress = 0.073358454
+frame_progress = 0.5633828
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1116366981 groups=["RopeFire"]]
 collision_layer = 4

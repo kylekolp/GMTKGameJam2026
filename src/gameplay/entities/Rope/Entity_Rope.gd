@@ -56,11 +56,13 @@ func _process(delta: float) -> void:
 
 func attach_rocket(rocket: Entity_Rocket) -> void:
 	add_point(rocket.global_position)
-	attachments.append({
+	var attachment = {
 		"rocket": rocket,
 		"index": points.size() - 1,
 		"hits_remaining": HITS_TO_LAUNCH
-	})
+	}
+	attachments.append(attachment)
+	rocket.tree_exiting.connect(attachments.erase.bind(attachment))
 	var scoreMult = getScoreMult()
 	#Attach Multiplier Number here!
 	SignalBus.SpawnScoreNumber.emit(scoreMult,"x" + str(scoreMult),rocket.global_position)

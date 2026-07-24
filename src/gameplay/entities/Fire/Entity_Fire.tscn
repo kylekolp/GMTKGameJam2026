@@ -57,7 +57,7 @@ script = ExtResource("1_fej27")
 sprite_frames = SubResource("SpriteFrames_qskyy")
 animation = &"burn"
 autoplay = "burn"
-frame_progress = 0.25882107
+frame_progress = 0.6734123
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2113893076]
 
