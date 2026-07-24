@@ -21,6 +21,8 @@ var player : Player = null
 
 var isGameOver : bool = false
 
+var hasSeenTutorial : bool = false
+
 func _ready() -> void:
 	SignalBus.LoadLevel.connect(LoadLevel)
 	SignalBus.LoadMenu.connect(LoadMenu)
@@ -296,6 +298,11 @@ func OnGameOver() -> void:
 	
 func OnStartGame() -> void:
 	isGameOver = false
+	
+	if not hasSeenTutorial:
+		hasSeenTutorial = true
+		LoadMenu(UIDCatalog.Menu_Tutorial)
+		return
 	
 	LoadLevel(UIDCatalog.Level_1)
 	
