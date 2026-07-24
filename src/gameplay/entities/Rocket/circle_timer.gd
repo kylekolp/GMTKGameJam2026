@@ -18,7 +18,7 @@ func _set(property : StringName, value : Variant) -> bool:
 	if property == target_property:
 		if get(property) == value: 
 			return false
-		#animate()
+		animate()
 		return false
 	return false
 	
@@ -105,11 +105,11 @@ func GetScaleBasedOnValue(value: float) -> float:
 		
 	#Orange
 	if value <= 40 && value > 25: 
-		return .8
+		return .6
 		
 	#Red
 	if value <= 25: 
-		return 1
+		return .8
 	
 	return 0
 	
