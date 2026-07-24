@@ -13,6 +13,7 @@ var attachments: Array[Dictionary] = []
 @export var fireSpawnTimer : Timer
 
 signal RopeComplete(rope : Entity_Rope)
+signal RopeEmpty(rope: Entity_Rope)
 
 var is_drawing := false
 var target: Node2D
@@ -62,11 +63,17 @@ func attach_rocket(rocket: Entity_Rocket) -> void:
 		"hits_remaining": HITS_TO_LAUNCH
 	}
 	attachments.append(attachment)
-	rocket.tree_exiting.connect(attachments.erase.bind(attachment))
+	rocket.tree_exiting.connect(_on_attached_rocket_exited.bind(attachment))
 	var scoreMult = getScoreMult()
 	#Attach Multiplier Number here!
 	SignalBus.SpawnScoreNumber.emit(scoreMult,"x" + str(scoreMult),rocket.global_position)
-	
+
+func _on_attached_rocket_exited(attachment: Dictionary) -> void:
+	attachments.erase(attachment)
+	if is_drawing and attachments.is_empty():
+		RopeEmpty.emit(self)
+		queue_free()
+
 func getScoreMult() -> int:
 	if attachments.size() < 5:
 		return attachments.size()
