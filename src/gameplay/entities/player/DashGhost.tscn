@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dnsvispcn2bhp"]
+
+[ext_resource type="Script" uid="uid://yv0ipxm0d6yi" path="res://src/gameplay/entities/player/DashGhost.gd" id="1_7862a"]
+[ext_resource type="Texture2D" uid="uid://c8vale8plupbr" path="res://icon.svg" id="1_bdtx6"]
+
+[sub_resource type="Shader" id="Shader_7862a"]
+code = "shader_type canvas_item;
+
+uniform bool whiten = false;
+uniform float mix_weight = 1.0;
+
+void fragment() {
+	if (whiten) {
+    	COLOR.rgb = mix(COLOR.rgb, vec3(1.0), mix_weight);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77yeb"]
+shader = SubResource("Shader_7862a")
+shader_parameter/whiten = true
+shader_parameter/mix_weight = 0.4
+
+[node name="DashGhost" type="Sprite2D" unique_id=874765161]
+material = SubResource("ShaderMaterial_77yeb")
+texture = ExtResource("1_bdtx6")
+script = ExtResource("1_7862a")

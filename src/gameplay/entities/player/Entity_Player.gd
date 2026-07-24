@@ -4,32 +4,45 @@ extends CharacterBody2D
 @export var movement_speed : float
 
 @onready var dash : Dash = $Dash
+@export var dash_cooldown : float
 @export var dash_speed : float
-@export var dashDuration : float = 0.2
+@export var dashDuration : float
+var dashDirection : Vector2 = Vector2.ZERO
+
+@export var movement_acceleration : float = 10
 
 var currentRope: Entity_Rope
 var currentRocket : Entity_Rocket
 
 var entityRoot : Node2D
 
-@onready var animator : AnimationPlayer = $AnimationPlayer
+@onready var sprite : Sprite2D = $Sprite2D
+
+@onready var animator_Movement : AnimationPlayer = $AnimationPlayerMovement
+@onready var animator_Damage : AnimationPlayer = $AnimationPlayerDamage
 
 func _ready() -> void:
 	entityRoot = get_parent()
+	dash.dash_cooldown = dash_cooldown
 	return
 	
 func _physics_process(delta: float) -> void:
-	var movementDirection = get_move_direction()
-	#var direction:= Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down")
+	var movementDirection = Vector2.ZERO
 	
+	if dash.is_dashing():
+		movementDirection = dashDirection
+	else:
+		movementDirection = get_move_direction()
+		
 	AnimatePlayer(movementDirection)
 	
-	if Input.is_action_just_pressed("Dash"):
-		dash.start_dash(dashDuration)
+	if Input.is_action_just_pressed("Dash") and not dash.is_dash_on_cooldown():
+			dash.start_dash(dashDuration)
+			dashDirection = movementDirection
 	
 	var speed = dash_speed if dash.is_dashing() else movement_speed
 	
-	velocity = movementDirection.normalized() * movement_speed * delta
+	velocity = velocity.lerp(movementDirection.normalized() * speed, movement_acceleration * delta)
 	
 	move_and_slide()
 
@@ -42,25 +55,23 @@ func get_move_direction() -> Vector2:
 func AnimatePlayer(direction : Vector2):
 	
 	if direction.x < 0 and direction.y == 0:
-		animator.play("Walk_Left")
+		animator_Movement.play("Walk_Left")
 	elif direction.x > 0 and direction.y == 0: #Right
-		animator.play("Walk_Right")
+		animator_Movement.play("Walk_Right")
 	elif direction.x == 0 and direction.y > 0:
-		animator.play("Walk_Down")
+		animator_Movement.play("Walk_Down")
 	elif direction.x == 0 and direction.y < 0:
-		animator.play("Walk_Up")
+		animator_Movement.play("Walk_Up")
 	elif direction.x < 0 and direction.y < 0:
-		animator.play("Walk_Diagonal_Back_Left")
+		animator_Movement.play("Walk_Diagonal_Back_Left")
 	elif direction.x > 0 and direction.y < 0:
-		animator.play("Walk_Diagonal_Back_Right")
+		animator_Movement.play("Walk_Diagonal_Back_Right")
 	elif direction.x < 0 and direction.y > 0:
-		animator.play("Walk_Diagonal_Front_LeftDown")
+		animator_Movement.play("Walk_Diagonal_Front_LeftDown")
 	elif direction.x > 0 and direction.y > 0:
-		animator.play("Walk_Diagonal_Front_RightDown")
+		animator_Movement.play("Walk_Diagonal_Front_RightDown")
 	else:
-		animator.play("Idle")
-		
-	print("current animation: " + animator.current_animation.get_basename())
+		animator_Movement.play("Idle")
 	
 	return
 
@@ -103,7 +114,7 @@ func CreateRope(position: Vector2) -> Entity_Rope:
 	
 #push the player back a bit and burn the rope they are holding
 func FireDamagePlayer(enemy : Entity_FireBurnRope) -> void:
-	animator.play("TakeDamage")
+	animator_Damage.play("TakeDamage")
 	if currentRope != null:
 		currentRope.reset_attached_rockets()
 		currentRope.BurnRope()
