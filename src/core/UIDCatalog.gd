@@ -6,6 +6,7 @@ extends Node
 #Systems
 const System_PauseAction : String = "uid://n3t0af3g7475"
 const System_Score : String = "uid://ug60f2r81iy6"
+const System_DashAction : String = "uid://d1ls3mfsrmj7u"
 
 #Menus
 const Menu_Main : String = "uid://k68tl4ppllaa"
@@ -32,6 +33,7 @@ const UI_Score : String = "uid://cutlm6om3imjp"
 const UI_Lives : String = "uid://dyjipvvvlgxpl"
 const ScoreNumberSpawner : String = "uid://c822q8pcdetsc"
 const System_Lives : String = "uid://c3cosdww72dkg"
+const UI_DashBar : String = "uid://d2h11drxvk1ad"
 
 #Other
 

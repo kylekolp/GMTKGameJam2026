@@ -66,5 +66,6 @@ func _on_ghost_timer_timeout() -> void:
 
 func _on_duration_timer_timeout() -> void:
 	cooldownTimer.start(dash_cooldown)
+	SignalBus.DashOnCooldown.emit(dash_cooldown)
 	ghostActive = false
 	pass # Replace with function body.

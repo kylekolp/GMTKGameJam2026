@@ -10,5 +10,6 @@ func _ready() -> void:
 	SignalBus.LoadSystem.emit(UIDCatalog.System_Score)
 	SignalBus.LoadSystem.emit(UIDCatalog.ScoreNumberSpawner)
 	SignalBus.LoadSystem.emit(UIDCatalog.System_Lives)
+	SignalBus.LoadSystem.emit(UIDCatalog.System_DashAction)
 	
 	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Player, Vector2(100,100), self)
