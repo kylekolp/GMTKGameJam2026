@@ -8,6 +8,7 @@ radius = 20.0
 
 [node name="FireBurnRope" type="Node2D" unique_id=1880901521]
 script = ExtResource("1_ydwmt")
+velocity = 400.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1967241812]
 scale = Vector2(0.1, 0.1)

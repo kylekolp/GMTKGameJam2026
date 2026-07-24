@@ -24,7 +24,7 @@ var entityRoot : Node2D
 var knockback : Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
 
-var knockback_wearoff_time : float = 0.1
+var knockback_wearoff_time : float = 0.5
 var knockback_wearing_off : float = 0.0
 
 var currentScale : Vector2
@@ -49,8 +49,6 @@ func _physics_process(delta: float) -> void:
 		knockback_wearing_off -= delta
 		if knockback_wearing_off <= 0.0:
 			knockback_wearing_off = 0
-		return
-		
 	
 	var movementDirection = Vector2.ZERO
 	
