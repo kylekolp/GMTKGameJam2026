@@ -184,6 +184,12 @@ func deferredLoadPauseLayer(menuUID : String) -> void:
 	
 	pauseRoot.add_child(newMenu)
 	
+	if menuUID == UIDCatalog.Menu_GameOver:
+		var gameOverMenu : Menu_GameOver = newMenu as Menu_GameOver
+		var scoreSystem : ScoreSystem = systemsRoot.get_node("System_Score")
+		gameOverMenu.score = str(scoreSystem.score)
+		gameOverMenu.SetScore()
+		
 	#Allow the new level to process before accessing it
 	await get_tree().process_frame
 	
@@ -330,4 +336,7 @@ func UnloadLevel() -> void:
 	for item in systemsRoot.get_children():
 		item.queue_free()
 		
-	#Unload Audio Stuff?
+	#Unload Audio Stuff
+	for item in AudioManager.get_children():
+		item.queue_free()
+	

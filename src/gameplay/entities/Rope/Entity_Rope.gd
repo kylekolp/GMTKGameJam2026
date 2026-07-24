@@ -22,6 +22,8 @@ var activeFires : int = 0
 var previousPoint : Vector2 = Vector2.ZERO
 var minPointDistance : float = 20
 
+@export var score_per_rocket : int = 10
+
 func _ready() -> void:
 	top_level = true
 	target = get_parent()
@@ -36,6 +38,7 @@ func start_drawing() -> void:
 
 func stop_drawing() -> void:
 	RopeComplete.emit(self)
+	AddRocketScore()
 	is_drawing = false
 	fireSpawnTimer.start() #Start spawning fire
 
@@ -46,7 +49,7 @@ func _process(delta: float) -> void:
 		
 			add_point(target.global_position)
 			previousPoint = points[points.size()-1]
-			drawingDelayTimer.start(.1)
+			drawingDelayTimer.start(Drawing_Delay_Time)
 
 func attach_rocket(rocket: Entity_Rocket) -> void:
 	add_point(rocket.global_position)
@@ -55,6 +58,26 @@ func attach_rocket(rocket: Entity_Rocket) -> void:
 		"index": points.size() - 1,
 		"hits_remaining": HITS_TO_LAUNCH
 	})
+	var scoreMult = getScoreMult()
+	#Attach Multiplier Number here!
+	SignalBus.SpawnScoreNumber.emit(scoreMult,"x" + str(scoreMult),rocket.global_position)
+	
+func getScoreMult() -> int:
+	if attachments.size() < 5:
+		return attachments.size()
+	else:
+		return 5
+		
+func AddRocketScore() -> void:
+	var scoreMult = getScoreMult()
+	var currentMult : int = 1
+	
+	for item : Dictionary in attachments:
+		var rocket : Entity_Rocket = item["rocket"]
+		var scoreForRocket : int = currentMult * score_per_rocket
+		SignalBus.SpawnScoreNumber.emit(scoreForRocket,str(scoreForRocket),rocket.global_position)
+		SignalBus.AddScore.emit(scoreForRocket,self)
+		currentMult += 1
 
 func notify_ember_passed_point(index: int) -> void:
 	for attachment in attachments:
