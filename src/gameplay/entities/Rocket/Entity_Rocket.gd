@@ -56,7 +56,8 @@ func _on_rope_complete(rope : Node2D) -> void:
 
 func launch() -> void:
 	#Play firework launch animation
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK)
+	#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK) # THIS CREATES THE EXPLOSION SFX
+	#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK_LAUNCH) # THIS CREATES THE POPPING LAUNCH SFX
 	queue_free()
 	
 #enum RocketColor {ROCKET_BLUE,ROCKET_GREEN,ROCKET_LIGHTBLUE,ROCKET_ORANGE,ROCKET_PINK,ROCKET_VIOLET,ROCKET_YELLOW}

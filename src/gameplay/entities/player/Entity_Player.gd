@@ -106,10 +106,15 @@ func start_drawing(rocket : Entity_Rocket) -> Entity_Rope:
 	currentRope.RopeComplete.connect(DropRopeOnComplete)
 	currentRope.start_drawing()
 	currentRope.attach_rocket(rocket)
+	AudioManager.create_2d_audio(position, 1000, SoundEffect.SOUND_EFFECT_TYPE.ROPE_CONNECT_TEXTURE)
+	AudioManager.create_2d_audio(position, 1000, SoundEffect.SOUND_EFFECT_TYPE.ROPE_CONNECT_TONE)
 	return currentRope
 
 func attach_rocket_to_current_rope(rocket : Entity_Rocket) -> Entity_Rope:
 	currentRope.attach_rocket(rocket)
+	AudioManager.create_2d_audio(position, 1000, SoundEffect.SOUND_EFFECT_TYPE.ROPE_CONNECT_TEXTURE)
+	var rope_attach_tone = AudioManager.create_2d_audio(position, 1000, SoundEffect.SOUND_EFFECT_TYPE.ROPE_CONNECT_TONE)
+	AudioManager.increase_pitch(rope_attach_tone, currentRope.getScoreMult())
 	return currentRope
 
 func hasRope() -> bool:
