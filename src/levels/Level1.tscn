@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://hd8w4ou6nb7m" path="res://src/levels/Level1.gd" id="1_qsbfr"]
 [ext_resource type="Texture2D" uid="uid://bgpd74dhk04v3" path="res://Assets/World/background_night.png" id="2_dklsv"]
+[ext_resource type="PackedScene" uid="uid://cg0ypork01p7y" path="res://src/levels/FireSpawner/FireSpawner.tscn" id="2_iearj"]
 [ext_resource type="PackedScene" uid="uid://byvocdjeyqvo5" path="res://src/levels/RocketSpawner/RocketSpawner.tscn" id="2_r7s8a"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_stybw"]
@@ -14,6 +15,8 @@
 
 [node name="Level1" type="Node2D" unique_id=1647347138]
 script = ExtResource("1_qsbfr")
+
+[node name="FireSpawner" parent="." unique_id=1929410905 instance=ExtResource("2_iearj")]
 
 [node name="RocketSpawner" parent="." unique_id=1900071013 instance=ExtResource("2_r7s8a")]
 
