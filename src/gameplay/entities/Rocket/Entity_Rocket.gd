@@ -28,10 +28,11 @@ func _ready() -> void:
 	countdown_tween = create_tween()
 	countdown_tween.tween_property(circle_timer, "value", 0.0, countdownTime)
 	countdown_tween.finished.connect(_on_countdown_finished)
-
+	
 func _on_countdown_finished() -> void:
 	if hasRope and rope != null and not rope.is_drawing:
 		return
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TICK_LAST) # Sound Effect missed rocket
 	queue_free()
 	SignalBus.RocketMissed.emit()
 
