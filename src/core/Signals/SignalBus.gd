@@ -31,6 +31,9 @@ signal UnloadLevel()
 signal StartGame()
 signal GameOver()
 
+signal IntroOver()
+signal MainMenuIntroRan()
+
 #Level
 signal LoadEntity(entityUID : String, position: Vector2, parent : Node2D)
 signal LoadEffect(effectUID : String)

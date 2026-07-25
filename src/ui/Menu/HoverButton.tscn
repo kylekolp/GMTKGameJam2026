@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://nmlq86y3npp1"]
+
+[ext_resource type="FontFile" uid="uid://c6pom3pd1kke2" path="res://Assets/Fonts/Daydream.otf" id="1_cjbi2"]
+[ext_resource type="Texture2D" uid="uid://dejkcmbyl3abc" path="res://Assets/Menu/ButtonBlue.png" id="2_0lk7p"]
+[ext_resource type="Texture2D" uid="uid://disocjn0mg8lv" path="res://Assets/Menu/ButtonBluePressed.png" id="3_2nhkc"]
+[ext_resource type="Script" uid="uid://d3gvf11uymf82" path="res://src/ui/Menu/HoverButton.gd" id="4_huiju"]
+[ext_resource type="Texture2D" uid="uid://bm3eja2s0o2gb" path="res://Assets/Menu/ColorHighlightLines.png" id="5_0lk7p"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bai2n"]
+texture = ExtResource("2_0lk7p")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_stybw"]
+texture = ExtResource("3_2nhkc")
+
+[node name="Button" type="Button" unique_id=397660677]
+offset_left = 110.0
+offset_top = 360.0
+offset_right = 328.0
+offset_bottom = 463.0
+theme_override_fonts/font = ExtResource("1_cjbi2")
+theme_override_font_sizes/font_size = 27
+theme_override_styles/normal = SubResource("StyleBoxTexture_bai2n")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_stybw")
+text = "Start"
+script = ExtResource("4_huiju")
+
+[node name="HoverLines" type="Sprite2D" parent="." unique_id=143359653]
+visible = false
+position = Vector2(125.000015, 52.999992)
+scale = Vector2(0.22234516, 0.23366831)
+texture = ExtResource("5_0lk7p")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
