@@ -36,4 +36,3 @@ value = 100.0
 texture_under = ExtResource("3_42lp1")
 texture_progress = ExtResource("4_yd8j7")
 script = ExtResource("5_5astw")
-target_property = "value"

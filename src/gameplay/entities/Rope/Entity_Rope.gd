@@ -122,6 +122,7 @@ func notify_ember_passed_point(index: int) -> void:
 func reset_attached_rockets() -> void:
 	for attachment in attachments:
 		attachment["rocket"].hasRope = false
+		attachment["rocket"].shaderMaterial.set_shader_parameter("outline_enabled",false)
 
 func _on_fire_spawn_timer_timeout() -> void:
 	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining():
