@@ -6,6 +6,8 @@ extends Line2D
 @export var Fire_Spawn_Time : float
 @export var Drawing_Delay_Time : float
 
+@export var burnStepTime : float = 0.04
+
 var attachments: Array[Dictionary] = []
 
 @export var drawingDelayTimer: Timer
@@ -171,7 +173,17 @@ func SpawnFireBurnAtPosition(entityUID : String, position: Vector2, parent : Nod
 	return newEntity
 	
 func BurnRope() -> void:
-	queue_free()
+	is_drawing = false
+
+	var dead_tween := create_tween()
+	var color_duration : float = min(points.size() * burnStepTime, 0.25) # burn color max duration
+	dead_tween.tween_property(self, "modulate", Color.BLACK, color_duration)
+	
+	var burn_tween := create_tween()
+	for i in range(points.size() - 1, -1, -1):
+		burn_tween.tween_callback(burn_to.bind(i))
+		burn_tween.tween_interval(burnStepTime)
+	burn_tween.finished.connect(queue_free)
 
 const NO_BURN := -2
 
