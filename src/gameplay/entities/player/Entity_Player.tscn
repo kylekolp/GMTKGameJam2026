@@ -354,7 +354,7 @@ _data = {
 &"TakeDamage": SubResource("Animation_4okl0")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=526542025 groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=526542025 node_paths=PackedStringArray("camera") groups=["Player"]]
 z_index = 2
 collision_layer = 5
 collision_mask = 5
@@ -363,6 +363,7 @@ movement_speed = 400.0
 dash_cooldown = 3.0
 dash_speed = 1900.0
 dashDuration = 0.12
+camera = NodePath("Camera")
 
 [node name="Dash" parent="." unique_id=1348304677 instance=ExtResource("2_77yeb")]
 
@@ -387,3 +388,19 @@ speed_scale = 1.8
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1316081576]
 current = true
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1383863192]
+position = Vector2(576, 324)
+limit_left = -35
+limit_top = -35
+limit_right = 1210
+limit_bottom = 683
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 2.5
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.3
+drag_top_margin = 0.3
+drag_right_margin = 0.3
+drag_bottom_margin = 0.3

@@ -7,9 +7,12 @@ extends Level
 
 func _ready() -> void:
 	SignalBus.LoadSystem.emit(UIDCatalog.System_PauseAction)
-	SignalBus.LoadSystem.emit(UIDCatalog.System_Score)
+	#SignalBus.LoadSystem.emit(UIDCatalog.System_Score)
 	SignalBus.LoadSystem.emit(UIDCatalog.ScoreNumberSpawner)
-	SignalBus.LoadSystem.emit(UIDCatalog.System_Lives)
-	SignalBus.LoadSystem.emit(UIDCatalog.System_DashAction)
+	SignalBus.LoadUI.emit()
+	#SignalBus.LoadSystem.emit(UIDCatalog.System_Lives)
+	#SignalBus.LoadSystem.emit(UIDCatalog.System_DashAction)
 	
-	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Player, Vector2(100,100), self)
+	var centerOfScreen = get_viewport().get_visible_rect().size / 2
+	
+	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Player, centerOfScreen, self)

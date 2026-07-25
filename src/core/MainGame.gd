@@ -40,6 +40,8 @@ func _ready() -> void:
 	
 	SignalBus.UnloadLevel.connect(UnloadLevel)
 	
+	SignalBus.LoadUI.connect(LoadUI)
+	
 	#RunIntro()
 	LoadMenu(UIDCatalog.Menu_Main)
 
@@ -253,6 +255,11 @@ func deferredLoadEntity(entityUID : String, position: Vector2, parent : Node2D =
 	
 	newEntity.position = position
 	
+	if newEntity is Player:
+		var player : Player = newEntity as Player
+		player.camera.global_position = player.global_position
+		var x : int = 4
+	
 	#Allow the new level to process before accessing it
 	await get_tree().process_frame
 	
@@ -278,6 +285,51 @@ func deferredLoadEffect(effectUID : String) -> void:
 	await get_tree().process_frame
 	
 	return
+	
+func LoadHud(uid : String) -> void:
+	deferredLoadHud.call_deferred(uid)
+	
+func deferredLoadHud(uid : String) -> void:
+	var effectPackedScene : PackedScene = ResourceLoader.load(uid, "PackedScene") as PackedScene
+	if effectPackedScene == null:
+		push_error("Could not load hud as packed scene: " + uid)
+		return
+		
+	var newHud = effectPackedScene.instantiate() as Control
+	if newHud == null:
+		push_error("Loaded hud scene was not able to instantiate " + uid)
+		return
+	
+	hudRoot.add_child(newHud)
+	
+	#Allow the new level to process before accessing it
+	await get_tree().process_frame
+	
+	return
+	
+func LoadUI() -> void:
+	LoadHud(UIDCatalog.UI_Main)
+	
+	LoadSystem(UIDCatalog.System_Score)
+	LoadSystem(UIDCatalog.System_Lives)
+	LoadSystem(UIDCatalog.System_DashAction)
+	
+	await get_tree().process_frame
+	
+	var systemScore = systemsRoot.get_node("System_Score")
+	var scoreUI : UI_Score = hudRoot.get_node("UI_Main").get_node("UiScore")
+	
+	systemScore.AssignUI(scoreUI)
+	
+	var systemLives = systemsRoot.get_node("SystemLives")
+	var livesUI : UI_Lives = hudRoot.get_node("UI_Main").get_node("UiLives")
+	
+	systemLives.AssignUI(livesUI)
+	
+	var systemDash = systemsRoot.get_node("System_DashAction")
+	var dashUI : DashMeter = hudRoot.get_node("UI_Main").get_node("DashMeter")
+	
+	systemDash.AssignUI(dashUI)
 	
 func TryQuit() -> void:
 	LoadMenu(UIDCatalog.Menu_Quit)
