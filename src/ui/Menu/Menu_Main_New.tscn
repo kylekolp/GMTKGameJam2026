@@ -57,7 +57,7 @@ texture = ExtResource("8_xs6if")
 
 [sub_resource type="Animation" id="Animation_lakli"]
 resource_name = "Idle"
-length = 1.31
+length = 2.01
 loop_mode = 1
 step = 0.01
 tracks/0/type = "value"
@@ -72,10 +72,202 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0, 0.05235988, -0.05235988]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Backgrounds/MainBackground/RocketOrange:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.39536554, 0.7628229, 1.0000422, 1.3395915, 1.611696),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(341.825, -14.290009), Vector2(361.00006, -20.39502), Vector2(362, -55.41), Vector2(344.145, -74.85), Vector2(330.99997, -33.39502), Vector2(359.095, -49.15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Backgrounds/MainBackground/RocketOrange:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.39536554, 0.7628229, 1.0000422, 1.3395915, 1.611696),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.08726646, 0.16231562, 0.105515905, -0.055850536, 0.2548180707911725, 0.16580627893946132]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Backgrounds/MainBackground/RocketLightBlue:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.38373715, 0.84654737, 1.29, 1.6163473),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.064577185, -0.019198623, 0.06981317007977318, -0.034906585]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Backgrounds/MainBackground/RocketLightBlue:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.38373715, 0.84654737, 1.29, 1.6163473),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(691, -15.39502), Vector2(695, -5.3950195), Vector2(689, -18.39502), Vector2(681.00006, -17.39502), Vector2(697, -1.3950195)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Backgrounds/MainBackground/RocketGreen:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.30931538, 0.59769964, 0.8860839, 1.2023764, 1.4744809),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.37524578, -0.33161256, -0.20943952, -0.04886922, -0.1407181, -0.23561944901923448]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Backgrounds/MainBackground/RocketGreen:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.30931538, 0.59769964, 0.8860839, 1.2023764, 1.4744809),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(435.00006, -231.395), Vector2(430.00006, -213.39502), Vector2(439, -228.39502), Vector2(427, -237.39502), Vector2(417.00003, -226.39503), Vector2(423.0646, -228.07962)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Backgrounds/MainBackground/RocketPink:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.4465305, 0.9488773, 1.3442428),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(629, -218.39499), Vector2(607.00006, -187.39503), Vector2(577.00006, -179.39502), Vector2(589, -225.39502)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Backgrounds/MainBackground/RocketPink:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.4465305, 0.9488773, 1.3442428),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.12391838, -0.0837758, -0.17627825]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Backgrounds/MainBackground/Person1:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.80235946, 1.08, 1.34, 1.6442555),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(371, 206.53), Vector2(371, 202.84), Vector2(371, 216.604), Vector2(371, 216.604), Vector2(371, 202.84), Vector2(371, 216.604), Vector2(371, 202.84)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Backgrounds/MainBackground/Person4:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.19768277, 0.38141146, 0.58607125, 0.76979995, 1.1953993, 1.4256417, 1.6093704),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(778, 189.085), Vector2(778, 208.835), Vector2(778, 187.018), Vector2(778, 208.835), Vector2(778, 187.018), Vector2(778, 187.018), Vector2(778, 208.835), Vector2(778, 187.018)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Backgrounds/MainBackground/Person3:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.31164107, 0.718635, 0.8000338, 0.9465516, 1.0326017),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(631, 220.02), Vector2(631, 212.675), Vector2(631, 225.745), Vector2(631, 213.851), Vector2(631, 226.359), Vector2(631, 214.262)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Backgrounds/MainBackground/Person2:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.2721045, 0.5186266, 0.8302676, 0.9232948, 0.99771655, 1.08, 1.3342451, 1.5307174, 1.6237445, 1.6981664, 1.7804499),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(508, 228.565), Vector2(508, 238.185), Vector2(508, 229.54), Vector2(508, 238.416), Vector2(508, 229.454), Vector2(508, 237.593), Vector2(508, 228.371), Vector2(508, 238.144), Vector2(508, 238.416), Vector2(508, 229.454), Vector2(508, 237.593), Vector2(508, 228.371)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Backgrounds/MainBackground/ButtonContainer/StartButton:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.47, 1.0137469, 1.5549504),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(54.999992, 352), Vector2(55, 357.99994), Vector2(54.999996, 355.86755), Vector2(55, 357.99994)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Backgrounds/MainBackground/ButtonContainer/ControlsButton:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.5573588, 1.10664, 1.6276493),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(332, 344.00003), Vector2(326, 346.99997), Vector2(332, 344.00003), Vector2(326, 346.99997)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Backgrounds/MainBackground/ButtonContainer/OptionsButton:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 0.43215504, 0.9814362, 1.5468727),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(65, 489.99997), Vector2(69.61, 496.965), Vector2(65, 489.99997), Vector2(73, 500.99994)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Backgrounds/MainBackground/ButtonContainer/QuitButton:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 0.480621, 1.0379798, 1.5751445),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(342.99997, 497.99997), Vector2(347, 508.99994), Vector2(342.99997, 497.99997), Vector2(347, 508.99994)]
+}
 
 [sub_resource type="Animation" id="Animation_ix8wp"]
 resource_name = "MoveBackground"
-length = 12.066667
+length = 11.57
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -788,6 +980,150 @@ tracks/29/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("Backgrounds/MainBackground/RocketOrange:rotation")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.17453292]
+}
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("Backgrounds/MainBackground/RocketLightBlue:rotation")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/32/type = "value"
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/path = NodePath("Backgrounds/MainBackground/RocketGreen:rotation")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.37524578]
+}
+tracks/33/type = "value"
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/path = NodePath("Backgrounds/MainBackground/RocketPink:rotation")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/34/type = "value"
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/path = NodePath("Backgrounds/MainBackground/Person1:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(371, 206.53)]
+}
+tracks/35/type = "value"
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/path = NodePath("Backgrounds/MainBackground/Person4:position")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(778, 189.085)]
+}
+tracks/36/type = "value"
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/path = NodePath("Backgrounds/MainBackground/Person3:position")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(631, 212.675)]
+}
+tracks/37/type = "value"
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/path = NodePath("Backgrounds/MainBackground/Person2:position")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(508, 228.565)]
+}
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("Backgrounds/MainBackground/ButtonContainer/StartButton:position")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(54.999992, 352)]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("Backgrounds/MainBackground/ButtonContainer/ControlsButton:position")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(332, 344.00003)]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("Backgrounds/MainBackground/ButtonContainer/OptionsButton:position")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(65, 489.99997)]
+}
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("Backgrounds/MainBackground/ButtonContainer/QuitButton:position")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(342.99997, 497.99997)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lakli"]
 _data = {
@@ -820,7 +1156,7 @@ offset_bottom = -360.395
 layout_mode = 0
 offset_left = 332.0
 offset_top = 344.00003
-offset_right = 534.3146
+offset_right = 534.3088
 offset_bottom = 439.58902
 rotation = 0.057595864
 theme_override_font_sizes/font_size = 16
@@ -843,8 +1179,8 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_2atgl")
 layout_mode = 0
 offset_left = 65.0
 offset_top = 489.99997
-offset_right = 253.44226
-offset_bottom = 579.03467
+offset_right = 253.44429
+offset_bottom = 579.0508
 rotation = 0.055850536
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxTexture_r1ivj")
@@ -856,8 +1192,8 @@ text = "Options"
 layout_mode = 0
 offset_left = 342.99997
 offset_top = 497.99997
-offset_right = 520.3751
-offset_bottom = 581.8058
+offset_right = 520.3877
+offset_bottom = 581.83167
 rotation = -0.11519173
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxTexture_pg667")
@@ -936,6 +1272,7 @@ texture = ExtResource("20_m2v8w")
 
 [node name="RocketOrange" type="Sprite2D" parent="Backgrounds/MainBackground" unique_id=1907605928]
 position = Vector2(545, 448.60498)
+rotation = -0.17453292
 scale = Vector2(0.3967934, 0.39679328)
 texture = ExtResource("17_bqahp")
 
@@ -970,6 +1307,9 @@ visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2091289178]
 libraries/ = SubResource("AnimationLibrary_lakli")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=468594003]
+bus = &"SFX"
 
 [connection signal="pressed" from="Backgrounds/MainBackground/ButtonContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="Backgrounds/MainBackground/ButtonContainer/StartButton" to="." method="_on_start_button_pressed"]

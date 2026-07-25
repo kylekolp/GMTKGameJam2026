@@ -25,9 +25,8 @@ text = "Start"
 script = ExtResource("4_huiju")
 
 [node name="HoverLines" type="Sprite2D" parent="." unique_id=143359653]
-visible = false
 position = Vector2(125.000015, 52.999992)
-scale = Vector2(0.27135676, 0.2851759)
+scale = Vector2(0.22234516, 0.23366831)
 texture = ExtResource("5_0lk7p")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
