@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://tl6khwr4g44e" path="res://src/gameplay/entities/player/Entity_Player.gd" id="1_khxic"]
 [ext_resource type="PackedScene" uid="uid://wras6segf5s5" path="res://src/gameplay/entities/player/Dash.tscn" id="2_77yeb"]
 [ext_resource type="Texture2D" uid="uid://ddcgb77euc8f5" path="res://Assets/characters/PlayerAnimationExport2.png" id="2_fok4k"]
+[ext_resource type="Script" uid="uid://nso4c4j37s7s" path="res://src/gameplay/entities/player/CameraShake.gd" id="4_4ahne"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
 size = Vector2(56, 74)
@@ -404,3 +405,4 @@ drag_left_margin = 0.3
 drag_top_margin = 0.3
 drag_right_margin = 0.3
 drag_bottom_margin = 0.3
+script = ExtResource("4_4ahne")

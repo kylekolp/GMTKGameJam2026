@@ -42,6 +42,7 @@ signal SubtractScore(value : int, source : Node2D)
 signal ResetScore()
 signal SpawnScoreNumber(number : int, label : String, position : Vector2)
 signal RocketMissed
+signal RocketExploded(position: Vector2, color: Color)
 
 #UI
 signal DashOnCooldown(cooldown : float)
