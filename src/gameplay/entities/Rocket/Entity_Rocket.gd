@@ -66,7 +66,8 @@ func launch() -> void:
 	#Play firework launch animation
 	shaderMaterial.set_shader_parameter("show_outline",false)
 	shaderMaterial.set_shader_parameter("wind_strength",0)
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK)
+	#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK) # THIS CREATES THE EXPLOSION SFX
+	#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK_LAUNCH) # THIS CREATES THE POPPING LAUNCH SFX
 	queue_free()
 	
 func AnimateSelection() -> void:
