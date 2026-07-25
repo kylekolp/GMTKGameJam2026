@@ -27,6 +27,7 @@ var minPointDistance : float = 20
 
 @export var score_per_rocket : int = 10
 
+@export var max_concurrent_embers : int = 10
 var burningEmber : Entity_FireBurnRope = null
 var is_burning : bool = false
 
@@ -114,9 +115,11 @@ func AddRocketScore() -> void:
 		SignalBus.AddScore.emit(scoreForRocket,self)
 		currentMult += 1
 
-func notify_ember_passed_point(index: int) -> void:
+func notify_ember_passed_point(index: int, can_finish: bool = true) -> void:
 	for attachment in attachments:
 		if attachment["index"] == index and attachment["hits_remaining"] > 0:
+			if attachment["hits_remaining"] == 1 and not can_finish:
+				continue
 			attachment["hits_remaining"] -= 1
 			if attachment["hits_remaining"] == 0:
 				attachment["rocket"].launch()
@@ -126,12 +129,14 @@ func reset_attached_rockets() -> void:
 		attachment["rocket"].hasRope = false
 
 func _on_fire_spawn_timer_timeout() -> void:
-	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining() or is_burning:
+	if total_hits_remaining() == 0 or activeFires >= min(total_hits_remaining(), max_concurrent_embers):
 		return
 
-	var target_burn_index := get_burn_target_index()
-	if target_burn_index != NO_BURN:
-		is_burning = true
+	var target_burn_index := NO_BURN
+	if not is_burning:
+		target_burn_index = get_burn_target_index()
+		if target_burn_index != NO_BURN:
+			is_burning = true
 
 	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(points[points.size() - 1])
 	fireBurn.burnDownToIndex = target_burn_index

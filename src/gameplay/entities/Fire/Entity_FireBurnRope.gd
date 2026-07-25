@@ -35,7 +35,7 @@ func _process_ordinary() -> void:
 		var distanceBetweenNextPoints = previousPoint.distance_to(parentRope.points[i])
 		var timeToReachNext : float = distanceBetweenNextPoints / velocity
 		movingTween.chain().tween_property(self, 'position', parentRope.points[i], timeToReachNext).set_trans(Tween.TRANS_LINEAR)
-		movingTween.chain().tween_callback(parentRope.notify_ember_passed_point.bind(i))
+		movingTween.chain().tween_callback(parentRope.notify_ember_passed_point.bind(i, false))
 		previousPoint = parentRope.points[i]
 
 	movingTween.finished.connect(FireBurnComplete)
@@ -53,7 +53,7 @@ func _process_burning(delta: float) -> void:
 		if distance_to_target <= remaining_distance:
 			global_position = target
 			remaining_distance -= distance_to_target
-			parentRope.notify_ember_passed_point(currentIndex)
+			parentRope.notify_ember_passed_point(currentIndex, true)
 			parentRope.burn_to(currentIndex)
 			currentIndex -= 1
 		else:
@@ -61,7 +61,11 @@ func _process_burning(delta: float) -> void:
 			remaining_distance = 0
 
 	if currentIndex <= burnDownToIndex:
-		FireBurnComplete()
+		var new_boundary := parentRope.get_burn_target_index()
+		if new_boundary == Entity_Rope.NO_BURN:
+			FireBurnComplete()
+		elif new_boundary < currentIndex:
+			burnDownToIndex = new_boundary
 
 func FireBurnComplete() -> void:
 	FireTravelComplete.emit(self)
