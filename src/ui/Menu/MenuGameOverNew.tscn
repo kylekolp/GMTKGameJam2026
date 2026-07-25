@@ -1,0 +1,388 @@
+[gd_scene format=3 uid="uid://t3dhfqnjq5pe"]
+
+[ext_resource type="Script" uid="uid://dgf8jtkcjrchy" path="res://src/ui/Menu/Menu_GameOver.gd" id="1_csv6c"]
+[ext_resource type="FontFile" uid="uid://c6pom3pd1kke2" path="res://Assets/Fonts/Daydream.otf" id="3_fadcd"]
+[ext_resource type="LabelSettings" uid="uid://db21agx7m6v2w" path="res://Assets/UI/LabelSettings/TitleSettings.tres" id="4_o3sqx"]
+[ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="5_ebi6b"]
+[ext_resource type="Texture2D" uid="uid://4tdoxswn7l4d" path="res://Assets/Menu/Background.png" id="6_4w3il"]
+[ext_resource type="Texture2D" uid="uid://bgpd74dhk04v3" path="res://Assets/World/background_night.png" id="7_55q2v"]
+[ext_resource type="Texture2D" uid="uid://byyyvqqj8i6m2" path="res://Assets/Fireworks/firework_blue.png" id="8_qixk7"]
+[ext_resource type="Texture2D" uid="uid://bjtuq677ti3lw" path="res://Assets/Fireworks/firework_green.png" id="9_i5syo"]
+[ext_resource type="Texture2D" uid="uid://bcswajgketda2" path="res://Assets/Fireworks/firework_lightblue.png" id="10_jy2eo"]
+[ext_resource type="Texture2D" uid="uid://bambnh6rnpmtm" path="res://Assets/Fireworks/firework_orange.png" id="11_l3xbh"]
+[ext_resource type="Texture2D" uid="uid://bjvnnc1dry6qx" path="res://Assets/Fireworks/firework_pink.png" id="12_okxla"]
+[ext_resource type="Texture2D" uid="uid://b2ke08klwxlqn" path="res://Assets/Fireworks/firework_violet.png" id="13_5lcgo"]
+[ext_resource type="Texture2D" uid="uid://bjd31lmwol00e" path="res://Assets/Fireworks/firework_yellow.png" id="14_b2yxi"]
+[ext_resource type="Texture2D" uid="uid://bfp151kvkr1uf" path="res://Assets/Menu/Person1.png" id="15_4w3il"]
+[ext_resource type="Texture2D" uid="uid://bhuncdloq3ov7" path="res://Assets/Menu/Person2.png" id="16_55q2v"]
+[ext_resource type="Script" uid="uid://dhbnlea2dmiqm" path="res://src/ui/Menu/GameOverPerson.gd" id="16_qixk7"]
+[ext_resource type="Texture2D" uid="uid://cv1cex0vf4wg4" path="res://Assets/Menu/Person3.png" id="17_qixk7"]
+[ext_resource type="Texture2D" uid="uid://ciad256wq82j3" path="res://Assets/Menu/Person4.png" id="18_i5syo"]
+
+[sub_resource type="Shader" id="Shader_a2ahv"]
+code = "shader_type canvas_item;
+
+// Outline Uniforms
+uniform bool show_outline = true;
+uniform vec4 outline_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float outline_width : hint_range(0.0, 10.0) = 1.0;
+
+// Wind Uniforms
+uniform float wind_speed : hint_range(0.0, 10.0) = 2.0;
+uniform float wind_strength : hint_range(0.0, 50.0) = 5.0;
+uniform float height_multiplier : hint_range(0.0, 2.0) = 1.0;
+
+void vertex() {
+    // Use the vertex position Y (or UV.y mask) to restrict wind to the top/tips
+    // Assuming mesh/sprite origin is at the bottom, VERTEX.y grows negative upwards or positive downwards depending on setup.
+    // Let's use a simple height factor based on local position:
+    float height_factor = clamp(1.0 - UV.y, 0.0, 1.0); // 0 at bottom, 1 at top
+    
+    // Apply sine wave motion offset based on TIME and vertex position
+    float wind_offset = sin(TIME * wind_speed + VERTEX.x * 0.1) * wind_strength * height_factor * height_multiplier;
+    
+    // Shift vertex along X axis
+    VERTEX.x += wind_offset;
+}
+
+void fragment() {
+    vec2 size = TEXTURE_PIXEL_SIZE * outline_width;
+    vec4 base_color = texture(TEXTURE, UV);
+    
+    if (show_outline && base_color.a == 0.0) {
+        float alpha = 0.0;
+        alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a;
+        alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a;
+        alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a;
+        alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a;
+        
+        if (alpha > 0.0) {
+            COLOR = outline_color;
+        } else {
+            COLOR = base_color;
+        }
+    } else {
+        COLOR = base_color;
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fadcd"]
+resource_local_to_scene = true
+shader = SubResource("Shader_a2ahv")
+shader_parameter/show_outline = false
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/wind_speed = 4.81200022857
+shader_parameter/wind_strength = 31.11600147801
+shader_parameter/height_multiplier = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4w3il"]
+content_margin_left = 50.0
+content_margin_top = 35.0
+content_margin_right = 50.0
+content_margin_bottom = 35.0
+bg_color = Color(0.14901961, 0.14901961, 0.14901961, 0.9607843)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0, 0, 0, 0.98039216)
+border_blend = true
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_i8ucm"]
+font = ExtResource("3_fadcd")
+font_size = 22
+
+[node name="MenuGameOverNew" type="Control" unique_id=339033683 node_paths=PackedStringArray("scoreLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_csv6c")
+scoreLabel = NodePath("MarginContainer/Panel/VBoxContainer/ScoreLabel")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1185616903]
+position = Vector2(591, 291)
+scale = Vector2(0.60030866, 0.60030866)
+texture = ExtResource("6_4w3il")
+
+[node name="BackgroundNight" type="Sprite2D" parent="." unique_id=488762423]
+position = Vector2(552, 900)
+scale = Vector2(1.4565972, 1)
+texture = ExtResource("7_55q2v")
+
+[node name="Rockets" type="Node2D" parent="." unique_id=962311592]
+
+[node name="FireworkBlue" type="Sprite2D" parent="Rockets" unique_id=201014641]
+material = SubResource("ShaderMaterial_fadcd")
+position = Vector2(285, 496)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_qixk7")
+
+[node name="FireworkGreen" type="Sprite2D" parent="Rockets" unique_id=1741171428]
+material = SubResource("ShaderMaterial_fadcd")
+position = Vector2(604, 496)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("9_i5syo")
+
+[node name="FireworkLightblue" type="Sprite2D" parent="Rockets" unique_id=1617451282]
+material = SubResource("ShaderMaterial_fadcd")
+position = Vector2(915, 496)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_jy2eo")
+
+[node name="FireworkOrange" type="Sprite2D" parent="Rockets" unique_id=1597520655]
+material = SubResource("ShaderMaterial_fadcd")
+position = Vector2(107, 496)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_l3xbh")
+
+[node name="FireworkPink" type="Sprite2D" parent="Rockets" unique_id=1282696463]
+material = SubResource("ShaderMaterial_fadcd")
+position = Vector2(766, 496)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("12_okxla")
+
+[node name="FireworkViolet" type="Sprite2D" parent="Rockets" unique_id=2050231505]
+material = SubResource("ShaderMaterial_fadcd")
+position = Vector2(452, 496)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("13_5lcgo")
+
+[node name="FireworkYellow" type="Sprite2D" parent="Rockets" unique_id=1179397415]
+material = SubResource("ShaderMaterial_fadcd")
+position = Vector2(1062, 496)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("14_b2yxi")
+
+[node name="People" type="Node2D" parent="." unique_id=370990128]
+position = Vector2(0, 9.305)
+
+[node name="Person1" type="Sprite2D" parent="People" unique_id=590022022]
+position = Vector2(63, 626)
+scale = Vector2(0.26562515, 0.26562506)
+texture = ExtResource("15_4w3il")
+script = ExtResource("16_qixk7")
+
+[node name="Person2" type="Sprite2D" parent="People" unique_id=1983950424]
+position = Vector2(118.999985, 631)
+scale = Vector2(0.62068963, 0.62068963)
+texture = ExtResource("16_55q2v")
+flip_h = true
+script = ExtResource("16_qixk7")
+
+[node name="Person3" type="Sprite2D" parent="People" unique_id=246812334]
+position = Vector2(178, 626)
+scale = Vector2(0.41290322, 0.41290328)
+texture = ExtResource("17_qixk7")
+script = ExtResource("16_qixk7")
+
+[node name="Person4" type="Sprite2D" parent="People" unique_id=934765538]
+position = Vector2(923, 629)
+scale = Vector2(0.2548263, 0.25482628)
+texture = ExtResource("18_i5syo")
+script = ExtResource("16_qixk7")
+
+[node name="Person17" type="Sprite2D" parent="People" unique_id=1342508013]
+position = Vector2(974.9531, 630)
+scale = Vector2(0.26562515, 0.26562506)
+texture = ExtResource("15_4w3il")
+script = ExtResource("16_qixk7")
+
+[node name="Person18" type="Sprite2D" parent="People" unique_id=287910737]
+position = Vector2(1030.9531, 635)
+scale = Vector2(0.62068963, 0.62068963)
+texture = ExtResource("16_55q2v")
+flip_h = true
+script = ExtResource("16_qixk7")
+
+[node name="Person19" type="Sprite2D" parent="People" unique_id=1717936726]
+position = Vector2(1089.9531, 630)
+scale = Vector2(0.41290322, 0.41290328)
+texture = ExtResource("17_qixk7")
+script = ExtResource("16_qixk7")
+
+[node name="Person20" type="Sprite2D" parent="People" unique_id=401382888]
+position = Vector2(1128.9531, 629)
+scale = Vector2(0.28571433, 0.2857143)
+texture = ExtResource("18_i5syo")
+script = ExtResource("16_qixk7")
+
+[node name="Person5" type="Sprite2D" parent="People" unique_id=1778853361]
+position = Vector2(267.95316, 627)
+scale = Vector2(0.26562515, 0.26562506)
+texture = ExtResource("15_4w3il")
+script = ExtResource("16_qixk7")
+
+[node name="Person13" type="Sprite2D" parent="People" unique_id=1241702099]
+position = Vector2(676, 633)
+scale = Vector2(0.62068963, 0.62068963)
+texture = ExtResource("16_55q2v")
+flip_h = true
+script = ExtResource("16_qixk7")
+
+[node name="Person14" type="Sprite2D" parent="People" unique_id=461025143]
+position = Vector2(735, 628)
+scale = Vector2(0.41290322, 0.41290328)
+texture = ExtResource("17_qixk7")
+script = ExtResource("16_qixk7")
+
+[node name="Person15" type="Sprite2D" parent="People" unique_id=724823012]
+position = Vector2(774, 627)
+scale = Vector2(0.28571433, 0.2857143)
+texture = ExtResource("18_i5syo")
+script = ExtResource("16_qixk7")
+
+[node name="Person21" type="Sprite2D" parent="People" unique_id=1124076171]
+position = Vector2(774, 627)
+scale = Vector2(0.28571433, 0.2857143)
+texture = ExtResource("18_i5syo")
+script = ExtResource("16_qixk7")
+
+[node name="Person16" type="Sprite2D" parent="People" unique_id=2133429485]
+position = Vector2(634, 632.00006)
+scale = Vector2(0.20231178, 0.22656263)
+texture = ExtResource("15_4w3il")
+flip_h = true
+script = ExtResource("16_qixk7")
+
+[node name="Person6" type="Sprite2D" parent="People" unique_id=1296080729]
+position = Vector2(323.95313, 632)
+scale = Vector2(0.62068963, 0.62068963)
+texture = ExtResource("16_55q2v")
+script = ExtResource("16_qixk7")
+
+[node name="Person9" type="Sprite2D" parent="People" unique_id=1791715242]
+position = Vector2(476, 628)
+scale = Vector2(0.41290322, 0.41290328)
+texture = ExtResource("17_qixk7")
+script = ExtResource("16_qixk7")
+
+[node name="Person10" type="Sprite2D" parent="People" unique_id=949293255]
+position = Vector2(515, 627)
+scale = Vector2(0.28571433, 0.2857143)
+texture = ExtResource("18_i5syo")
+flip_h = true
+script = ExtResource("16_qixk7")
+
+[node name="Person11" type="Sprite2D" parent="People" unique_id=1157985269]
+position = Vector2(565.9531, 629)
+scale = Vector2(0.26562515, 0.26562506)
+texture = ExtResource("15_4w3il")
+script = ExtResource("16_qixk7")
+
+[node name="Person12" type="Sprite2D" parent="People" unique_id=1647790916]
+position = Vector2(621.9531, 634)
+scale = Vector2(0.62068963, 0.62068963)
+texture = ExtResource("16_55q2v")
+script = ExtResource("16_qixk7")
+
+[node name="Person7" type="Sprite2D" parent="People" unique_id=1197703966]
+position = Vector2(382.95316, 627)
+scale = Vector2(0.3360884, 0.33608845)
+texture = ExtResource("17_qixk7")
+script = ExtResource("16_qixk7")
+
+[node name="Person8" type="Sprite2D" parent="People" unique_id=4042328]
+position = Vector2(420, 629)
+scale = Vector2(0.24710429, 0.24710426)
+texture = ExtResource("18_i5syo")
+flip_h = true
+script = ExtResource("16_qixk7")
+
+[node name="Person22" type="Sprite2D" parent="People" unique_id=439474999]
+position = Vector2(818.00006, 630)
+scale = Vector2(0.5517241, 0.5517241)
+texture = ExtResource("16_55q2v")
+script = ExtResource("16_qixk7")
+
+[node name="Person23" type="Sprite2D" parent="People" unique_id=1328141582]
+position = Vector2(856.3224, 629)
+scale = Vector2(0.2811762, 0.26254818)
+texture = ExtResource("18_i5syo")
+script = ExtResource("16_qixk7")
+
+[node name="Person24" type="Sprite2D" parent="People" unique_id=1437840683]
+position = Vector2(219, 628.00006)
+scale = Vector2(0.26254767, 0.26254764)
+texture = ExtResource("18_i5syo")
+script = ExtResource("16_qixk7")
+
+[node name="Person25" type="Sprite2D" parent="People" unique_id=322212801]
+position = Vector2(350, 629)
+scale = Vector2(0.7356322, 0.7356323)
+texture = ExtResource("16_55q2v")
+script = ExtResource("16_qixk7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=891601800]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=502753700]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 250
+
+[node name="Panel" type="PanelContainer" parent="MarginContainer" unique_id=1127106564]
+layout_mode = 2
+theme = ExtResource("5_ebi6b")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4w3il")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel" unique_id=269004824]
+layout_mode = 2
+theme_override_constants/separation = 26
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer" unique_id=608218704]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fadcd")
+text = "Game Over"
+label_settings = ExtResource("4_o3sqx")
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer" unique_id=1184543184]
+layout_mode = 2
+text = "Final Score: 0"
+label_settings = SubResource("LabelSettings_i8ucm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Node2D" type="Control" parent="MarginContainer/Panel/VBoxContainer" unique_id=420947474]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/VBoxContainer" unique_id=649026202]
+layout_mode = 2
+theme_override_constants/separation = 90
+alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer" unique_id=1244295991]
+layout_mode = 2
+theme = ExtResource("5_ebi6b")
+text = "Main Menu"
+
+[node name="RestartButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer" unique_id=1883461611]
+layout_mode = 2
+theme = ExtResource("5_ebi6b")
+text = "Play Again"
+
+[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

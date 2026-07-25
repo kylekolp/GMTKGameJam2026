@@ -3,6 +3,7 @@ extends BaseMenu
 
 @onready var BackgroundParent : Node2D = $Backgrounds
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
+@export var crowdAudioPlayer : AudioStreamPlayer
 
 var isFirstRun : bool = true
 
@@ -31,14 +32,14 @@ func RunStartAnimation(isFirstRun : bool):
 	if !isFirstRun:
 		animationPlayer.play("MoveBackground")
 		animationPlayer.seek(10.3,true)
+		await get_tree().create_timer(12).timeout
+		animationPlayer.play("Idle")
 	else:
 		animationPlayer.play("MoveBackground")
 		animationPlayer.seek(5,true)
+		await get_tree().create_timer(7).timeout
+		animationPlayer.play("Idle")
+		SignalBus.MainMenuIntroRan.emit()
 		
 func IntroOver() -> void:
 	RunStartAnimation(isFirstRun)
-
-
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	SignalBus.MainMenuIntroRan.emit()
-	animationPlayer.play("Idle")

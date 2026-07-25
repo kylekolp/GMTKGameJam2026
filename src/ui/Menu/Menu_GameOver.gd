@@ -12,7 +12,6 @@ func _on_restart_button_pressed() -> void:
 	SignalBus.StartGame.emit()
 	queue_free()
 
-
 func _on_main_menu_button_pressed() -> void:
 	SignalBus.UnloadLevel.emit()
 	SignalBus.UnPause.emit()
