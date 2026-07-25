@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://46ob4yqr28gh"
+path="res://.godot/imported/Firework Launch.wav-c10a76233aac07f5c54e390ca8b1ba3d.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/WAVs/Firework Launch.wav"
+dest_files=["res://.godot/imported/Firework Launch.wav-c10a76233aac07f5c54e390ca8b1ba3d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
