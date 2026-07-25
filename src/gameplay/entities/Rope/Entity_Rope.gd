@@ -127,14 +127,10 @@ func _on_fire_spawn_timer_timeout() -> void:
 	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining():
 		return
 	
-	var ropeEndPosition : Vector2 = Vector2(points[points.size()-1].x,points[points.size()-1].y)
-	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(ropeEndPosition)
+	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(points[points.size() - 1])
+	fireBurn.burnDownToIndex = get_burn_target_index()
 	activeFires += 1
 	fireBurn.FireTravelComplete.connect(_on_fire_travel_complete)
-	
-	#var newFire : Entity_FireBurnRope = get_child("")
-	
-	pass # Replace with function body.
 
 func _on_fire_travel_complete(fireEntity : Node2D) -> void:
 	activeFires -= 1
@@ -176,3 +172,20 @@ func SpawnFireBurnAtPosition(entityUID : String, position: Vector2, parent : Nod
 	
 func BurnRope() -> void:
 	queue_free()
+
+const NO_BURN := -2
+
+func get_burn_target_index() -> int:
+	var safe_boundary := -1     # -1 means safe to burn all the way to index 0
+	var any_finishing := false
+	for a in attachments:
+		if a["hits_remaining"] == 1:
+			any_finishing = true
+		elif a["hits_remaining"] > 1:
+			safe_boundary = max(safe_boundary, a["index"])
+	return safe_boundary if any_finishing else NO_BURN
+
+func burn_to(index: int) -> void:
+	if index >= points.size() - 1:
+		return
+	points = points.slice(0, index + 1)
