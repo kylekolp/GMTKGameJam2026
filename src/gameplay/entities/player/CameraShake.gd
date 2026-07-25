@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var shake_per_explosion : float = 0.4
+@export var shake_per_explosion : float = 0.6
 @export var decay : float = 1.5
 @export var max_offset : float = 10.0
 @export var max_rotation_degrees : float = 1.5
