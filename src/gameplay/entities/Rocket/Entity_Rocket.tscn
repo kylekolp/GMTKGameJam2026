@@ -59,7 +59,7 @@ shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/outline_width = 10.0
 shader_parameter/wind_speed = 2.000000095
 shader_parameter/wind_strength = 20.00000095
-shader_parameter/height_multiplier = 1.5000000712500001
+shader_parameter/height_multiplier = 1.50000007125
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
 size = Vector2(20, 54.666664)
