@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://b1n3w7gi8uxkl"]
+
+[ext_resource type="Script" uid="uid://30y54iud8iw8" path="res://src/ui/Menu/Menu_Main.gd" id="1_bappc"]
+[ext_resource type="Texture2D" uid="uid://4tdoxswn7l4d" path="res://Assets/Menu/Background.png" id="2_usyho"]
+[ext_resource type="Texture2D" uid="uid://jowkcbv3pcy5" path="res://Assets/Menu/LinesTitleLight.png" id="3_f33ux"]
+[ext_resource type="PackedScene" uid="uid://nmlq86y3npp1" path="res://src/ui/Menu/HoverButton.tscn" id="3_rnlqw"]
+[ext_resource type="Texture2D" uid="uid://d1x1ym0kqc2b6" path="res://Assets/Menu/Title.png" id="4_04xbd"]
+[ext_resource type="Texture2D" uid="uid://deevhalb1wgyf" path="res://Assets/Menu/ButtonGreen.png" id="4_qvfxr"]
+[ext_resource type="Texture2D" uid="uid://bjg2o6risyv4v" path="res://Assets/Menu/ButtonGreenPressed.png" id="5_66hvr"]
+[ext_resource type="Texture2D" uid="uid://bfv78lxp0giwi" path="res://Assets/Menu/ButtonOrange.png" id="6_66hvr"]
+[ext_resource type="Texture2D" uid="uid://cri7d2c170tto" path="res://Assets/Menu/ButtonOrangePressed.png" id="7_eyn7y"]
+[ext_resource type="Texture2D" uid="uid://b7ei2bqv40lub" path="res://Assets/Menu/QuitButton.png" id="8_xs6if"]
+[ext_resource type="Texture2D" uid="uid://dy0qoeqh3yyvs" path="res://Assets/Menu/ButtonPinkPressed.png" id="9_r1ivj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eyn7y"]
+texture = ExtResource("4_qvfxr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xs6if"]
+texture = ExtResource("5_66hvr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r1ivj"]
+texture = ExtResource("6_66hvr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g52li"]
+texture = ExtResource("7_eyn7y")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pg667"]
+texture = ExtResource("8_xs6if")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qqwc1"]
+texture = ExtResource("9_r1ivj")
+
+[node name="MenuMainNew" type="Control" unique_id=1328720762]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bappc")
+
+[node name="Backgrounds" type="Node2D" parent="." unique_id=447503684]
+
+[node name="Background3" type="Sprite2D" parent="Backgrounds" unique_id=1261782781]
+position = Vector2(281, -2591)
+texture = ExtResource("2_usyho")
+flip_h = true
+
+[node name="Background" type="Sprite2D" parent="Backgrounds" unique_id=894327536]
+position = Vector2(279, -4)
+texture = ExtResource("2_usyho")
+
+[node name="Background2" type="Sprite2D" parent="Backgrounds" unique_id=2144004877]
+position = Vector2(279, -1295)
+texture = ExtResource("2_usyho")
+flip_h = true
+flip_v = true
+
+[node name="Background4" type="Sprite2D" parent="Backgrounds" unique_id=484236025]
+position = Vector2(570.00006, -3572)
+scale = Vector2(0.4965278, 0.5123457)
+texture = ExtResource("2_usyho")
+
+[node name="ControlsButton" parent="Backgrounds" unique_id=397660677 instance=ExtResource("3_rnlqw")]
+offset_left = 394.0
+offset_top = 356.0
+offset_right = 612.0
+offset_bottom = 459.0
+rotation = 0.057595864
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_eyn7y")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_xs6if")
+text = "Controls"
+
+[node name="StartButton" parent="Backgrounds" unique_id=497993988 instance=ExtResource("3_rnlqw")]
+rotation = -0.057595864
+
+[node name="OptionsButton" parent="Backgrounds" unique_id=119615427 instance=ExtResource("3_rnlqw")]
+offset_left = 103.99999
+offset_top = 486.0
+offset_right = 322.0
+offset_bottom = 589.0
+rotation = 0.055850536
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_r1ivj")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_g52li")
+text = "Options"
+
+[node name="QuitButton" parent="Backgrounds" unique_id=1153205373 instance=ExtResource("3_rnlqw")]
+offset_left = 381.99997
+offset_top = 503.99997
+offset_right = 599.99994
+offset_bottom = 607.0
+rotation = -0.11519173
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_pg667")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_qqwc1")
+text = "Quit"
+
+[node name="LinesTitleLight" type="Sprite2D" parent="." unique_id=311022084]
+position = Vector2(302, 169)
+scale = Vector2(0.4277778, 0.42777777)
+texture = ExtResource("3_f33ux")
+
+[node name="Title" type="Sprite2D" parent="LinesTitleLight" unique_id=1596804042]
+position = Vector2(-4.675354, -23.37674)
+scale = Vector2(1.0295001, 1.0295001)
+texture = ExtResource("4_04xbd")
+
+[connection signal="pressed" from="Backgrounds/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="Backgrounds/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Backgrounds/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Backgrounds/QuitButton" to="." method="_on_quit_button_pressed"]
