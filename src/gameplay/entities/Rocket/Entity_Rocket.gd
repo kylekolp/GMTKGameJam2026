@@ -64,12 +64,18 @@ func _on_rope_complete(rope : Node2D) -> void:
 	circle_timer.queue_free()
 
 func launch() -> void:
-	#Play firework launch animation
 	shaderMaterial.set_shader_parameter("show_outline",false)
 	shaderMaterial.set_shader_parameter("wind_strength",0)
-	#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK) # THIS CREATES THE EXPLOSION SFX
-	#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK_LAUNCH) # THIS CREATES THE POPPING LAUNCH SFX
-	queue_free()
+	
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK_LAUNCH)
+	
+	var launch_tween := create_tween()
+	launch_tween.tween_property(self, "scale", scale * Vector2(1.2, 0.8), 0.12)
+	launch_tween.tween_property(self, "scale", scale * Vector2(0.9, 1.1), 0.08)
+	launch_tween.tween_property(self, "position:y", -2000.0, 0.9).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	launch_tween.tween_callback(AudioManager.create_audio.bind(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK))
+	launch_tween.tween_callback(queue_free)
+	
 	
 func AnimateSelection() -> void:
 	shaderMaterial.set_shader_parameter("show_outline",true)
