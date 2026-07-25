@@ -399,6 +399,7 @@ func UnloadLevel() -> void:
 		item.queue_free()
 		
 	#Unload Audio Stuff
+	#AudioManager.clear_all_sfx()
 	for item in AudioManager.get_children():
 		item.queue_free()
 	
