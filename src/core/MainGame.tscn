@@ -8,6 +8,8 @@
 shader = ExtResource("2_o0g52")
 shader_parameter/edge_color = Color(1, 1, 1, 1)
 shader_parameter/edge_width = 0.2
+shader_parameter/center_x = 0.5
+shader_parameter/glow_half_width = 0.2
 shader_parameter/strength = 0.0
 
 [node name="MainGame" type="Node2D" unique_id=1336662122]
