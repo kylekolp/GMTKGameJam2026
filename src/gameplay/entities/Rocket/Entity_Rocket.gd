@@ -57,20 +57,20 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	rope.RopeComplete.connect(_on_rope_complete)
 
 func _on_rope_complete(rope : Node2D) -> void:
-	shaderMaterial.set_shader_parameter("outline_enabled",false)
+	shaderMaterial.set_shader_parameter("show_outline",false)
 	rope.RopeComplete.disconnect(_on_rope_complete)
 	countdown_tween.kill()
 	circle_timer.queue_free()
 
 func launch() -> void:
 	#Play firework launch animation
-	shaderMaterial.set_shader_parameter("outline_enabled",false)
-	shaderMaterial.set_shader_parameter("wind_enabled",false)
+	shaderMaterial.set_shader_parameter("show_outline",false)
+	shaderMaterial.set_shader_parameter("wind_strength",0)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK)
 	queue_free()
 	
 func AnimateSelection() -> void:
-	shaderMaterial.set_shader_parameter("outline_enabled",true)
+	shaderMaterial.set_shader_parameter("show_outline",true)
 	var originalScale = scale
 	var newScale = Vector2(scale.x + .2,scale.y + .2)
 	
