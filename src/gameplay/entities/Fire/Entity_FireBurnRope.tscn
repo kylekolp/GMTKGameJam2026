@@ -61,8 +61,15 @@ frame_progress = 0.5633828
 [node name="Area2D" type="Area2D" parent="." unique_id=1116366981 groups=["RopeFire"]]
 collision_layer = 4
 collision_mask = 4
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=960159316]
 shape = SubResource("CircleShape2D_bai2n")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="GraceTimer" type="Timer" parent="Area2D" unique_id=1804082809]
+wait_time = 0.375
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Area2D/GraceTimer" to="." method="_on_grace_timer_timeout"]
