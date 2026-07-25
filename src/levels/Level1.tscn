@@ -50,7 +50,47 @@ position = Vector2(1146.615, 325)
 rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_b6imk")
 
+[node name="Background2" type="Sprite2D" parent="." unique_id=345892538]
+position = Vector2(574.00006, -131.00003)
+scale = Vector2(1.05, 1.053)
+texture = ExtResource("2_dklsv")
+
+[node name="Background9" type="Sprite2D" parent="." unique_id=931444048]
+position = Vector2(578, 970)
+scale = Vector2(1.05, 1.053)
+texture = ExtResource("2_dklsv")
+
+[node name="Background7" type="Sprite2D" parent="." unique_id=16364707]
+position = Vector2(-603, -338)
+scale = Vector2(1.05, 1.053)
+texture = ExtResource("2_dklsv")
+
+[node name="Background8" type="Sprite2D" parent="." unique_id=588353920]
+position = Vector2(1776, -353)
+scale = Vector2(1.05, 1.053)
+texture = ExtResource("2_dklsv")
+
+[node name="Background3" type="Sprite2D" parent="." unique_id=1758740609]
+position = Vector2(-306, 320)
+scale = Vector2(1.05, 1.053)
+texture = ExtResource("2_dklsv")
+
+[node name="Background4" type="Sprite2D" parent="." unique_id=51868654]
+position = Vector2(1590.0001, 314)
+scale = Vector2(1.05, 1.053)
+texture = ExtResource("2_dklsv")
+
+[node name="Background5" type="Sprite2D" parent="." unique_id=1633667673]
+position = Vector2(1603, 974)
+scale = Vector2(1.05, 1.053)
+texture = ExtResource("2_dklsv")
+
+[node name="Background6" type="Sprite2D" parent="." unique_id=74759371]
+position = Vector2(-517, 970)
+scale = Vector2(1.05, 1.053)
+texture = ExtResource("2_dklsv")
+
 [node name="Background" type="Sprite2D" parent="." unique_id=552936561]
 position = Vector2(575, 323)
-scale = Vector2(1.006, 1.009)
+scale = Vector2(1.05, 1.053)
 texture = ExtResource("2_dklsv")

@@ -2,8 +2,8 @@ extends System
 
 var dashMeter : DashMeter
 
-func _ready() -> void:
-	dashMeter = SpawnDashUI()
+func AssignUI(dashUI : DashMeter) -> void:
+	dashMeter = dashUI
 
 func SpawnDashUI() -> DashMeter:
 	var entityPackedScene : PackedScene = ResourceLoader.load(UIDCatalog.UI_DashBar, "PackedScene") as PackedScene

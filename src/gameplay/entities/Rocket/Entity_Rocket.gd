@@ -14,7 +14,11 @@ var rope : Entity_Rope
 
 enum RocketColor {ROCKET_BLUE,ROCKET_GREEN,ROCKET_LIGHTBLUE,ROCKET_ORANGE,ROCKET_PINK,ROCKET_VIOLET,ROCKET_YELLOW}
 
+var shaderMaterial : ShaderMaterial
+
 func _ready() -> void:
+	
+	shaderMaterial = sprite.material
 	
 	var randomColor : RocketColor = randi_range(0,6) as RocketColor
 	var randomTexture : Texture2D = GetTexture2DForRocketColor(randomColor)
@@ -24,11 +28,10 @@ func _ready() -> void:
 	countdown_tween = create_tween()
 	countdown_tween.tween_property(circle_timer, "value", 0.0, countdownTime)
 	countdown_tween.finished.connect(_on_countdown_finished)
-	
+
 func _on_countdown_finished() -> void:
 	if hasRope and rope != null and not rope.is_drawing:
 		return
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TICK_LAST) # Sound Effect missed rocket
 	queue_free()
 	SignalBus.RocketMissed.emit()
 
@@ -43,8 +46,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if rope == null:
 			return
 		hasRope = true
+		AnimateSelection()
 	elif body.currentRope.is_drawing:
 		rope = body.attach_rocket_to_current_rope(self)
+		AnimateSelection()
 		hasRope = true
 	else:
 		return
@@ -52,15 +57,26 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	rope.RopeComplete.connect(_on_rope_complete)
 
 func _on_rope_complete(rope : Node2D) -> void:
+	shaderMaterial.set_shader_parameter("show_outline",false)
 	rope.RopeComplete.disconnect(_on_rope_complete)
 	countdown_tween.kill()
 	circle_timer.queue_free()
 
 func launch() -> void:
 	#Play firework launch animation
-	#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK) # THIS CREATES THE EXPLOSION SFX
-	#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK_LAUNCH) # THIS CREATES THE POPPING LAUNCH SFX
+	shaderMaterial.set_shader_parameter("show_outline",false)
+	shaderMaterial.set_shader_parameter("wind_strength",0)
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK)
 	queue_free()
+	
+func AnimateSelection() -> void:
+	shaderMaterial.set_shader_parameter("show_outline",true)
+	var originalScale = scale
+	var newScale = Vector2(scale.x + .2,scale.y + .2)
+	
+	var tween : Tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "scale", newScale, 0.1)
+	tween.chain().tween_property(self, "scale", originalScale, 0.1)
 	
 #enum RocketColor {ROCKET_BLUE,ROCKET_GREEN,ROCKET_LIGHTBLUE,ROCKET_ORANGE,ROCKET_PINK,ROCKET_VIOLET,ROCKET_YELLOW}
 	

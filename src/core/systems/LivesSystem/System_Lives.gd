@@ -9,7 +9,9 @@ var UILives: UI_Lives
 func _ready() -> void:
 	SignalBus.RocketMissed.connect(OnRocketMissed)
 	SignalBus.StartGame.connect(ResetLives)
-	UILives = SpawnLivesUI()
+
+func AssignUI(uiLives : UI_Lives) -> void:
+	UILives = uiLives
 	ResetLives()
 
 func ResetLives() -> void:

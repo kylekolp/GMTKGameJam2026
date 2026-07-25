@@ -4,6 +4,63 @@
 [ext_resource type="Texture2D" uid="uid://bambnh6rnpmtm" path="res://Assets/Fireworks/firework_orange.png" id="2_o8uc8"]
 [ext_resource type="PackedScene" uid="uid://b0thcwxmiit8x" path="res://src/gameplay/entities/Rocket/CircleTimer.tscn" id="3_mln42"]
 
+[sub_resource type="Shader" id="Shader_mln42"]
+code = "shader_type canvas_item;
+
+// Outline Uniforms
+uniform bool show_outline = true;
+uniform vec4 outline_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float outline_width : hint_range(0.0, 10.0) = 1.0;
+
+// Wind Uniforms
+uniform float wind_speed : hint_range(0.0, 10.0) = 2.0;
+uniform float wind_strength : hint_range(0.0, 50.0) = 5.0;
+uniform float height_multiplier : hint_range(0.0, 2.0) = 1.0;
+
+void vertex() {
+    // Use the vertex position Y (or UV.y mask) to restrict wind to the top/tips
+    // Assuming mesh/sprite origin is at the bottom, VERTEX.y grows negative upwards or positive downwards depending on setup.
+    // Let's use a simple height factor based on local position:
+    float height_factor = clamp(1.0 - UV.y, 0.0, 1.0); // 0 at bottom, 1 at top
+    
+    // Apply sine wave motion offset based on TIME and vertex position
+    float wind_offset = sin(TIME * wind_speed + VERTEX.x * 0.1) * wind_strength * height_factor * height_multiplier;
+    
+    // Shift vertex along X axis
+    VERTEX.x += wind_offset;
+}
+
+void fragment() {
+    vec2 size = TEXTURE_PIXEL_SIZE * outline_width;
+    vec4 base_color = texture(TEXTURE, UV);
+    
+    if (show_outline && base_color.a == 0.0) {
+        float alpha = 0.0;
+        alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a;
+        alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a;
+        alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a;
+        alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a;
+        
+        if (alpha > 0.0) {
+            COLOR = outline_color;
+        } else {
+            COLOR = base_color;
+        }
+    } else {
+        COLOR = base_color;
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_joy22"]
+resource_local_to_scene = true
+shader = SubResource("Shader_mln42")
+shader_parameter/show_outline = false
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 10.0
+shader_parameter/wind_speed = 2.000000095
+shader_parameter/wind_strength = 20.00000095
+shader_parameter/height_multiplier = 1.50000007125
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
 size = Vector2(20, 54.666664)
 
@@ -14,6 +71,7 @@ script = ExtResource("1_o8uc8")
 countdownTime = 30.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1540493977]
+material = SubResource("ShaderMaterial_joy22")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_o8uc8")
 

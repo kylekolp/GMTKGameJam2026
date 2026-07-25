@@ -34,6 +34,7 @@ signal GameOver()
 #Level
 signal LoadEntity(entityUID : String, position: Vector2, parent : Node2D)
 signal LoadEffect(effectUID : String)
+signal LoadUI()
 
 #Score
 signal AddScore(value : int, source : Node2D)

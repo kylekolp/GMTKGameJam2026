@@ -29,6 +29,8 @@ var knockback_wearing_off : float = 0.0
 
 var currentScale : Vector2
 
+@export var camera : Camera2D
+
 func _ready() -> void:
 	entityRoot = get_parent()
 	dash.dash_cooldown = dash_cooldown
