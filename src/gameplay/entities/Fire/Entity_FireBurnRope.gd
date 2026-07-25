@@ -81,8 +81,10 @@ func FireBurnComplete() -> void:
 		AudioManager.fade_out(fire_sfx, 2.0)
 	queue_free()
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	var bodyGroups : Array[StringName] = body.get_groups()
-	if "Player" in bodyGroups:
-		var playerObj : Player = body as Player
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if "Player" in area.get_groups():
+		var playerObj : Player = area.get_parent() as Player
 		playerObj.FireDamagePlayer(self)
+
+func _on_grace_timer_timeout() -> void:
+	$Area2D.monitoring = true
