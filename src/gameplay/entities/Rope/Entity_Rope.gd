@@ -131,6 +131,8 @@ func reset_attached_rockets() -> void:
 func _on_fire_spawn_timer_timeout() -> void:
 	if total_hits_remaining() == 0 or activeFires >= min(total_hits_remaining(), max_concurrent_embers):
 		return
+	if is_burning and (burningEmber == null or not burningEmber.is_paused):
+		return
 
 	var target_burn_index := NO_BURN
 	if not is_burning:
@@ -138,13 +140,13 @@ func _on_fire_spawn_timer_timeout() -> void:
 		if target_burn_index != NO_BURN:
 			is_burning = true
 
+	activeFires += 1
 	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(points[points.size() - 1])
 	fireBurn.burnDownToIndex = target_burn_index
 	if target_burn_index != NO_BURN:
 		burningEmber = fireBurn
-	activeFires += 1
 	fireBurn.FireTravelComplete.connect(_on_fire_travel_complete)
-	
+
 func _on_fire_travel_complete(fireEntity : Node2D) -> void:
 	activeFires -= 1
 	if fireEntity == burningEmber:

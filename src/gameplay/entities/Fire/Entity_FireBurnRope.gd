@@ -40,6 +40,8 @@ func _process_ordinary() -> void:
 
 	movingTween.finished.connect(FireBurnComplete)
 
+var is_paused : bool = false
+
 func _process_burning(delta: float) -> void:
 	if currentIndex == -1:
 		currentIndex = parentRope.points.size() - 1
@@ -53,7 +55,7 @@ func _process_burning(delta: float) -> void:
 		if distance_to_target <= remaining_distance:
 			global_position = target
 			remaining_distance -= distance_to_target
-			parentRope.notify_ember_passed_point(currentIndex, true)
+			parentRope.notify_ember_passed_point(currentIndex)
 			parentRope.burn_to(currentIndex)
 			currentIndex -= 1
 		else:
@@ -66,6 +68,11 @@ func _process_burning(delta: float) -> void:
 			FireBurnComplete()
 		elif new_boundary < currentIndex:
 			burnDownToIndex = new_boundary
+			is_paused = false
+		else:
+			is_paused = true
+	else:
+		is_paused = false
 
 func FireBurnComplete() -> void:
 	FireTravelComplete.emit(self)
