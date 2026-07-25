@@ -7,7 +7,9 @@
 [sub_resource type="Shader" id="Shader_mln42"]
 code = "shader_type canvas_item;
 
-uniform bool enabled = false;
+//Outline stuff
+uniform bool outline_enabled = false;
+uniform bool wind_enabled = true;
 uniform vec4 color : source_color = vec4(1.0);
 uniform float width : hint_range(0, 10) = 1.0;
 uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
@@ -16,6 +18,15 @@ uniform bool add_margins = true; // only useful when inside is false
 uniform vec2 number_of_images = vec2(1.0); // number of horizontal and vertical images in the sprite sheet
 
 varying flat vec4 modulate;
+
+//Wind stuff
+uniform float x_intensity = 3.0;
+uniform float y_intensity = 0.5;
+uniform float offset2 = 0.0;
+uniform float speed : hint_range(0, 20) = 2.0;
+uniform float wave_frequency : hint_range(0, 100) = 20;
+uniform float wave_length : hint_range(50, 800) = 200.0;
+
 
 void vertex() {
 	modulate = COLOR;
@@ -57,7 +68,7 @@ bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, vec2 image_top_left,
 
 void fragment() {
 	
-	if(enabled) {
+	if(outline_enabled) {
 		vec2 uv = UV;
 		vec2 image_top_left = floor(uv * number_of_images) / number_of_images;
 		vec2 image_bottom_right = image_top_left + vec2(1.0) / number_of_images;
@@ -81,19 +92,55 @@ void fragment() {
 			COLOR.a += (1.0 - COLOR.a) * color.a * modulate.a;
 		}
 	}
+	
+	if(wind_enabled) {
+		vec2 real_uv = vec2(UV.x, UV.y);
+	
+		vec2 vecToBottom = vec2(1, 1) - UV.y; 
+		float distToBottom = length(vecToBottom);
+		
+		float final_speed = TIME * (speed / 4.0) + offset2;
+		
+		float time_var = (cos(final_speed) * cos(final_speed * 4.0) * cos(final_speed * 2.0))/(200.0);
+		float time_var2 = (cos(final_speed) * cos(final_speed * 6.0) * cos(final_speed * 2.0))/(200.0);
+		
+		float wave_from_x = (cos(real_uv.x * 100.0)/1000.0);
+		float wave_large_from_x = cos(TIME + (real_uv.x * wave_frequency))/wave_length;
+		
+		float wave_from_y = (cos(real_uv.y * 99000.0)/90000.0);
+		
+		float new_x = real_uv.x + time_var * (distToBottom * x_intensity) + wave_from_x + (wave_large_from_x);
+		float new_y = real_uv.y + time_var2 * (distToBottom * y_intensity);
+		
+		vec2 new_uv1 = vec2(new_x, new_y);
+		vec4 new_texture = texture(TEXTURE, new_uv1);
+		
+		if(new_texture.rgb != vec3(1,1,1)){
+			COLOR.rgba = new_texture.rgba;
+		}
+	}
+	
+	
 }
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_joy22"]
 resource_local_to_scene = true
 shader = SubResource("Shader_mln42")
-shader_parameter/enabled = false
+shader_parameter/outline_enabled = false
+shader_parameter/wind_enabled = true
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/width = 10.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/number_of_images = Vector2(1, 1)
+shader_parameter/x_intensity = 6.0
+shader_parameter/y_intensity = 0.5
+shader_parameter/offset2 = 0.0
+shader_parameter/speed = 2.000000095
+shader_parameter/wave_frequency = 30.000001425
+shader_parameter/wave_length = 150.00000475000002
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
 size = Vector2(20, 54.666664)
