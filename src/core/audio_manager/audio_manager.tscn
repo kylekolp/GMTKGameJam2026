@@ -16,6 +16,8 @@
 [ext_resource type="AudioStream" uid="uid://dlvorr1w6hnh1" path="res://Audio/SFX/WAVs/Timer Low.wav" id="14_h23lm"]
 [ext_resource type="AudioStream" uid="uid://doj24t7128iy1" path="res://Audio/SFX/WAVs/Pop.wav" id="15_d73h1"]
 [ext_resource type="AudioStream" uid="uid://b00b7cg2fvob6" path="res://Audio/SFX/WAVs/Rope Score.wav" id="16_w0rdc"]
+[ext_resource type="AudioStream" uid="uid://bgdh4jqvjvwio" path="res://Audio/SFX/WAVs/Crowd Cheer 1.wav" id="17_swa2y"]
+[ext_resource type="AudioStream" uid="uid://b63uha2h3jak0" path="res://Audio/SFX/WAVs/Crowd Applause.wav" id="18_cug2h"]
 
 [sub_resource type="Resource" id="Resource_s7fu5"]
 script = ExtResource("2_w37oj")
@@ -125,6 +127,20 @@ sound_effect = ExtResource("16_w0rdc")
 volume = -16.0
 metadata/_custom_type_script = "uid://edosslbptmeu"
 
+[sub_resource type="Resource" id="Resource_6t0lw"]
+script = ExtResource("2_w37oj")
+type = 14
+sound_effect = ExtResource("17_swa2y")
+volume = -16.0
+metadata/_custom_type_script = "uid://edosslbptmeu"
+
+[sub_resource type="Resource" id="Resource_w0rdc"]
+script = ExtResource("2_w37oj")
+type = 15
+sound_effect = ExtResource("18_cug2h")
+volume = -16.0
+metadata/_custom_type_script = "uid://edosslbptmeu"
+
 [node name="AudioManager" type="Node2D" unique_id=1002705866]
 script = ExtResource("1_s7fu5")
-sound_effect_settings = Array[ExtResource("2_w37oj")]([SubResource("Resource_s7fu5"), SubResource("Resource_w37oj"), SubResource("Resource_qsbfr"), SubResource("Resource_qw8bb"), SubResource("Resource_f7c22"), SubResource("Resource_3nv2i"), SubResource("Resource_whfmy"), SubResource("Resource_2on5u"), SubResource("Resource_88741"), SubResource("Resource_igw0h"), SubResource("Resource_3d0px"), SubResource("Resource_mln42"), SubResource("Resource_h23lm"), SubResource("Resource_d73h1")])
+sound_effect_settings = Array[ExtResource("2_w37oj")]([SubResource("Resource_s7fu5"), SubResource("Resource_w37oj"), SubResource("Resource_qsbfr"), SubResource("Resource_qw8bb"), SubResource("Resource_f7c22"), SubResource("Resource_3nv2i"), SubResource("Resource_whfmy"), SubResource("Resource_2on5u"), SubResource("Resource_88741"), SubResource("Resource_igw0h"), SubResource("Resource_3d0px"), SubResource("Resource_mln42"), SubResource("Resource_h23lm"), SubResource("Resource_d73h1"), SubResource("Resource_6t0lw"), SubResource("Resource_w0rdc")])
