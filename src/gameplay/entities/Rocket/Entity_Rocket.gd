@@ -16,13 +16,23 @@ enum RocketColor {ROCKET_BLUE,ROCKET_GREEN,ROCKET_LIGHTBLUE,ROCKET_ORANGE,ROCKET
 
 var shaderMaterial : ShaderMaterial
 
+const ROCKET_COLOR_VALUES := {
+	RocketColor.ROCKET_BLUE: Color("1521D3"),
+	RocketColor.ROCKET_GREEN: Color("05B81C"),
+	RocketColor.ROCKET_LIGHTBLUE: Color("07DAC1"),
+	RocketColor.ROCKET_ORANGE: Color("F3680A"),
+	RocketColor.ROCKET_PINK: Color("A6094B"),
+	RocketColor.ROCKET_VIOLET: Color("6309CA"),
+	RocketColor.ROCKET_YELLOW: Color("EBF205"),
+}
+
+var rocket_color : RocketColor
+
 func _ready() -> void:
-	
 	shaderMaterial = sprite.material
-	
-	var randomColor : RocketColor = randi_range(0,6) as RocketColor
-	var randomTexture : Texture2D = GetTexture2DForRocketColor(randomColor)
-	sprite.texture = randomTexture
+
+	rocket_color = randi_range(0,6) as RocketColor
+	sprite.texture = GetTexture2DForRocketColor(rocket_color)
 	
 	circle_timer.value = circle_timer.max_value
 	countdown_tween = create_tween()
@@ -64,11 +74,20 @@ func _on_rope_complete(rope : Node2D) -> void:
 	circle_timer.queue_free()
 
 func launch() -> void:
-	#Play firework launch animation
 	shaderMaterial.set_shader_parameter("show_outline",false)
 	shaderMaterial.set_shader_parameter("wind_strength",0)
-	#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK) # THIS CREATES THE EXPLOSION SFX
-	#AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK_LAUNCH) # THIS CREATES THE POPPING LAUNCH SFX
+	
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK_LAUNCH)
+	
+	var launch_tween := create_tween()
+	launch_tween.tween_property(self, "scale", scale * Vector2(1.2, 0.8), 0.12)
+	launch_tween.tween_property(self, "scale", scale * Vector2(0.9, 1.1), 0.08)
+	launch_tween.tween_property(self, "position:y", -2000.0, 0.9).as_relative().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	launch_tween.tween_callback(_explode)
+
+func _explode() -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK)
+	SignalBus.RocketExploded.emit(global_position, ROCKET_COLOR_VALUES[rocket_color])
 	queue_free()
 	
 func AnimateSelection() -> void:
