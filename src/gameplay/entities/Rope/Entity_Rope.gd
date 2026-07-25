@@ -27,6 +27,9 @@ var minPointDistance : float = 20
 
 @export var score_per_rocket : int = 10
 
+var burningEmber : Entity_FireBurnRope = null
+var is_burning : bool = false
+
 func _ready() -> void:
 	top_level = true
 	target = get_parent()
@@ -117,25 +120,43 @@ func notify_ember_passed_point(index: int) -> void:
 			attachment["hits_remaining"] -= 1
 			if attachment["hits_remaining"] == 0:
 				attachment["rocket"].launch()
-	
-	if total_hits_remaining() == 0:
-		queue_free()
+				catch_up_burn()
+
+func catch_up_burn() -> void:
+	var boundary := -1
+	for a in attachments:
+		if a["hits_remaining"] > 0:
+			boundary = max(boundary, a["index"])
+	if boundary >= points.size() - 1:
+		return
+	var catch_up_tween := create_tween()
+	for i in range(points.size() - 1, boundary, -1):
+		catch_up_tween.tween_callback(burn_to.bind(i))
+		catch_up_tween.tween_interval(burnStepTime)
 
 func reset_attached_rockets() -> void:
 	for attachment in attachments:
 		attachment["rocket"].hasRope = false
 
 func _on_fire_spawn_timer_timeout() -> void:
-	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining():
+	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining() or is_burning:
 		return
-	
+
 	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(points[points.size() - 1])
 	fireBurn.burnDownToIndex = get_burn_target_index()
+	if fireBurn.burnDownToIndex != NO_BURN:
+		is_burning = true
+		burningEmber = fireBurn
 	activeFires += 1
 	fireBurn.FireTravelComplete.connect(_on_fire_travel_complete)
 
 func _on_fire_travel_complete(fireEntity : Node2D) -> void:
 	activeFires -= 1
+	if fireEntity == burningEmber:
+		is_burning = false
+		burningEmber = null
+	if total_hits_remaining() == 0:
+		queue_free()
 
 func total_hits_remaining() -> int:
 	var total := 0
