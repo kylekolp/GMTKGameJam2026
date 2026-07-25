@@ -14,7 +14,11 @@ var rope : Entity_Rope
 
 enum RocketColor {ROCKET_BLUE,ROCKET_GREEN,ROCKET_LIGHTBLUE,ROCKET_ORANGE,ROCKET_PINK,ROCKET_VIOLET,ROCKET_YELLOW}
 
+var shaderMaterial : ShaderMaterial
+
 func _ready() -> void:
+	
+	shaderMaterial = sprite.material
 	
 	var randomColor : RocketColor = randi_range(0,6) as RocketColor
 	var randomTexture : Texture2D = GetTexture2DForRocketColor(randomColor)
@@ -42,8 +46,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if rope == null:
 			return
 		hasRope = true
+		AnimateSelection()
 	elif body.currentRope.is_drawing:
 		rope = body.attach_rocket_to_current_rope(self)
+		AnimateSelection()
 		hasRope = true
 	else:
 		return
@@ -51,6 +57,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	rope.RopeComplete.connect(_on_rope_complete)
 
 func _on_rope_complete(rope : Node2D) -> void:
+	shaderMaterial.set_shader_parameter("enabled",false)
 	rope.RopeComplete.disconnect(_on_rope_complete)
 	countdown_tween.kill()
 	circle_timer.queue_free()
@@ -59,6 +66,15 @@ func launch() -> void:
 	#Play firework launch animation
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.FIREWORK)
 	queue_free()
+	
+func AnimateSelection() -> void:
+	shaderMaterial.set_shader_parameter("enabled",true)
+	var originalScale = scale
+	var newScale = Vector2(scale.x + .2,scale.y + .2)
+	
+	var tween : Tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(self, "scale", newScale, 0.1)
+	tween.chain().tween_property(self, "scale", originalScale, 0.1)
 	
 #enum RocketColor {ROCKET_BLUE,ROCKET_GREEN,ROCKET_LIGHTBLUE,ROCKET_ORANGE,ROCKET_PINK,ROCKET_VIOLET,ROCKET_YELLOW}
 	

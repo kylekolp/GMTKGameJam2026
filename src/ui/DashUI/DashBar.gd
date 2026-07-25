@@ -37,9 +37,7 @@ func animate(newValue : float) -> void:
 
 			tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
 			tween.tween_property(self, "offset_transform_scale", newScale, 0.1)
-			tween.parallel().tween_property(self, "offset_transform_scale", newScale, 0.1).set_delay(0.05)
 			tween.chain().tween_property(self, "offset_transform_scale", initialScale, 0.1)
-			tween.parallel().tween_property(self, "offset_transform_scale", initialScale, 0.1)
 	
 func GetColorBasedOnValue(value: float) -> Color:
 	

@@ -1,11 +1,4 @@
-[gd_scene format=3 uid="uid://c86xeg2esb2uo"]
-
-[ext_resource type="Script" uid="uid://davrbmi2pn8l8" path="res://src/gameplay/entities/Rocket/Entity_Rocket.gd" id="1_o8uc8"]
-[ext_resource type="Texture2D" uid="uid://bambnh6rnpmtm" path="res://Assets/Fireworks/firework_orange.png" id="2_o8uc8"]
-[ext_resource type="PackedScene" uid="uid://b0thcwxmiit8x" path="res://src/gameplay/entities/Rocket/CircleTimer.tscn" id="3_mln42"]
-
-[sub_resource type="Shader" id="Shader_mln42"]
-code = "shader_type canvas_item;
+shader_type canvas_item;
 
 uniform bool enabled = false;
 uniform vec4 color : source_color = vec4(1.0);
@@ -82,45 +75,3 @@ void fragment() {
 		}
 	}
 }
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_joy22"]
-resource_local_to_scene = true
-shader = SubResource("Shader_mln42")
-shader_parameter/enabled = false
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 10.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-shader_parameter/number_of_images = Vector2(1, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
-size = Vector2(20, 54.666664)
-
-[node name="Rocket" type="Node2D" unique_id=1733741076]
-z_index = 1
-scale = Vector2(0.75, 0.75)
-script = ExtResource("1_o8uc8")
-countdownTime = 30.0
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1540493977]
-material = SubResource("ShaderMaterial_joy22")
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_o8uc8")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=1027875018 groups=["Rocket"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=982255867]
-position = Vector2(-0.66666687, 2)
-shape = SubResource("RectangleShape2D_bai2n")
-
-[node name="CircleTimer" parent="." unique_id=1655192922 instance=ExtResource("3_mln42")]
-offset_left = 4.0000005
-offset_top = -65.33334
-offset_right = 36.0
-offset_bottom = -33.333355
-pivot_offset = Vector2(0, 31.999989)
-tint_progress = Color(0.348, 0.348, 0.348, 1)
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
