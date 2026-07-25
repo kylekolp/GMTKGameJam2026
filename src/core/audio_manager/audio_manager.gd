@@ -15,7 +15,7 @@ func create_2d_audio(location: Vector2, distance: int, type: SoundEffect.SOUND_E
 		if sound_effect.has_open_limit():
 			sound_effect.change_audio_count(1)
 			var new_2D_audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-			new_2D_audio.bus = &"Master"
+			new_2D_audio.bus = &"SFX"
 			add_child(new_2D_audio)
 			new_2D_audio.position = location
 			new_2D_audio.stream = sound_effect.sound_effect
