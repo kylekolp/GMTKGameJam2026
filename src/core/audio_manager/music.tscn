@@ -45,15 +45,28 @@ Vector2i(2, 2): {
 "from_time": 0,
 "to_time": 0
 },
-Vector2i(3, 3): {
-"fade_beats": 2.0,
-"fade_mode": 3,
+Vector2i(2, 3): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(3, 1): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(3, 2): {
+"fade_beats": 1.0,
+"fade_mode": 4,
 "from_time": 0,
 "to_time": 0
 }
 }
 
 [node name="Music" type="AudioStreamPlayer" unique_id=697584193]
+process_mode = 3
 stream = SubResource("AudioStreamInteractive_sbdt4")
 volume_db = -10.0
 autoplay = true
