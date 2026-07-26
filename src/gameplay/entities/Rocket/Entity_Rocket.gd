@@ -92,12 +92,14 @@ func _explode() -> void:
 	
 func AnimateSelection() -> void:
 	shaderMaterial.set_shader_parameter("show_outline",true)
-	var originalScale = scale
+	bounce_rocket()
+
+func bounce_rocket() -> void:
 	var newScale = Vector2(scale.x + .2,scale.y + .2)
-	
 	var tween : Tween = create_tween().set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(self, "scale", newScale, 0.1)
-	tween.chain().tween_property(self, "scale", originalScale, 0.1)
+	tween.chain().tween_property(self, "scale", scale, 0.1)
+
 	
 #enum RocketColor {ROCKET_BLUE,ROCKET_GREEN,ROCKET_LIGHTBLUE,ROCKET_ORANGE,ROCKET_PINK,ROCKET_VIOLET,ROCKET_YELLOW}
 	
