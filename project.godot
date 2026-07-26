@@ -29,6 +29,10 @@ SignalBus="*uid://cmsme5d5erh4l"
 AudioManager="*uid://cprnbvbu2ferg"
 Music="*uid://buwdhohpr7any"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [dotnet]
 
 project/assembly_name="RogueLikeAbilities"
