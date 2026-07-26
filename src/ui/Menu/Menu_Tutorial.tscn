@@ -2,10 +2,50 @@
 
 [ext_resource type="StyleBox" uid="uid://1y8mw8aos0s7" path="res://Assets/UI/PanelContainer/TempPanelBoxStyle.tres" id="1_a18k3"]
 [ext_resource type="Script" uid="uid://di65jts0lc7li" path="res://src/ui/Menu/Menu_Tutorial.gd" id="1_x3tj7"]
+[ext_resource type="Texture2D" uid="uid://bgpd74dhk04v3" path="res://Assets/World/background_night.png" id="2_angim"]
 [ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="3_angim"]
 [ext_resource type="LabelSettings" uid="uid://db21agx7m6v2w" path="res://Assets/UI/LabelSettings/TitleSettings.tres" id="4_p61v1"]
+[ext_resource type="Texture2D" uid="uid://cj5ruod8ngvlx" path="res://Assets/TutorialImages/Step0ControlsPlayer.png" id="6_p61v1"]
+[ext_resource type="Texture2D" uid="uid://bf30pbtl17d7h" path="res://Assets/TutorialImages/Step1AttachRope.png" id="7_m7mwn"]
+[ext_resource type="Texture2D" uid="uid://dij71flr10m86" path="res://Assets/TutorialImages/Step2AttachRopeToFire.png" id="8_0oma3"]
+[ext_resource type="Texture2D" uid="uid://7je7yx238g7h" path="res://Assets/TutorialImages/Step3DontGetBurned.png" id="9_0oma3"]
+[ext_resource type="Texture2D" uid="uid://dhml6tjhjavkq" path="res://Assets/TutorialImages/Step2YellowTimer.png" id="9_etcea"]
+[ext_resource type="Texture2D" uid="uid://cbwkl3bbrvf3j" path="res://Assets/TutorialImages/Step2OrangeTimer.png" id="10_4reen"]
+[ext_resource type="Texture2D" uid="uid://dmewer5vqsroj" path="res://Assets/TutorialImages/Step2RedTimer.png" id="11_73x3e"]
+[ext_resource type="Texture2D" uid="uid://byi1hejh35ool" path="res://Assets/TutorialImages/Step4Combos.png" id="13_4reen"]
+[ext_resource type="Texture2D" uid="uid://cumm2d0cv32k1" path="res://Assets/TutorialImages/Step5_3Misses.png" id="14_73x3e"]
 
-[node name="MenuTutorial" type="Control" unique_id=985753097]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73x3e"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(18.892157, 18.892157, 18.892157, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbxdt"]
+content_margin_left = 15.0
+content_margin_top = 25.0
+content_margin_right = 25.0
+content_margin_bottom = 25.0
+bg_color = Color(0.14901961, 0.14901961, 0.14901961, 0.9607843)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0, 0, 0, 0.98039216)
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="MenuTutorial" type="Control" unique_id=985753097 node_paths=PackedStringArray("finalButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,8 +53,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x3tj7")
+finalButton = NodePath("HowToPlayStep6/PanelContainer/VBoxContainer/MarginContainer/LetsPlayButton")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1121373189]
+position = Vector2(579, 327)
+texture = ExtResource("2_angim")
 
 [node name="Panel" type="Panel" parent="." unique_id=852437355]
+modulate = Color(1, 1, 1, 0.5647059)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_a18k3")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1323973740]
+[node name="HowToPlayStep1" type="CenterContainer" parent="." unique_id=1323973740]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -37,56 +83,476 @@ offset_bottom = 225.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=602067297]
-custom_minimum_size = Vector2(600, 450)
+[node name="PanelContainer" type="PanelContainer" parent="HowToPlayStep1" unique_id=602067297]
+custom_minimum_size = Vector2(500, 450)
 layout_mode = 2
 theme = ExtResource("3_angim")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=918032006]
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayStep1/PanelContainer" unique_id=918032006]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1837388824]
+[node name="Label" type="Label" parent="HowToPlayStep1/PanelContainer/VBoxContainer" unique_id=1837388824]
 layout_mode = 2
 text = "How To Play"
 label_settings = ExtResource("4_p61v1")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=341060907]
+[node name="Control" type="Control" parent="HowToPlayStep1/PanelContainer/VBoxContainer" unique_id=432796401]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HowToPlayStep1/PanelContainer/VBoxContainer" unique_id=948930979]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_constants/separation = 125
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayStep1/PanelContainer/VBoxContainer/HBoxContainer" unique_id=341060907]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1866437708]
+[node name="Label" type="Label" parent="HowToPlayStep1/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1866437708]
 layout_mode = 2
 text = "WASD - move"
 
-[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=819463041]
+[node name="Label2" type="Label" parent="HowToPlayStep1/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=819463041]
 layout_mode = 2
 text = "Space - dash"
 
-[node name="Label5" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=2059027098]
+[node name="Label5" type="Label" parent="HowToPlayStep1/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2059027098]
 layout_mode = 2
 text = "Esc / P - pause"
 
-[node name="Label3" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=2108073840]
+[node name="TextureRect" type="TextureRect" parent="HowToPlayStep1/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1648074791]
 layout_mode = 2
-text = "Walk into a rocket to grab its rope, drag it to the fire"
+texture = ExtResource("6_p61v1")
+stretch_mode = 2
 
-[node name="Label4" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=88764793]
-layout_mode = 2
-text = "Dodge fires travelling up rope, don't get burned!"
-
-[node name="EmptyControl" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1782804453]
+[node name="EmptyControl" type="Control" parent="HowToPlayStep1/PanelContainer/VBoxContainer" unique_id=1782804453]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=751487221]
+[node name="MarginContainer" type="HBoxContainer" parent="HowToPlayStep1/PanelContainer/VBoxContainer" unique_id=1361530685]
 layout_mode = 2
-theme_override_constants/margin_left = 75
-theme_override_constants/margin_right = 75
+theme_override_constants/separation = 50
+alignment = 1
 
-[node name="ContinueButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/MarginContainer" unique_id=1699026174]
+[node name="BackButton" type="Button" parent="HowToPlayStep1/PanelContainer/VBoxContainer/MarginContainer" unique_id=1581821047]
+visible = false
 layout_mode = 2
-text = "Continue"
+theme_override_styles/normal = SubResource("StyleBoxFlat_73x3e")
+text = "    Back    "
+
+[node name="Skip Tutorial" type="Button" parent="HowToPlayStep1/PanelContainer/VBoxContainer/MarginContainer" unique_id=2042248733]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_73x3e")
+text = "    Skip    "
+
+[node name="ContinueButton" type="Button" parent="HowToPlayStep1/PanelContainer/VBoxContainer/MarginContainer" unique_id=1699026174]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_73x3e")
+text = "     Next      "
+
+[node name="HowToPlayStep2" type="CenterContainer" parent="." unique_id=2102846412]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -225.0
+offset_right = 300.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HowToPlayStep2" unique_id=1318753685]
+custom_minimum_size = Vector2(500, 450)
+layout_mode = 2
+theme = ExtResource("3_angim")
+theme_override_styles/panel = SubResource("StyleBoxFlat_rbxdt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayStep2/PanelContainer" unique_id=895109128]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Label" type="Label" parent="HowToPlayStep2/PanelContainer/VBoxContainer" unique_id=1772763106]
+layout_mode = 2
+text = "Objective"
+label_settings = ExtResource("4_p61v1")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayStep2/PanelContainer/VBoxContainer" unique_id=2135717060]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HowToPlayStep2/PanelContainer/VBoxContainer/VBoxContainer" unique_id=661999493]
+layout_mode = 2
+theme_override_constants/separation = 11
+alignment = 1
+
+[node name="Control" type="Control" parent="HowToPlayStep2/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1151821415]
+custom_minimum_size = Vector2(46.28, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlayStep2/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1570106627]
+layout_mode = 2
+texture = ExtResource("7_m7mwn")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="HowToPlayStep2/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=813059011]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.805, 0.805)
+offset_transform_visual_only = false
+texture = ExtResource("8_0oma3")
+stretch_mode = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HowToPlayStep2/PanelContainer/VBoxContainer/VBoxContainer" unique_id=385257646]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Label" type="Label" parent="HowToPlayStep2/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1555690259]
+layout_mode = 2
+text = "Bump into rockets 
+to attach your rope"
+
+[node name="Label2" type="Label" parent="HowToPlayStep2/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=933085412]
+layout_mode = 2
+text = "Attach your firework to 
+a fire to score points"
+
+[node name="EmptyControl" type="Control" parent="HowToPlayStep2/PanelContainer/VBoxContainer" unique_id=518036741]
+layout_mode = 2
+
+[node name="MarginContainer" type="HBoxContainer" parent="HowToPlayStep2/PanelContainer/VBoxContainer" unique_id=420097236]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="BackButton" type="Button" parent="HowToPlayStep2/PanelContainer/VBoxContainer/MarginContainer" unique_id=569642724]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_73x3e")
+text = "    Back    "
+
+[node name="Skip Tutorial" type="Button" parent="HowToPlayStep2/PanelContainer/VBoxContainer/MarginContainer" unique_id=2010023227]
+layout_mode = 2
+text = "  Skip  "
+
+[node name="ContinueButton" type="Button" parent="HowToPlayStep2/PanelContainer/VBoxContainer/MarginContainer" unique_id=415105166]
+layout_mode = 2
+text = "  Next  "
+
+[node name="HowToPlayStep3" type="CenterContainer" parent="." unique_id=427773951]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.5
+offset_top = -225.0
+offset_right = 345.5
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HowToPlayStep3" unique_id=139118031]
+custom_minimum_size = Vector2(500, 450)
+layout_mode = 2
+theme = ExtResource("3_angim")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayStep3/PanelContainer" unique_id=452980004]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="HowToPlayStep3/PanelContainer/VBoxContainer" unique_id=619608234]
+layout_mode = 2
+text = "Timing   is   Key "
+label_settings = ExtResource("4_p61v1")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="HowToPlayStep3/PanelContainer/VBoxContainer" unique_id=1230221104]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayStep3/PanelContainer/VBoxContainer" unique_id=427003958]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HowToPlayStep3/PanelContainer/VBoxContainer/VBoxContainer" unique_id=11569698]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_constants/separation = 94
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlayStep3/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=807604896]
+layout_mode = 2
+texture = ExtResource("9_etcea")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="HowToPlayStep3/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1260347135]
+layout_mode = 2
+texture = ExtResource("10_4reen")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="HowToPlayStep3/PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=405044233]
+layout_mode = 2
+texture = ExtResource("11_73x3e")
+stretch_mode = 2
+
+[node name="Control" type="Control" parent="HowToPlayStep3/PanelContainer/VBoxContainer/VBoxContainer" unique_id=2052558746]
+custom_minimum_size = Vector2(0, 10.8)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HowToPlayStep3/PanelContainer/VBoxContainer/VBoxContainer" unique_id=166151144]
+layout_mode = 2
+text = "Watch out! You only have a limited time to 
+connect each rocket before you miss your cue"
+
+[node name="EmptyControl" type="Control" parent="HowToPlayStep3/PanelContainer/VBoxContainer" unique_id=1319787810]
+layout_mode = 2
+
+[node name="MarginContainer" type="HBoxContainer" parent="HowToPlayStep3/PanelContainer/VBoxContainer" unique_id=1544287031]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="BackButton" type="Button" parent="HowToPlayStep3/PanelContainer/VBoxContainer/MarginContainer" unique_id=1346339491]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_73x3e")
+text = "    Back    "
+
+[node name="Skip Tutorial" type="Button" parent="HowToPlayStep3/PanelContainer/VBoxContainer/MarginContainer" unique_id=1381186168]
+layout_mode = 2
+text = "  Skip  "
+
+[node name="ContinueButton" type="Button" parent="HowToPlayStep3/PanelContainer/VBoxContainer/MarginContainer" unique_id=380367715]
+layout_mode = 2
+text = "  Next  "
+
+[node name="HowToPlayStep4" type="CenterContainer" parent="." unique_id=1897983561]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.5
+offset_top = -225.0
+offset_right = 345.5
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HowToPlayStep4" unique_id=1198392266]
+custom_minimum_size = Vector2(500, 450)
+layout_mode = 2
+theme = ExtResource("3_angim")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayStep4/PanelContainer" unique_id=1295232632]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="HowToPlayStep4/PanelContainer/VBoxContainer" unique_id=89185971]
+layout_mode = 2
+text = "Be Careful!"
+label_settings = ExtResource("4_p61v1")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="HowToPlayStep4/PanelContainer/VBoxContainer" unique_id=1011753492]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayStep4/PanelContainer/VBoxContainer" unique_id=1627055667]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlayStep4/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1238512420]
+layout_mode = 2
+texture = ExtResource("9_0oma3")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HowToPlayStep4/PanelContainer/VBoxContainer/VBoxContainer" unique_id=300163875]
+layout_mode = 2
+text = "A lit rope is very dangerous! 
+If you get hurt while holding a rope 
+it will burn up and youll have to re attach it"
+horizontal_alignment = 1
+
+[node name="EmptyControl" type="Control" parent="HowToPlayStep4/PanelContainer/VBoxContainer" unique_id=412097606]
+layout_mode = 2
+
+[node name="MarginContainer" type="HBoxContainer" parent="HowToPlayStep4/PanelContainer/VBoxContainer" unique_id=1609277846]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="BackButton" type="Button" parent="HowToPlayStep4/PanelContainer/VBoxContainer/MarginContainer" unique_id=2012717936]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_73x3e")
+text = "    Back    "
+
+[node name="Skip Tutorial" type="Button" parent="HowToPlayStep4/PanelContainer/VBoxContainer/MarginContainer" unique_id=2099825954]
+layout_mode = 2
+text = "  Skip  "
+
+[node name="ContinueButton" type="Button" parent="HowToPlayStep4/PanelContainer/VBoxContainer/MarginContainer" unique_id=790843106]
+layout_mode = 2
+text = "  Next  "
+
+[node name="HowToPlayStep5" type="CenterContainer" parent="." unique_id=1202974381]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.5
+offset_top = -225.0
+offset_right = 345.5
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HowToPlayStep5" unique_id=1885043208]
+custom_minimum_size = Vector2(500, 450)
+layout_mode = 2
+theme = ExtResource("3_angim")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayStep5/PanelContainer" unique_id=1500318217]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="HowToPlayStep5/PanelContainer/VBoxContainer" unique_id=2128120304]
+layout_mode = 2
+text = "Combos!"
+label_settings = ExtResource("4_p61v1")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="HowToPlayStep5/PanelContainer/VBoxContainer" unique_id=1565660520]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="HowToPlayStep5/PanelContainer/VBoxContainer" unique_id=821075313]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_constants/separation = 21
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlayStep5/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1440986613]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("13_4reen")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HowToPlayStep5/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1852721188]
+layout_mode = 2
+text = "Connect multiple rockets together on one rope for bonus points!"
+
+[node name="EmptyControl" type="Control" parent="HowToPlayStep5/PanelContainer/VBoxContainer" unique_id=326934720]
+layout_mode = 2
+
+[node name="MarginContainer" type="HBoxContainer" parent="HowToPlayStep5/PanelContainer/VBoxContainer" unique_id=766944587]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="BackButton" type="Button" parent="HowToPlayStep5/PanelContainer/VBoxContainer/MarginContainer" unique_id=1746921354]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_73x3e")
+text = "    Back    "
+
+[node name="Skip Tutorial" type="Button" parent="HowToPlayStep5/PanelContainer/VBoxContainer/MarginContainer" unique_id=689291343]
+layout_mode = 2
+text = "  Skip  "
+
+[node name="ContinueButton" type="Button" parent="HowToPlayStep5/PanelContainer/VBoxContainer/MarginContainer" unique_id=1776840785]
+layout_mode = 2
+text = "  Next  "
+
+[node name="HowToPlayStep6" type="CenterContainer" parent="." unique_id=1600729709]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -345.5
+offset_top = -225.0
+offset_right = 345.5
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HowToPlayStep6" unique_id=1103683954]
+custom_minimum_size = Vector2(500, 450)
+layout_mode = 2
+theme = ExtResource("3_angim")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayStep6/PanelContainer" unique_id=525791244]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="HowToPlayStep6/PanelContainer/VBoxContainer" unique_id=1395420497]
+layout_mode = 2
+text = "Mistakes happen!"
+label_settings = ExtResource("4_p61v1")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="HowToPlayStep6/PanelContainer/VBoxContainer" unique_id=1177524143]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="HowToPlayStep6/PanelContainer/VBoxContainer" unique_id=129912553]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_constants/separation = 21
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlayStep6/PanelContainer/VBoxContainer/HBoxContainer" unique_id=277104782]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("14_73x3e")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HowToPlayStep6/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1092793012]
+layout_mode = 2
+text = "You are allowed 3 mistakes before 
+you are fired for poor performance.
+
+Good Luck!"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="HBoxContainer" parent="HowToPlayStep6/PanelContainer/VBoxContainer" unique_id=1734172982]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="BackButton" type="Button" parent="HowToPlayStep6/PanelContainer/VBoxContainer/MarginContainer" unique_id=1281493782]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_73x3e")
+text = "    Back    "
+
+[node name="LetsPlayButton" type="Button" parent="HowToPlayStep6/PanelContainer/VBoxContainer/MarginContainer" unique_id=919323946]
+layout_mode = 2
+text = "Lets Play!"
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MarginContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep1/PanelContainer/VBoxContainer/MarginContainer/Skip Tutorial" to="." method="_on_skip_tutorial_pressed"]
+[connection signal="pressed" from="HowToPlayStep1/PanelContainer/VBoxContainer/MarginContainer/ContinueButton" to="." method="_on_continue_step1_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep2/PanelContainer/VBoxContainer/MarginContainer/BackButton" to="." method="_on_back_step2_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep2/PanelContainer/VBoxContainer/MarginContainer/Skip Tutorial" to="." method="_on_skip_tutorial_pressed"]
+[connection signal="pressed" from="HowToPlayStep2/PanelContainer/VBoxContainer/MarginContainer/ContinueButton" to="." method="_on_continue_step2_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep3/PanelContainer/VBoxContainer/MarginContainer/BackButton" to="." method="_on_back_step3_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep3/PanelContainer/VBoxContainer/MarginContainer/Skip Tutorial" to="." method="_on_skip_tutorial_pressed"]
+[connection signal="pressed" from="HowToPlayStep3/PanelContainer/VBoxContainer/MarginContainer/ContinueButton" to="." method="_on_continue_step3_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep4/PanelContainer/VBoxContainer/MarginContainer/BackButton" to="." method="_on_back_step4_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep4/PanelContainer/VBoxContainer/MarginContainer/Skip Tutorial" to="." method="_on_skip_tutorial_pressed"]
+[connection signal="pressed" from="HowToPlayStep4/PanelContainer/VBoxContainer/MarginContainer/ContinueButton" to="." method="_on_continue_step4_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep5/PanelContainer/VBoxContainer/MarginContainer/BackButton" to="." method="_on_back_step5_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep5/PanelContainer/VBoxContainer/MarginContainer/Skip Tutorial" to="." method="_on_skip_tutorial_pressed"]
+[connection signal="pressed" from="HowToPlayStep5/PanelContainer/VBoxContainer/MarginContainer/ContinueButton" to="." method="_on_continue_step5_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep6/PanelContainer/VBoxContainer/MarginContainer/BackButton" to="." method="_on_back_step6_button_pressed"]
+[connection signal="pressed" from="HowToPlayStep6/PanelContainer/VBoxContainer/MarginContainer/LetsPlayButton" to="." method="_on_LetsPlay_button_pressed"]
