@@ -361,7 +361,7 @@ horizontal_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer" unique_id=1184543184]
 layout_mode = 2
-text = "Final Score: 0"
+text = "Final Score         0"
 label_settings = SubResource("LabelSettings_i8ucm")
 horizontal_alignment = 1
 vertical_alignment = 1

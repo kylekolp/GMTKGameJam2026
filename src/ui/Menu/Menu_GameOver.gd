@@ -6,7 +6,7 @@ extends Control
 var score : String
 
 func SetScore() -> void:
-	scoreLabel.text = "Final Score: " + score
+	scoreLabel.text = "Final Score         " + score
 
 func _on_restart_button_pressed() -> void:
 	SignalBus.UnloadLevel.emit()
