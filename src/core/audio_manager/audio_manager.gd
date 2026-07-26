@@ -23,7 +23,7 @@ func create_2d_audio(location: Vector2, distance: int, type: SoundEffect.SOUND_E
 			new_2D_audio.max_distance = distance
 			new_2D_audio.pitch_scale = sound_effect.pitch_scale
 			new_2D_audio.pitch_scale += randf_range(-sound_effect.pitch_randomness, sound_effect.pitch_randomness)
-			new_2D_audio.finished.connect(sound_effect.on_audio_finished)
+			new_2D_audio.tree_exiting.connect(sound_effect.on_audio_finished)
 			new_2D_audio.finished.connect(new_2D_audio.queue_free)
 			new_2D_audio.play()
 			return new_2D_audio
@@ -42,7 +42,7 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE):
 			new_2D_audio.volume_db = sound_effect.volume
 			new_2D_audio.pitch_scale = sound_effect.pitch_scale
 			new_2D_audio.pitch_scale += randf_range(-sound_effect.pitch_randomness, sound_effect.pitch_randomness)
-			new_2D_audio.finished.connect(sound_effect.on_audio_finished)
+			new_2D_audio.tree_exiting.connect(sound_effect.on_audio_finished)
 			new_2D_audio.finished.connect(new_2D_audio.queue_free)
 			new_2D_audio.play()
 	else:
