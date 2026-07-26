@@ -80,7 +80,7 @@ func SpawnRocket(countdownTimer : float) -> bool:
 	
 func getNextSpawnInterval(rocketsSpawned : int) -> float:
 	var newInterval : float = 0
-	if rocketsSpawned < 4:
+	if rocketsSpawned <= 4:
 		return 3.5
 	elif rocketsSpawned >= 5 and rocketsSpawned < 15:
 		return 2.5
