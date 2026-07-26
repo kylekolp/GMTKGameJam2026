@@ -24,6 +24,7 @@ func OnRocketMissed() -> void:
 	var usedIndex := MAX_MISSES - missesRemaining - 1
 	if usedIndex >= 0 and usedIndex < UILives.livesIcons.size():
 		UILives.livesIcons[usedIndex].visible = false
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TICK_LAST) # Sound Effect missed rocket
 	if missesRemaining <= 0:
 		SignalBus.GameOver.emit()
 
