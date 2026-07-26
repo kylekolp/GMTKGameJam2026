@@ -99,7 +99,10 @@ func howManyRocketsToSpawn(rocketsSpawned : int) -> float:
 	elif rocketsSpawned == 30:
 		return 3
 	elif rocketsSpawned >= 15 and rocketsSpawned < 40: #After 20 we spawn 2 rockets at a time
-		return 2
+		if rocketsSpawned == 20 or rocketsSpawned == 25 or rocketsSpawned == 30 or rocketsSpawned == 35:
+			return 2
+		else:
+			return 1
 	elif rocketsSpawned == 40:
 		return 4
 	elif rocketsSpawned == 45:
@@ -110,15 +113,17 @@ func howManyRocketsToSpawn(rocketsSpawned : int) -> float:
 		if rocketsSpawned % 10 == 0:
 			return 5
 		else:
-			return 3
+			return 2
 	
 func getRocketTimer(rocketsSpawned : int) -> float:
 	if rocketsSpawned < 10:
-		return 14
-	elif rocketsSpawned >= 5 and rocketsSpawned < 50:
 		return 12
+	elif rocketsSpawned >= 5 and rocketsSpawned < 30:
+		return 14
+	elif rocketsSpawned >= 30 and rocketsSpawned < 50:
+		return 16
 	else: #After 40 we spawn 3 rockets at a time
-		return 10
+		return 18
 
 func _is_far_enough_from_group(position: Vector2, group: StringName, min_distance: float) -> bool:
 	for node in get_tree().get_nodes_in_group(group):
