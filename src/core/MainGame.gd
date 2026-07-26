@@ -23,7 +23,7 @@ var isGameOver : bool = false
 
 var hasSeenTutorial : bool = false
 
-var isFirstRun : bool = true
+var isFirstRun : bool = false
 
 func _ready() -> void:
 	SignalBus.LoadLevel.connect(LoadLevel)
@@ -46,8 +46,8 @@ func _ready() -> void:
 	
 	SignalBus.MainMenuIntroRan.connect(RanMainMenuIntro)
 	
-	RunIntro()
-	#LoadMenu(UIDCatalog.Menu_Main)
+	#RunIntro()
+	LoadMenu(UIDCatalog.Menu_Main)
 
 #Runs the intro video and transitions into the main menu
 func RunIntro() -> void:
@@ -245,10 +245,10 @@ func deferredLoadSystem(systemUID : String) -> void:
 	
 	return
 	
-func LoadEntity(entityUID : String, position: Vector2, parent : Node2D = null) -> void:
-	deferredLoadEntity.call_deferred(entityUID,position,parent)
+func LoadEntity(entityUID : String, position: Vector2, parent : Node2D = null, extraArg : Variant = null) -> void:
+	deferredLoadEntity.call_deferred(entityUID,position,parent,extraArg)
 	
-func deferredLoadEntity(entityUID : String, position: Vector2, parent : Node2D = null) -> void:
+func deferredLoadEntity(entityUID : String, position: Vector2, parent : Node2D = null, extraArg : Variant = null) -> void:
 	var entityPackedScene : PackedScene = ResourceLoader.load(entityUID, "PackedScene") as PackedScene
 	if entityPackedScene == null:
 		push_error("Could not load entity as packed scene: " + entityUID)
@@ -270,6 +270,10 @@ func deferredLoadEntity(entityUID : String, position: Vector2, parent : Node2D =
 		var player : Player = newEntity as Player
 		player.camera.global_position = player.global_position
 		var x : int = 4
+		
+	if newEntity is Entity_Rocket:
+		var rocket : Entity_Rocket = newEntity as Entity_Rocket
+		rocket.countdownTime = extraArg as float
 	
 	#Allow the new level to process before accessing it
 	await get_tree().process_frame
