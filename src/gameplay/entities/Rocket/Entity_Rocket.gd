@@ -35,8 +35,11 @@ func _ready() -> void:
 	sprite.texture = GetTexture2DForRocketColor(rocket_color)
 	
 	circle_timer.value = circle_timer.max_value
+
+func StartCountdown(newCountdown : float) -> void:
+	countdownTime = newCountdown
 	countdown_tween = create_tween()
-	countdown_tween.tween_property(circle_timer, "value", 0.0, countdownTime)
+	countdown_tween.tween_property(circle_timer, "value", 0.0, newCountdown)
 	countdown_tween.finished.connect(_on_countdown_finished)
 	
 func _on_countdown_finished() -> void:

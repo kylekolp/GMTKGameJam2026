@@ -35,7 +35,7 @@ signal IntroOver()
 signal MainMenuIntroRan()
 
 #Level
-signal LoadEntity(entityUID : String, position: Vector2, parent : Node2D)
+signal LoadEntity(entityUID : String, position: Vector2, parent : Node2D, extraArg : Variant)
 signal LoadEffect(effectUID : String)
 signal LoadUI()
 
