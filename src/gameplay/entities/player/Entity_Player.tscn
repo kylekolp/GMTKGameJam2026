@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://tl6khwr4g44e" path="res://src/gameplay/entities/player/Entity_Player.gd" id="1_khxic"]
 [ext_resource type="PackedScene" uid="uid://wras6segf5s5" path="res://src/gameplay/entities/player/Dash.tscn" id="2_77yeb"]
 [ext_resource type="Texture2D" uid="uid://ddcgb77euc8f5" path="res://Assets/characters/PlayerAnimationExport2.png" id="2_fok4k"]
+[ext_resource type="Script" uid="uid://nso4c4j37s7s" path="res://src/gameplay/entities/player/CameraShake.gd" id="4_4ahne"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bai2n"]
 size = Vector2(56, 74)
@@ -354,10 +355,11 @@ _data = {
 &"TakeDamage": SubResource("Animation_4okl0")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wb2dy"]
+size = Vector2(40, 51)
+
 [node name="Player" type="CharacterBody2D" unique_id=526542025 node_paths=PackedStringArray("camera") groups=["Player"]]
 z_index = 2
-collision_layer = 5
-collision_mask = 5
 script = ExtResource("1_khxic")
 movement_speed = 400.0
 dash_cooldown = 3.0
@@ -404,3 +406,13 @@ drag_left_margin = 0.3
 drag_top_margin = 0.3
 drag_right_margin = 0.3
 drag_bottom_margin = 0.3
+script = ExtResource("4_4ahne")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1346342252 groups=["Player"]]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1940190821]
+position = Vector2(0, 11.5)
+shape = SubResource("RectangleShape2D_wb2dy")
+debug_color = Color(0.99999994, 0.018323882, 0.00813814, 0.41960785)

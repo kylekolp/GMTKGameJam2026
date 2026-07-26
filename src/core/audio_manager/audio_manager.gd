@@ -15,6 +15,7 @@ func create_2d_audio(location: Vector2, distance: int, type: SoundEffect.SOUND_E
 		if sound_effect.has_open_limit():
 			sound_effect.change_audio_count(1)
 			var new_2D_audio: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+			new_2D_audio.bus = &"SFX"
 			add_child(new_2D_audio)
 			new_2D_audio.position = location
 			new_2D_audio.stream = sound_effect.sound_effect
@@ -36,6 +37,7 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE):
 			sound_effect.change_audio_count(1)
 			var new_2D_audio: AudioStreamPlayer = AudioStreamPlayer.new()
 			add_child(new_2D_audio)
+			new_2D_audio.bus = &"SFX"
 			new_2D_audio.stream = sound_effect.sound_effect
 			new_2D_audio.volume_db = sound_effect.volume
 			new_2D_audio.pitch_scale = sound_effect.pitch_scale
@@ -54,4 +56,13 @@ func update_position(sfx: AudioStreamPlayer2D, location: Vector2):
 func fade_out(sfx:AudioStreamPlayer2D, duration: float = 1.0):
 	var tween = create_tween()
 	tween.tween_property(sfx, "volume_db", -80, duration)
+	tween.finished.connect(sfx.queue_free)
 	
+
+func increase_pitch(sfx: AudioStreamPlayer2D, amt: int):
+	if sfx:
+		sfx.pitch_scale += 0.1 * amt
+
+func clear_all_sfx():
+	for sfx in self.get_children():
+		sfx.queue_free()

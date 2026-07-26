@@ -1,6 +1,16 @@
 [gd_scene format=3 uid="uid://b1s1vhoannn5j"]
 
 [ext_resource type="Script" uid="uid://ce7nkroaijfve" path="res://src/core/MainGame.gd" id="1_deefb"]
+[ext_resource type="Shader" uid="uid://bu1yvbv1s5k16" path="res://src/shaders/ScreenEdgeGlow.gdshader" id="2_o0g52"]
+[ext_resource type="Script" uid="uid://d4n1ip4onuyfy" path="res://src/core/ScreenEdgeFlash.gd" id="3_xmb12"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wb2dy"]
+shader = ExtResource("2_o0g52")
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+shader_parameter/edge_width = 0.2
+shader_parameter/center_x = 0.5
+shader_parameter/glow_half_width = 0.2
+shader_parameter/strength = 0.0
 
 [node name="MainGame" type="Node2D" unique_id=1336662122]
 process_mode = 3
@@ -64,3 +74,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="ScreenEdgeLayer" type="CanvasLayer" parent="." unique_id=542255508]
+
+[node name="ScreenEdgeFlash" type="ColorRect" parent="ScreenEdgeLayer" unique_id=1996411221]
+unique_name_in_owner = true
+visibility_layer = 524288
+material = SubResource("ShaderMaterial_wb2dy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_xmb12")

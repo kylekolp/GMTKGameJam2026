@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bgdh4jqvjvwio"
+path="res://.godot/imported/Crowd Cheer 1.wav-c4a13cd24512dac753ce51feb8fe91ba.sample"
+
+[deps]
+
+source_file="res://Audio/SFX/WAVs/Crowd Cheer 1.wav"
+dest_files=["res://.godot/imported/Crowd Cheer 1.wav-c4a13cd24512dac753ce51feb8fe91ba.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

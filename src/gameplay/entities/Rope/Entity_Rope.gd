@@ -6,6 +6,8 @@ extends Line2D
 @export var Fire_Spawn_Time : float
 @export var Drawing_Delay_Time : float
 
+@export var burnStepTime : float = 0.04
+
 var attachments: Array[Dictionary] = []
 
 @export var drawingDelayTimer: Timer
@@ -25,6 +27,10 @@ var minPointDistance : float = 20
 
 @export var score_per_rocket : int = 10
 
+@export var max_concurrent_embers : int = 10
+var burningEmber : Entity_FireBurnRope = null
+var is_burning : bool = false
+
 func _ready() -> void:
 	top_level = true
 	target = get_parent()
@@ -41,6 +47,7 @@ func stop_drawing(final_point: Vector2 = Vector2.INF) -> void:
 	if final_point != Vector2.INF:
 		add_point(to_local(final_point))
 		previousPoint = points[points.size() - 1]
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ROPE_SCORE)
 	RopeComplete.emit(self)
 	AddRocketScore()
 	is_drawing = false
@@ -109,15 +116,14 @@ func AddRocketScore() -> void:
 		SignalBus.AddScore.emit(scoreForRocket,self)
 		currentMult += 1
 
-func notify_ember_passed_point(index: int) -> void:
+func notify_ember_passed_point(index: int, can_finish: bool = true) -> void:
 	for attachment in attachments:
 		if attachment["index"] == index and attachment["hits_remaining"] > 0:
+			if attachment["hits_remaining"] == 1 and not can_finish:
+				continue
 			attachment["hits_remaining"] -= 1
 			if attachment["hits_remaining"] == 0:
 				attachment["rocket"].launch()
-	
-	if total_hits_remaining() == 0:
-		queue_free()
 
 func reset_attached_rockets() -> void:
 	for attachment in attachments:
@@ -125,20 +131,31 @@ func reset_attached_rockets() -> void:
 		attachment["rocket"].shaderMaterial.set_shader_parameter("show_outline",false)
 
 func _on_fire_spawn_timer_timeout() -> void:
-	if total_hits_remaining() == 0 or activeFires >= total_hits_remaining():
+	if total_hits_remaining() == 0 or activeFires >= min(total_hits_remaining(), max_concurrent_embers):
 		return
-	
-	var ropeEndPosition : Vector2 = Vector2(points[points.size()-1].x,points[points.size()-1].y)
-	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(ropeEndPosition)
+	if is_burning and (burningEmber == null or not burningEmber.is_paused):
+		return
+
+	var target_burn_index := NO_BURN
+	if not is_burning:
+		target_burn_index = get_burn_target_index()
+		if target_burn_index != NO_BURN:
+			is_burning = true
+
 	activeFires += 1
+	var fireBurn : Entity_FireBurnRope = await SpawnFireBurn(points[points.size() - 1])
+	fireBurn.burnDownToIndex = target_burn_index
+	if target_burn_index != NO_BURN:
+		burningEmber = fireBurn
 	fireBurn.FireTravelComplete.connect(_on_fire_travel_complete)
-	
-	#var newFire : Entity_FireBurnRope = get_child("")
-	
-	pass # Replace with function body.
 
 func _on_fire_travel_complete(fireEntity : Node2D) -> void:
 	activeFires -= 1
+	if fireEntity == burningEmber:
+		is_burning = false
+		burningEmber = null
+	if total_hits_remaining() == 0:
+		queue_free()
 
 func total_hits_remaining() -> int:
 	var total := 0
@@ -176,4 +193,31 @@ func SpawnFireBurnAtPosition(entityUID : String, position: Vector2, parent : Nod
 	return newEntity
 	
 func BurnRope() -> void:
-	queue_free()
+	is_drawing = false
+
+	var dead_tween := create_tween()
+	var color_duration : float = min(points.size() * burnStepTime, 0.25) # burn color max duration
+	dead_tween.tween_property(self, "modulate", Color.BLACK, color_duration)
+	
+	var burn_tween := create_tween()
+	for i in range(points.size() - 1, -1, -1):
+		burn_tween.tween_callback(burn_to.bind(i))
+		burn_tween.tween_interval(burnStepTime)
+	burn_tween.finished.connect(queue_free)
+
+const NO_BURN := -2
+
+func get_burn_target_index() -> int:
+	var safe_boundary := -1 # -1 means safe to burn all the way to index 0
+	var any_finishing := false
+	for a in attachments:
+		if a["hits_remaining"] == 1:
+			any_finishing = true
+		elif a["hits_remaining"] > 1:
+			safe_boundary = max(safe_boundary, a["index"])
+	return safe_boundary if any_finishing else NO_BURN
+
+func burn_to(index: int) -> void:
+	if index >= points.size() - 1:
+		return
+	points = points.slice(0, index + 1)
