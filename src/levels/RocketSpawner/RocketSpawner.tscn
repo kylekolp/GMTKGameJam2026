@@ -8,9 +8,9 @@ script = ExtResource("1_tv61y")
 [node name="SpawnTimer" type="Timer" parent="." unique_id=895268452]
 
 [node name="SpawnAreaTopLeft" type="Marker2D" parent="." unique_id=839193397]
-position = Vector2(128, 128)
+position = Vector2(64, 64)
 
 [node name="SpawnAreaBottomRight" type="Marker2D" parent="." unique_id=1041913581]
-position = Vector2(1024, 512)
+position = Vector2(1088, 584)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
