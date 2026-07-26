@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var min_distance_between_fires: float = 300.0
+@export var min_distance_between_fires: float = 900.0
 @export var max_placement_attempts: int = 30
 
 @onready var fire_area_top_left: Marker2D = $FireAreaTopLeft

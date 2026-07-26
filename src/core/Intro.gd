@@ -60,4 +60,8 @@ func SwitchToMainMenu() -> void:
 	SignalBus.LoadMenu.emit(UIDCatalog.Menu_Main)
 	var fadeToBlackTween : Tween = create_tween()
 	fadeToBlackTween.tween_property(TransitionPanel, "color:a", 0.0, transitionTime)
-	fadeToBlackTween.finished.connect(queue_free) #Tween the opacity as well and queue free when its finished
+	fadeToBlackTween.finished.connect(RunIntro) #Tween the opacity as well and queue free when its finished
+	
+func RunIntro() -> void:
+	SignalBus.IntroOver.emit()
+	queue_free()

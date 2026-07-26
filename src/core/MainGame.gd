@@ -23,6 +23,8 @@ var isGameOver : bool = false
 
 var hasSeenTutorial : bool = false
 
+var isFirstRun : bool = true
+
 func _ready() -> void:
 	SignalBus.LoadLevel.connect(LoadLevel)
 	SignalBus.LoadMenu.connect(LoadMenu)
@@ -42,13 +44,18 @@ func _ready() -> void:
 	
 	SignalBus.LoadUI.connect(LoadUI)
 	
-	#RunIntro()
-	LoadMenu(UIDCatalog.Menu_Main)
+	SignalBus.MainMenuIntroRan.connect(RanMainMenuIntro)
+	
+	RunIntro()
+	#LoadMenu(UIDCatalog.Menu_Main)
 
 #Runs the intro video and transitions into the main menu
 func RunIntro() -> void:
 	LoadMenu(UIDCatalog.Menu_Main)
 	LoadMenu(UIDCatalog.Menu_Intro)
+	
+func RanMainMenuIntro() -> void:
+	isFirstRun = false
 	
 func InitializePlayer() -> void:
 	var playerUID : String = UIDCatalog.Entity_Player
@@ -139,7 +146,7 @@ func deferredLoadMenu(menuUID : String) -> void:
 	
 	if menuUID == UIDCatalog.Menu_Tutorial:
 		hasSeenTutorial = true
-	
+		
 	#Allow the old level to finish freeing before adding a new one
 	await get_tree().process_frame
 	
@@ -147,6 +154,10 @@ func deferredLoadMenu(menuUID : String) -> void:
 	
 	#Allow the new level to process before accessing it
 	await get_tree().process_frame
+	
+	if menuUID == UIDCatalog.Menu_Main and !isFirstRun:
+		var newMainMenu : Menu_Main = newMenu as Menu_Main
+		newMainMenu.RunStartAnimation(isFirstRun)
 	
 	return
 	
