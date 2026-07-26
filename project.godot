@@ -27,6 +27,7 @@ buses/default_bus_layout="uid://cuqgi3f3ylsq4"
 
 SignalBus="*uid://cmsme5d5erh4l"
 AudioManager="*uid://cprnbvbu2ferg"
+Music="*uid://buwdhohpr7any"
 
 [dotnet]
 

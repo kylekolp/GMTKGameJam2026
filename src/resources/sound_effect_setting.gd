@@ -19,7 +19,8 @@ enum SOUND_EFFECT_TYPE{
 	ROPE_SCORE,
 	CROWD_CHEER,
 	CROWD_APPLAUSE,
-	SMALL_APPLAUSE
+	SMALL_APPLAUSE,
+	CROWD_DISAPPOINTED,
 }
 
 @export_range(0, 100) var limit: int = 5 ## Max number of SoundEffect allowed to be played
