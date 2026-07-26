@@ -47,7 +47,6 @@ func stop_drawing(final_point: Vector2 = Vector2.INF) -> void:
 	if final_point != Vector2.INF:
 		add_point(to_local(final_point))
 		previousPoint = points[points.size() - 1]
-	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ROPE_SCORE)
 	RopeComplete.emit(self)
 	AddRocketScore()
 	is_drawing = false

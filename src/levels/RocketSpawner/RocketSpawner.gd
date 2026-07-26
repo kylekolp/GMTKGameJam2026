@@ -1,6 +1,9 @@
 extends Node2D
 
-@export var spawn_interval: float = 2.0
+@export var game_start_spawn_interval : float = 2.0
+#@export var min_spawn_interval: float = 1.0
+#@export var max_spawn_interval: float = 4
+var spawn_interval: float = 4
 @export var failed_spawn_interval: float = 0.1
 @export var min_distance_from_fire: float = 150.0
 @export var min_distance_from_rocket: float = 60.0
@@ -13,14 +16,37 @@ extends Node2D
 
 var spawn_area: Rect2
 
+var rocketsSpawned : int = 0
+var minSpawnInterval : float = 1
+
 func _ready() -> void:
 	spawn_area = Rect2(
 		spawn_area_top_left.position,
 		spawn_area_bottom_right.position - spawn_area_top_left.position
 	)
-	spawn_timer.start(spawn_interval)
+	spawn_timer.start(game_start_spawn_interval)
 
 func _on_spawn_timer_timeout() -> void:
+	var howManyRockets : int = howManyRocketsToSpawn(rocketsSpawned)
+	spawn_interval = getNextSpawnInterval(rocketsSpawned)
+	var countdownTimer : float = getRocketTimer(rocketsSpawned)
+	
+	var wasSuccessful : bool = false
+	
+	for i in range(0,howManyRockets):
+		var wasSuccess = SpawnRocket(countdownTimer)
+		if wasSuccess:
+			rocketsSpawned += 1
+			wasSuccessful = true
+	
+	print("Rockets Spawned: " + str(rocketsSpawned) + ", HowManyRockets: " + str(howManyRockets) + ", spawnInterval: " + str(spawn_interval) + ", countdownTimer: " + str(countdownTimer))
+	
+	if wasSuccessful:
+		spawn_timer.start(spawn_interval)
+	else:
+		spawn_timer.start(failed_spawn_interval)
+
+func SpawnRocket(countdownTimer : float) -> bool:
 	var candidate_position := Vector2(
 		randf_range(spawn_area.position.x, spawn_area.end.x),
 		randf_range(spawn_area.position.y, spawn_area.end.y)
@@ -35,16 +61,62 @@ func _on_spawn_timer_timeout() -> void:
 		if group == "Player":
 			min_distance = min_distance_from_player
 		if not _is_far_enough_from_group(candidate_position, group, min_distance):
-			spawn_timer.start(failed_spawn_interval)
-			return
+			return false
 
 	if not _is_far_enough_from_rope(candidate_position, min_distance_from_rope):
-		spawn_timer.start(failed_spawn_interval)
-		return
+		return false
 
-	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Rocket, candidate_position, get_parent() as Node2D)
+	SignalBus.LoadEntity.emit(UIDCatalog.Entity_Rocket, candidate_position, get_parent() as Node2D, countdownTimer)
 	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ROCKET_SPAWN)
-	spawn_timer.start(spawn_interval)
+	return true
+	
+func getNextSpawnInterval(rocketsSpawned : int) -> float:
+	var newInterval : float = 0
+	if rocketsSpawned < 4:
+		return 3.5
+	elif rocketsSpawned >= 5 and rocketsSpawned < 10:
+		return 2.5
+	elif rocketsSpawned >= 15 and rocketsSpawned < 40:
+		return 2
+	else:
+		return 1.75
+		
+func howManyRocketsToSpawn(rocketsSpawned : int) -> float:
+	if rocketsSpawned < 4:
+		return 1
+	if rocketsSpawned == 5:
+		return 2
+	elif rocketsSpawned >= 5 and rocketsSpawned < 15:
+		return 1
+	elif rocketsSpawned == 20:
+		return 3
+	elif rocketsSpawned == 25:
+		return 3
+	elif rocketsSpawned == 30:
+		return 3
+	elif rocketsSpawned == 35:
+		return 3
+	elif rocketsSpawned >= 15 and rocketsSpawned < 40: #After 20 we spawn 2 rockets at a time
+		return 2
+	elif rocketsSpawned == 40:
+		return 4
+	elif rocketsSpawned == 45:
+		return 4
+	elif rocketsSpawned == 55:
+		return 5
+	else: #After 40 we spawn 3 rockets at a time
+		if rocketsSpawned % 10 == 0:
+			return 5
+		else:
+			return 3
+	
+func getRocketTimer(rocketsSpawned : int) -> float:
+	if rocketsSpawned < 10:
+		return 14
+	elif rocketsSpawned >= 5 and rocketsSpawned < 50:
+		return 12
+	else: #After 40 we spawn 3 rockets at a time
+		return 10
 
 func _is_far_enough_from_group(position: Vector2, group: StringName, min_distance: float) -> bool:
 	for node in get_tree().get_nodes_in_group(group):
