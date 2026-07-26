@@ -44,7 +44,7 @@ theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=931568599]
 layout_mode = 2
-text = "Mistakes"
+text = "Misses:"
 label_settings = SubResource("LabelSettings_bai2n")
 
 [node name="Icon0" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1922600147]
