@@ -122,6 +122,7 @@ func notify_ember_passed_point(index: int, can_finish: bool = true) -> void:
 			if attachment["hits_remaining"] == 1 and not can_finish:
 				continue
 			attachment["hits_remaining"] -= 1
+			attachment["rocket"].bounce_rocket()
 			if attachment["hits_remaining"] == 0:
 				attachment["rocket"].launch()
 
