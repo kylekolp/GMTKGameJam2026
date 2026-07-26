@@ -82,7 +82,7 @@ func getNextSpawnInterval(rocketsSpawned : int) -> float:
 	var newInterval : float = 0
 	if rocketsSpawned < 4:
 		return 3.5
-	elif rocketsSpawned >= 5 and rocketsSpawned < 10:
+	elif rocketsSpawned >= 5 and rocketsSpawned < 15:
 		return 2.5
 	elif rocketsSpawned >= 15 and rocketsSpawned < 60:
 		return 2
