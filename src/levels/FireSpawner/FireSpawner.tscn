@@ -6,7 +6,7 @@
 script = ExtResource("1_4e76m")
 
 [node name="FireAreaTopLeft" type="Marker2D" parent="." unique_id=1798021766]
-position = Vector2(128, 250)
+position = Vector2(128, 128)
 
 [node name="FireAreaBottomRight" type="Marker2D" parent="." unique_id=519523090]
 position = Vector2(1024, 512)
