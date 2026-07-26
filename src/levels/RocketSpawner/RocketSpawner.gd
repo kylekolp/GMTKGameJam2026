@@ -47,7 +47,7 @@ func _on_spawn_timer_timeout() -> void:
 					wasSuccessful = true
 					break
 	
-	print("Rockets Spawned: " + str(rocketsSpawned) + ", HowManyRockets: " + str(howManyRockets) + ", spawnInterval: " + str(spawn_interval) + ", countdownTimer: " + str(countdownTimer))
+	#print("Rockets Spawned: " + str(rocketsSpawned) + ", HowManyRockets: " + str(howManyRockets) + ", spawnInterval: " + str(spawn_interval) + ", countdownTimer: " + str(countdownTimer))
 	
 	if wasSuccessful:
 		spawn_timer.start(spawn_interval)
@@ -87,7 +87,7 @@ func getNextSpawnInterval(rocketsSpawned : int) -> float:
 	elif rocketsSpawned >= 15 and rocketsSpawned < 60:
 		return 2
 	else:
-		return 1.75
+		return 1.8
 		
 func howManyRocketsToSpawn(rocketsSpawned : int) -> float:
 	if rocketsSpawned <= 4:
@@ -105,13 +105,11 @@ func howManyRocketsToSpawn(rocketsSpawned : int) -> float:
 			return 1
 	elif rocketsSpawned == 40:
 		return 4
-	elif rocketsSpawned == 45:
+	elif rocketsSpawned == 50:
 		return 4
-	elif rocketsSpawned == 55:
-		return 5
 	else: #After 40 we spawn 3 rockets at a time
-		if rocketsSpawned % 10 == 0:
-			return 5
+		if rocketsSpawned % 5 == 0:
+			return 3
 		else:
 			return 2
 	
@@ -119,11 +117,9 @@ func getRocketTimer(rocketsSpawned : int) -> float:
 	if rocketsSpawned < 10:
 		return 12
 	elif rocketsSpawned >= 5 and rocketsSpawned < 30:
-		return 14
-	elif rocketsSpawned >= 30 and rocketsSpawned < 50:
-		return 16
-	else: #After 40 we spawn 3 rockets at a time
-		return 18
+		return 15
+	else:
+		return 20
 
 func _is_far_enough_from_group(position: Vector2, group: StringName, min_distance: float) -> bool:
 	for node in get_tree().get_nodes_in_group(group):

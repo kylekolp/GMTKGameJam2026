@@ -23,7 +23,7 @@ var isGameOver : bool = false
 
 var hasSeenTutorial : bool = false
 
-var isFirstRun : bool = false
+var isFirstRun : bool = true
 
 func _ready() -> void:
 	SignalBus.LoadLevel.connect(LoadLevel)
@@ -46,8 +46,8 @@ func _ready() -> void:
 	
 	SignalBus.MainMenuIntroRan.connect(RanMainMenuIntro)
 	
-	#RunIntro()
-	LoadMenu(UIDCatalog.Menu_Main)
+	RunIntro()
+	#LoadMenu(UIDCatalog.Menu_Main)
 
 #Runs the intro video and transitions into the main menu
 func RunIntro() -> void:
@@ -274,6 +274,7 @@ func deferredLoadEntity(entityUID : String, position: Vector2, parent : Node2D =
 	if newEntity is Entity_Rocket:
 		var rocket : Entity_Rocket = newEntity as Entity_Rocket
 		rocket.countdownTime = extraArg as float
+		rocket.StartCountdown(extraArg as float)
 	
 	#Allow the new level to process before accessing it
 	await get_tree().process_frame

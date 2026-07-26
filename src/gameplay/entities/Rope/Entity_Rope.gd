@@ -25,7 +25,7 @@ var activeFires : int = 0
 var previousPoint : Vector2 = Vector2.ZERO
 var minPointDistance : float = 20
 
-@export var score_per_rocket : int = 10
+@export var score_per_rocket : int = 100
 
 @export var max_concurrent_embers : int = 10
 var burningEmber : Entity_FireBurnRope = null
