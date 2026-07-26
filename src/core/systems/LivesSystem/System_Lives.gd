@@ -27,6 +27,7 @@ func OnRocketMissed() -> void:
 		var lifeItem : Life = UILives.livesIcons[usedIndex] as Life
 		lifeItem.animateHit()
 		UILives.lostLifeAnimate()
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TICK_LAST) # Sound Effect missed rocket
 	if missesRemaining <= 0:
 		SignalBus.GameOver.emit()
 

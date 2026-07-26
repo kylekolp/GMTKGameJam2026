@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://dhbnlea2dmiqm" path="res://src/ui/Menu/GameOverPerson.gd" id="16_qixk7"]
 [ext_resource type="Texture2D" uid="uid://cv1cex0vf4wg4" path="res://Assets/Menu/Person3.png" id="17_qixk7"]
 [ext_resource type="Texture2D" uid="uid://ciad256wq82j3" path="res://Assets/Menu/Person4.png" id="18_i5syo"]
+[ext_resource type="AudioStream" uid="uid://fkitamxase48" path="res://Audio/SFX/WAVs/Tick Final.wav" id="19_55q2v"]
 
 [sub_resource type="Shader" id="Shader_a2ahv"]
 code = "shader_type canvas_item;
@@ -383,6 +384,13 @@ text = "Main Menu"
 layout_mode = 2
 theme = ExtResource("5_ebi6b")
 text = "Play Again"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=167071325]
+process_mode = 3
+stream = ExtResource("19_55q2v")
+volume_db = -12.0
+autoplay = true
+bus = &"SFX"
 
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
