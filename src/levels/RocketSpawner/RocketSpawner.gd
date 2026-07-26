@@ -3,7 +3,7 @@ extends Node2D
 @export var spawn_interval: float = 2.0
 @export var failed_spawn_interval: float = 0.1
 @export var min_distance_from_fire: float = 150.0
-@export var min_distance_from_rocket: float = 80.0
+@export var min_distance_from_rocket: float = 60.0
 @export var min_distance_from_rope: float = 40.0
 @export var min_distance_from_player: float = 100.0
 
