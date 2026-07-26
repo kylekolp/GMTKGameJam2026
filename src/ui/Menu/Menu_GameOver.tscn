@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://c6pom3pd1kke2" path="res://Assets/Fonts/Daydream.otf" id="3_0kf1q"]
 [ext_resource type="LabelSettings" uid="uid://db21agx7m6v2w" path="res://Assets/UI/LabelSettings/TitleSettings.tres" id="3_pvixc"]
 [ext_resource type="Theme" uid="uid://j2rfknwaqld0" path="res://Assets/UI/TempUITheme.tres" id="4_pvixc"]
+[ext_resource type="AudioStream" uid="uid://fkitamxase48" path="res://Audio/SFX/WAVs/Tick Final.wav" id="6_6ndwh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bai2n"]
 font = ExtResource("3_0kf1q")
@@ -102,6 +103,13 @@ text = "Main Menu"
 layout_mode = 2
 theme = ExtResource("4_pvixc")
 text = "Play Again"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=334970288]
+process_mode = 3
+stream = ExtResource("6_6ndwh")
+volume_db = -12.0
+autoplay = true
+bus = &"SFX"
 
 [connection signal="pressed" from="MarginContainer/Panel/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

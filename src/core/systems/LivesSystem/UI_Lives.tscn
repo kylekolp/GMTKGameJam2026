@@ -1,15 +1,17 @@
 [gd_scene format=3 uid="uid://dyjipvvvlgxpl"]
 
 [ext_resource type="Script" uid="uid://dbwppo88emgdh" path="res://src/core/systems/LivesSystem/UI_Lives.gd" id="1_ui2mi"]
+[ext_resource type="Texture2D" uid="uid://bw080157dx410" path="res://Assets/UI/DamageHaze.png" id="2_pmm3y"]
+[ext_resource type="PackedScene" uid="uid://dcsjuy2kt3lx4" path="res://src/core/systems/LivesSystem/Life.tscn" id="3_eng6g"]
 [ext_resource type="FontFile" uid="uid://c6pom3pd1kke2" path="res://Assets/Fonts/Daydream.otf" id="3_pmm3y"]
-[ext_resource type="Texture2D" uid="uid://bjtuq677ti3lw" path="res://Assets/Fireworks/firework_green.png" id="4_pmm3y"]
+[ext_resource type="Texture2D" uid="uid://bjvnnc1dry6qx" path="res://Assets/Fireworks/firework_pink.png" id="4_eng6g"]
 [ext_resource type="Texture2D" uid="uid://bambnh6rnpmtm" path="res://Assets/Fireworks/firework_orange.png" id="5_dqb2n"]
-[ext_resource type="Texture2D" uid="uid://b2ke08klwxlqn" path="res://Assets/Fireworks/firework_violet.png" id="6_rbo0e"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bai2n"]
 font = ExtResource("3_pmm3y")
+font_size = 18
 
-[node name="UiLives" type="Control" unique_id=1870645117]
+[node name="UiLives" type="Control" unique_id=1870645117 node_paths=PackedStringArray("damageHaze")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,6 +21,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ui2mi")
+damageHaze = NodePath("MarginContainer/DamageHaze")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=846573625]
 layout_mode = 1
@@ -38,41 +41,28 @@ theme_override_constants/margin_top = -15
 theme_override_constants/margin_right = -15
 theme_override_constants/margin_bottom = -15
 
+[node name="DamageHaze" type="Sprite2D" parent="MarginContainer" unique_id=2104755658]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(116.5, 17)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_pmm3y")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1867735424]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 22
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=931568599]
 layout_mode = 2
 text = "Misses"
 label_settings = SubResource("LabelSettings_bai2n")
 
-[node name="Icon0" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1922600147]
-custom_minimum_size = Vector2(32, 32)
+[node name="Icon0" parent="MarginContainer/HBoxContainer" unique_id=108426699 instance=ExtResource("3_eng6g")]
 layout_mode = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(1.5, 1.5)
-offset_transform_rotation = 0.43633232
-texture = ExtResource("4_pmm3y")
-expand_mode = 1
-stretch_mode = 5
+texture = ExtResource("4_eng6g")
 
-[node name="Icon1" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1533135011]
-custom_minimum_size = Vector2(32, 32)
+[node name="Icon1" parent="MarginContainer/HBoxContainer" unique_id=1658420818 instance=ExtResource("3_eng6g")]
 layout_mode = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(1.5, 1.5)
-offset_transform_rotation = 0.43633232
 texture = ExtResource("5_dqb2n")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="Icon2" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1982524705]
-custom_minimum_size = Vector2(32, 32)
+[node name="Icon2" parent="MarginContainer/HBoxContainer" unique_id=1723389246 instance=ExtResource("3_eng6g")]
 layout_mode = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(1.5, 1.5)
-offset_transform_rotation = 0.43633232
-texture = ExtResource("6_rbo0e")
-expand_mode = 1
-stretch_mode = 5

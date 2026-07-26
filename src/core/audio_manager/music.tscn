@@ -68,7 +68,7 @@ Vector2i(3, 2): {
 [node name="Music" type="AudioStreamPlayer" unique_id=697584193]
 process_mode = 3
 stream = SubResource("AudioStreamInteractive_sbdt4")
-volume_db = -10.0
+volume_db = -14.0
 autoplay = true
 bus = &"Music"
 script = ExtResource("4_qvtvy")

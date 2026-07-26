@@ -358,6 +358,7 @@ func OnGameOver() -> void:
 		return
 		
 	isGameOver = true
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TICK_LAST) # Sound Effect missed rocket
 	
 	get_tree().paused = true
 	

@@ -20,10 +20,14 @@ func ResetLives() -> void:
 		icon.visible = true
 
 func OnRocketMissed() -> void:
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.LIFE_LOST)
 	missesRemaining -= 1
-	var usedIndex := MAX_MISSES - missesRemaining - 1
+	var usedIndex := missesRemaining
 	if usedIndex >= 0 and usedIndex < UILives.livesIcons.size():
-		UILives.livesIcons[usedIndex].visible = false
+		var lifeItem : Life = UILives.livesIcons[usedIndex] as Life
+		lifeItem.animateHit()
+		UILives.lostLifeAnimate()
+		AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.TICK_LAST) # Sound Effect missed rocket
 	if missesRemaining <= 0:
 		SignalBus.GameOver.emit()
 
