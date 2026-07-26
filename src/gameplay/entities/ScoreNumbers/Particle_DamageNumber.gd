@@ -74,27 +74,27 @@ func GetNextColor(value: float) -> Color:
 	
 	var weight : float = 0.0
 	
-	if value < 10:
+	if value < 100:
 		return Color0
 		
 	#Yellow
-	if value >= 10 && value < 20:
+	if value >= 100 && value < 200:
 		return Color1
 	
 	#Orange
-	if value >= 20 && value < 30: 
+	if value >= 200 && value < 300: 
 		return Color2
 		
 	#Red
-	if value >= 30 && value < 40: 
+	if value >= 300 && value < 400: 
 		return Color3
 		
 	#Purple
-	if value >= 40 && value < 50: 
+	if value >= 400 && value < 500: 
 		return Color4
 	
 	#Purple
-	if value >= 50: 
+	if value >= 500: 
 		return Color5
 	
 	return Color.WHITE

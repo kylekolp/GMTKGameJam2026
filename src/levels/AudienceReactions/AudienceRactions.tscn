@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://886ix87dvik2"]
+
+[ext_resource type="Script" uid="uid://c2teb70lpdee8" path="res://src/levels/AudienceReactions/AudienceReactions.gd" id="1_gtoak"]
+
+[node name="AudienceReactions" type="Node2D" unique_id=1032568715]
+script = ExtResource("1_gtoak")

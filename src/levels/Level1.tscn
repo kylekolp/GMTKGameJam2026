@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bgpd74dhk04v3" path="res://Assets/World/background_night.png" id="2_dklsv"]
 [ext_resource type="PackedScene" uid="uid://cg0ypork01p7y" path="res://src/levels/FireSpawner/FireSpawner.tscn" id="2_iearj"]
 [ext_resource type="PackedScene" uid="uid://byvocdjeyqvo5" path="res://src/levels/RocketSpawner/RocketSpawner.tscn" id="2_r7s8a"]
+[ext_resource type="PackedScene" uid="uid://886ix87dvik2" path="res://src/levels/AudienceReactions/AudienceRactions.tscn" id="4_7y3dr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_stybw"]
 
@@ -19,6 +20,8 @@ script = ExtResource("1_qsbfr")
 [node name="FireSpawner" parent="." unique_id=1929410905 instance=ExtResource("2_iearj")]
 
 [node name="RocketSpawner" parent="." unique_id=1900071013 instance=ExtResource("2_r7s8a")]
+
+[node name="AudienceRactions" parent="." unique_id=1032568715 instance=ExtResource("4_7y3dr")]
 
 [node name="WallTop" type="StaticBody2D" parent="." unique_id=1890332113]
 position = Vector2(0, 117.22)
