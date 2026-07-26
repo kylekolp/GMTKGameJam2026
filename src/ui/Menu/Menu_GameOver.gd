@@ -9,6 +9,7 @@ func SetScore() -> void:
 	scoreLabel.text = "Final Score: " + score
 
 func _on_restart_button_pressed() -> void:
+	SignalBus.UnloadLevel.emit()
 	SignalBus.StartGame.emit()
 	queue_free()
 
