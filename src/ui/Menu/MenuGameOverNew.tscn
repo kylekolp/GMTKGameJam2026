@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://ciad256wq82j3" path="res://Assets/Menu/Person4.png" id="18_i5syo"]
 [ext_resource type="AudioStream" uid="uid://fkitamxase48" path="res://Audio/SFX/WAVs/Tick Final.wav" id="19_55q2v"]
 [ext_resource type="AudioStream" uid="uid://c8c42k54lnju3" path="res://Audio/SFX/WAVs/MistakeSound.wav" id="20_qixk7"]
+[ext_resource type="AudioStream" uid="uid://cfbd352k3fpgy" path="res://Audio/SFX/DisappointedCrowd-Universfield.mp3" id="21_i5syo"]
 
 [sub_resource type="Shader" id="Shader_a2ahv"]
 code = "shader_type canvas_item;
@@ -397,6 +398,13 @@ bus = &"SFX"
 process_mode = 3
 stream = ExtResource("20_qixk7")
 volume_db = -12.0
+autoplay = true
+bus = &"SFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="." unique_id=263289797]
+process_mode = 3
+stream = ExtResource("21_i5syo")
+volume_db = -18.0
 autoplay = true
 bus = &"SFX"
 
