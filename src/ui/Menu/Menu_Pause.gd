@@ -2,6 +2,7 @@ extends BaseMenu
 
 func _on_resume_button_pressed() -> void:
 	SignalBus.UnPause.emit()
+	Music.get_stream_playback().switch_to_clip_by_name("Game")
 	queue_free()
 
 func _on_options_button_pressed() -> void:
@@ -12,6 +13,7 @@ func _on_main_menu_button_pressed() -> void:
 	SignalBus.UnloadLevel.emit()
 	SignalBus.UnPause.emit()
 	SignalBus.LoadMenu.emit(UIDCatalog.Menu_Main)
+	Music.get_stream_playback().switch_to_clip_by_name("Menu")
 	queue_free()
 
 

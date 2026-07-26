@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://buwdhohpr7any"]
+
+[ext_resource type="AudioStream" uid="uid://usbe7nymyj6b" path="res://Audio/Music/BGMIntro.mp3" id="1_yqqlu"]
+[ext_resource type="AudioStream" uid="uid://ov34jjxcoqsl" path="res://Audio/Music/BGMMenu.mp3" id="2_v27wq"]
+[ext_resource type="AudioStream" uid="uid://b8new43ow1ktr" path="res://Audio/Music/BGMInGame.mp3" id="3_y463u"]
+[ext_resource type="Script" uid="uid://bxwpdn5cjiuvc" path="res://src/core/audio_manager/music.gd" id="4_qvtvy"]
+[ext_resource type="AudioStream" uid="uid://rfnba8h8pkux" path="res://Audio/Music/BGMPause.mp3" id="4_v27wq"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_sbdt4"]
+clip_count = 4
+clip_0/name = &"Intro"
+clip_0/stream = ExtResource("1_yqqlu")
+clip_0/auto_advance = 0
+clip_1/name = &"Menu"
+clip_1/stream = ExtResource("2_v27wq")
+clip_1/auto_advance = 0
+clip_2/name = &"Game"
+clip_2/stream = ExtResource("3_y463u")
+clip_2/auto_advance = 0
+clip_3/name = &"Pause"
+clip_3/stream = ExtResource("4_v27wq")
+clip_3/auto_advance = 0
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 3,
+"to_time": 0
+},
+Vector2i(1, 2): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(2, 1): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(2, 2): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(2, 3): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(3, 1): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(3, 2): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+}
+}
+
+[node name="Music" type="AudioStreamPlayer" unique_id=697584193]
+process_mode = 3
+stream = SubResource("AudioStreamInteractive_sbdt4")
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("4_qvtvy")
